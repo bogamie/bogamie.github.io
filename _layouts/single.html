@@ -34,7 +34,38 @@ layout: default
 			</div>
 		</section>
 	</div>
+
 	<div class="sized__box"></div>
+
+	<div class="related-posts">
+		<h2 class="related-posts__title">Related posts</h2>
+		<div class="related-posts__line"></div>
+		{% assign current_category = page.categories | join: '-' | downcase %}
+		{% assign reversed_posts = site.posts | reverse %}
+		
+		{% assign related_posts = "" | split: "" %}
+		{% for post in reversed_posts %}
+			{% assign post_category = post.categories | join: '-' | downcase %}
+			{% if post_category == current_category and post.url != page.url %}
+				{% assign related_posts = related_posts | push: post %}
+			{% endif %}
+			{% if related_posts.size == 4 %}
+				{% break %}
+			{% endif %}
+		{% endfor %}
+		
+		<div class="related-posts__wrapper">
+			{% for post in related_posts %}
+			<a href="{{ post.url }}" class="related-item">
+				<div>
+					<div class="related-item__title">{{ post.title }}</div>
+					<div class="related-item__excerpt">{{ post.excerpt }}</div>
+					<div class="related-item__date">{{ post.date | date: "%B %-d, %Y" }}</div>
+				</div>
+			</a>
+			{% endfor %}
+		</div>
+	</div>
 </div>
 
 <script src="/assets/js/single.js"></script>
