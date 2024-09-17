@@ -1,0 +1,136 @@
+.masthead {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background-color: var(--color-primary-100);
+    z-index: 1000;
+    transition: top $nav-transition;
+
+    &__inner-wrap {
+        position: relative;
+        align-items: center;
+        display: flex;
+        height: 60px;
+        justify-content: space-between;
+        padding: 0 30px;
+    }
+    &.stickyHead {
+        top: -60px;
+        transition: top $nav-transition;
+    }
+    a {
+        color: var(--text-primary-100);
+        text-decoration: none;
+    }
+    a:hover {
+        color: var(--text-primary-400);
+        transition: color 0.3s ease;
+    }
+}
+
+#theme-switch {
+    padding: 0;
+    border: #ffffff;
+    border-radius: 100%;
+    width: 28px;
+    height: 28px;
+    background-color: var(--theme-switch);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    svg:last-child {
+        display: none;
+    }
+}
+#theme-switch:hover {
+    background-color: var(--theme-switch-hover);
+    transition: background-color 0.3s ease;
+}
+
+[data-theme='dark'] #theme-switch svg:first-child {
+    display: none;
+}
+
+[data-theme='dark'] #theme-switch svg:last-child {
+    display: block;
+}
+
+.masthead__title {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.site-title {
+    font-size: 1.25em;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.masthead__menu {
+    display: flex;
+    height: 100%;
+}
+
+.nav__inner-wrap {
+    display: flex;
+    padding: 0 0 0 30px;
+}
+
+.nav-item {
+    font-size: 0.75em;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-item:not(.masthead-active):hover {
+    color: var(--text-primary-400);
+    transition: color 0.3s ease;
+}
+
+.nav-indicator {
+    position: absolute;
+    top: 0px;
+    background-color: var(--text-primary-100);
+    height: 3px;
+    border-radius: 0 0 16px 16px;
+    animation: fadeInDown 1s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes fadeInDown {
+    0% {
+        transform: translate3d(0, -100%, 0);
+    }
+
+    100% {
+        transform: translateZ(0);
+    }
+}
+
+@media (max-width: 1279px) {
+    .masthead {
+        &.stickyHead {
+            top: -60px;
+        }
+    }
+}
+
+@media (max-width: 479px) {
+    .masthead {
+        &__inner-wrap {
+            height: 30px;
+            padding: 0 30px;
+        }
+    
+        &.stickyHead {
+            top: -30px;
+        }
+    }
+}

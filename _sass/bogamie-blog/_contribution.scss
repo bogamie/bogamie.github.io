@@ -1,0 +1,106 @@
+.border.py-2.graph-before-activity-overview {
+    display: flex;
+    justify-content: center;
+}
+.js-calendar-graph {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+    position: relative;
+    align-items: flex-end; 
+}
+.ContributionCalendar-day, 
+.ContributionCalendar-day[data-level="0"] {
+    fill: var(--color-calendar-graph-day-bg);
+    shape-rendering: geometricPrecision;
+    background-color: var(--color-calendar-graph-day-bg);
+    border-radius: 2px;
+    outline: 1px solid var(--color-calendar-graph-day-border);
+    outline-offset: -1px;
+}
+
+.ContributionCalendar-day[data-level="1"] {
+    fill: var(--color-calendar-graph-day-L1-bg);
+    background-color: var(--color-calendar-graph-day-L1-bg);
+    outline: 1px solid var(--color-calendar-graph-day-L1-border);
+}
+
+.ContributionCalendar-day[data-level="2"] {
+    fill: var(--color-calendar-graph-day-L2-bg);
+    background-color: var(--color-calendar-graph-day-L2-bg);
+    outline: 1px solid var(--color-calendar-graph-day-L2-border);
+}
+
+.ContributionCalendar-day[data-level="3"] {
+    fill: var(--color-calendar-graph-day-L3-bg);
+    background-color: var(--color-calendar-graph-day-L3-bg);
+    outline: 1px solid var(--color-calendar-graph-day-L3-border);
+}
+
+.ContributionCalendar-day[data-level='4'] {
+    fill: var(--color-calendar-graph-day-L4-bg);
+    background-color: var(--color-calendar-graph-day-L4-bg);
+    outline: 1px solid var(--color-calendar-graph-day-L4-border);
+}
+
+table.ContributionCalendar-grid {
+    margin-bottom: 0pt;
+    margin: auto;
+}
+
+table.ContributionCalendar-grid td {
+    padding: 4pt;
+}
+
+table.ContributionCalendar-grid td span.sr-only {
+    display: none;
+}
+
+td.ContributionCalendar-label span[aria-hidden='true'] {
+    font-size: 8pt;
+    left: -1pt;
+}
+
+tool-tip {
+    display: none;
+}
+
+.calendar {
+    font-family: Helvetica, arial;
+    border-radius: 3px;
+    text-align: center;
+    margin: 0 auto;
+    color: var(--text-primary-400);
+}
+
+.calendar-graph text.wday,
+.calendar-graph text.month {
+    font-size: 10px;
+    fill: #aaa;
+}
+.calendar .width-full {
+    display: flex;
+    justify-content: space-between; /* 양쪽 끝으로 요소 배치 */
+    align-items: center;
+}
+.calendar .width-full>.float-left {
+    display: none;
+}
+
+.calendar .width-full>.float-right {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--text-primary-400);
+}
+#user-activity-overview {
+    display: none;
+}
+
+@media (max-width: 790px) {
+    td.ContributionCalendar-label span[aria-hidden='true'] {
+        display: none;
+    }
+}

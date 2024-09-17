@@ -1,0 +1,73 @@
+{% assign cs_list = "Data Structure,Algorithm,Computer Architecture" | split: "," %}
+{% assign system_list = "System Programming,Computer Network" | split: "," %}
+{% assign design_list = "Database,Design Pattern" | split: "," %}
+{% assign web_list = "Web Programming" | split: "," %}
+{% assign lang_list = "JavaScript,Java" | split: "," %}
+
+<div class="post__nav lists">
+
+    <!-- Language -->
+    <div class="post__nav item">
+      <div class="item__title">Language</div>
+      {% for category in lang_list %}
+      <a href="javascript:void(0);" class="item__link"
+        data-category="{{ category | downcase | replace: ' ', '-' }}">
+        <div class="item__subtitle">
+          <span>{{ category }}</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    
+    <!-- Computer Science -->
+    <div class="post__nav item">
+      <div class="item__title">Computer Science</div>
+      {% for category in cs_list %}
+      <a href="javascript:void(0);" class="item__link"
+        data-category="{{ category | downcase | replace: ' ', '-' }}">
+        <div class="item__subtitle">
+          <span>{{ category }}</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- System -->
+    <div class="post__nav item">
+      <div class="item__title">Systems</div>
+      {% for category in system_list %}
+      <a href="javascript:void(0);" class="item__link"
+        data-category="{{ category | downcase | replace: ' ', '-' }}">
+        <div class="item__subtitle">
+          <span>{{ category }}</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- Data & Design -->
+    <div class="post__nav item">
+      <div class="item__title">Data & Design</div>
+      {% for category in design_list %}
+      <a href="javascript:void(0);" class="item__link"
+        data-category="{{ category | downcase | replace: ' ', '-' }}">
+        <div class="item__subtitle">
+          <span>{{ category }}</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- Web Development -->
+    <div class="post__nav item">
+      <div class="item__title">Web Development</div>
+      {% for category in web_list %}
+      <a href="javascript:void(0);" class="item__link"
+        data-category="{{ category | downcase | replace: ' ', '-' }}">
+        <div class="item__subtitle">
+          <span>{{ category }}</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>

@@ -1,0 +1,57 @@
+.highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: var(--highlight-text);
+  background-color: var(--highlight-bg);
+}
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt, .highlight .kv {
+  color: var(--highlight-keyword);
+}
+.highlight .gr {
+  color: var(--highlight-error-text);
+}
+.highlight .gd {
+  color: var(--highlight-deletion-text);
+  background-color: var(--highlight-deletion-bg);
+}
+.highlight .nb, .highlight .nc, .highlight .no, .highlight .nn {
+  color: var(--highlight-variable);
+}
+.highlight .sr, .highlight .na, .highlight .nt, .highlight .gi {
+  color: var(--highlight-string);
+}
+.highlight .gi {
+  background-color: var(--highlight-addition-bg);
+}
+.highlight .ges {
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .kc, .highlight .l, .highlight .ld, .highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx, .highlight .sb, .highlight .bp, .highlight .ne, .highlight .nl, .highlight .py, .highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .vm, .highlight .o, .highlight .ow, .highlight .gh, .highlight .gu {
+  color: var(--highlight-constant);
+}
+.highlight .gh, .highlight .gu {
+  font-weight: bold;
+}
+.highlight .s, .highlight .sa, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .sx, .highlight .s1, .highlight .ss {
+  color: var(--highlight-string-bold);
+}
+.highlight .nd, .highlight .nf, .highlight .fm {
+  color: var(--highlight-class);
+}
+.highlight .err {
+  color: var(--highlight-error-text);
+  background-color: var(--highlight-error-bg);
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cp, .highlight .cpf, .highlight .c1, .highlight .cs, .highlight .gl, .highlight .gt {
+  color: var(--highlight-comment);
+}
+.highlight .ni, .highlight .si, .highlight .ge, .highlight .gs {
+  color: var(--highlight-text);
+}
+.highlight .ge {
+  font-style: italic;
+}
+.highlight .gs {
+  font-weight: bold;
+}

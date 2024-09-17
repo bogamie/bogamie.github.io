@@ -1,0 +1,44 @@
+---
+layout: default
+---
+<div class="container">
+  <div class="grid-system">
+    <section class="nav-wrapper">
+      <div class="nav-wrapper wrap" id="post">
+        <aside class="post__sidebar">
+          <nav class="category">
+            <div class="markdown-body">
+              <header class="nav-items">
+                <h4 class="category__title"><i class="fa-solid fa-book" style="color: #FFD43B;"></i> Categories</h4>
+                <i class="fa-solid fa-angle-down"></i>
+              </header>
+              <div class="category__content">
+                {% include category.html %}
+              </div>
+            </div>
+          </nav>
+        </aside>
+      </div>
+    </section>
+
+    <div class="post-wrapper" id="post-container">
+      {% assign reversed_posts = site.posts | reverse %}
+      {% for post in reversed_posts %}
+      <div class="post-item" data-category="{{ post.categories | join: ' ' | downcase | replace: ' ', '-' }}">
+        <a href="{{ post.url }}">
+          <div class="post-item__wrapper">
+            <div class="post-item__top">
+              <h2 class="post-item__title">{{ post.title }}</h2>
+              <p class="post-item__category {{ post.categories | join: '-' | downcase }}">{{ post.categories | join: ' ' }}</p>
+            </div>
+            <p class="post-item__excerpt">{{ post.excerpt }}</p>
+            <p class="post-item__date">{{ post.date | date: "%B %-d, %Y" }}</p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/category.js"></script>

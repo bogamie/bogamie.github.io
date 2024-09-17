@@ -1,0 +1,33 @@
+---
+---
+
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+
+<head>
+    {% include head.html %}
+    {% include head/fabicon.html %}
+    <script>
+        !function () {
+            let theme = localStorage.getItem("theme");
+            if (theme === "dark") {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        }();
+    </script>
+</head>
+
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+    {% include_cached masthead.html %}
+    {{ content }}
+    <div id="footer" class="page__footer">
+        <footer>
+            {% include_cached footer.html %}
+        </footer>
+    </div>
+    {% include scripts.html %}
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+.page__footer {
+    display: block;
+    padding: 1rem;
+    text-align: center;
+}
+
+.page__footer-follow {
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-icons li {
+    display: inline-block;
+    vertical-align: top;
+    /* 아이콘을 위쪽으로 정렬 */
+}
+
+.social-icons a {
+    color: var(--text-primary-300);
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    display: inline-block;
+    vertical-align: top;
+    /* 아이콘의 텍스트 정렬 기준을 위쪽으로 */
+}
+
+.social-icons a i {
+    display: inline-block;
+    vertical-align: top;
+    /* 아이콘 내부의 <i> 요소도 위쪽으로 정렬 */
+}
+
+.page__footer-copyright {
+    color: var(--text-primary-300);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+.page__footer-copyright a {
+    color: var(--text-primary-300);
+    text-decoration: none;
+}
+
+.social-icons a:hover,
+.page__footer-copyright a:hover {
+    transform: translateY(-2px);
+    color: var(--text-primary-500);
+    transition: transform 0.3s ease;
+}
