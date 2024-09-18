@@ -1,0 +1,54 @@
+{% assign current_category = page.categories | join: '-' | downcase %}
+{% assign reversed_posts = site.posts | reverse %}
+{% assign related_posts = "" | split: "" %}
+
+{% for post in reversed_posts %}
+	{% assign post_category = post.categories | join: '-' | downcase %}
+	{% if post_category == current_category %}
+		{% assign related_posts = related_posts | push: post %}
+	{% endif %}
+{% endfor %}
+
+{% assign total_related = related_posts | size %}
+
+{% if total_related > 1 %}
+	<div class="related-posts">
+		<h2 class="related-posts__title">Related posts</h2>
+		<div class="related-posts__line"></div>
+
+		{% assign curr_index = 0 %}
+
+		{% for post in related_posts %}
+			{% if post.url == page.url %}
+				{% break %}
+			{% endif %}
+			{% assign curr_index = curr_index | plus: 1 %}
+		{% endfor %}
+
+		{% assign adjusted_value = total_related | minus: 3 %}
+
+		{% if curr_index <= 2 %}
+			{% assign show_posts=related_posts | slice: 0, 5 %}
+		{% elsif curr_index>= adjusted_value %}
+			{% assign start_index = total_related | minus: 5 %}
+			{% assign show_posts = related_posts | slice: start_index, 5 %}
+		{% else %}
+			{% assign start_index = curr_index | minus:2 %}
+			{% assign show_posts = related_posts | slice: start_index, 5 %}
+		{% endif %}
+
+		<div class="related-posts__wrapper">
+			{% for post in show_posts %}
+				{% if post.url !=page.url %}
+				<a href="{{ post.url }}" class="related-item">
+					<div>
+						<div class="related-item__title">{{ post.title }}</div>
+						<div class="related-item__excerpt">{{ post.excerpt }}</div>
+						<div class="related-item__date">{{ post.date | date: "%B %-d, %Y" }}</div>
+					</div>
+				</a>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+{% endif %}
