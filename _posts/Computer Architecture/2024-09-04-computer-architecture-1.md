@@ -4,13 +4,13 @@ excerpt: "&nbsp;&nbsp; This chapter introduces key concepts in computer architec
 date:   2024-09-04 19:02:54 +0900
 categories: Computer Architecture
 permalink: posts/1-Computer-Abstractions-and-Technology
-published: true
+published: false
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 # ![Light Mode Image](){: class="light-mode-img" height="90%" width="90%"}
 
 # ![Dark Mode Image](){: class="dark-mode-img" height="90%" width="90%"}
 
-# abstration <img class="lazy" data-src="https://github.com/user-attachments/assets/6ea4ec22-b848-4765-8045-42c91600041a#right" alt="image" height="5%" width="5%">**
+# abstration <img class="lazy" data-src="https://github.com/user-attachments/assets/88804cf0-05c4-4f03-8319-3161edd6f5b7#right" alt="image" height="5%" width="5%">**
 ---
 # 1.1 Introduction
 
@@ -59,53 +59,53 @@ published: true
 
 ## a. Use Abstration to Simplify Design
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/6ea4ec22-b848-4765-8045-42c91600041a" alt="image" height="15%" width="15%">*ABSTRACTION*
+<img class="lazy" data-src="https://github.com/user-attachments/assets/88804cf0-05c4-4f03-8319-3161edd6f5b7" alt="image" height="15%" width="15%">*ABSTRACTION*
 
 &nbsp;&nbsp; A major productivity technique for hardware and software is to use **abstractions** to represent the design at different levels of representation; lower-level details are hidden to offer a simpler model at higher levels.
 
 ## b. Make the Common Case Fast
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/494af6d5-84a3-42d8-8391-e3e4ce770678" alt="image" height="15%" width="15%">*COMMON CASE FAST*
+<img class="lazy" data-src="https://github.com/user-attachments/assets/d564b128-6384-454a-a8fd-182afbe5ebcb" alt="image" height="15%" width="15%">*COMMON CASE FAST*
 
 &nbsp;&nbsp; Making the **common case fast** will tend to enhance performance better than optimizing the rare case. Ironically, the common case is often simpler than the rare case and hence is often easier to enhance. This common sense advice implies that you know what the common case is, which is only possible with careful experimentation and measurement.
 
 ## c. Performance via 
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/49de57e5-812b-4d1f-8b43-82689e385fb9" alt="image" height="15%" width="15%">*PARALLELISM*
+<img class="lazy" data-src="https://github.com/user-attachments/assets/f0e6cc2f-a921-4dad-a52a-dccd080125dd" alt="image" height="15%" width="15%">*PARALLELISM*
 
 &nbsp;&nbsp; Since the dawn of computing, computer architects have offered designs that get more performance by performing operations in parallel.
 
 ## d. Performance via Pipelining
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/a7b93236-47f8-4540-9914-4f64fd999f04" alt="image" height="15%" width="15%">*PIPELINING*
+<img class="lazy" data-src="https://github.com/user-attachments/assets/2d4f131b-1d75-4d15-b842-748a12abf82e" alt="image" height="15%" width="15%">*PIPELINING*
 
 &nbsp;&nbsp; A particular patern of parallelism is so prevalent in computer architecture that it merits its own name: **pipelining**.
 
 ## e. Performance via Prediction
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/925476aa-466f-4da8-8f4f-480aa371229b" alt="image" height="15%" width="15%">*PREDICTION*
+<img class="lazy" data-src="https://github.com/user-attachments/assets/0fc5ecc4-2e97-4229-ac7f-e32b8d5def95" alt="image" height="15%" width="15%">*PREDICTION*
 
 &nbsp;&nbsp; Following the saying that it can be beer to ask for forgiveness than to ask for permission, the next great idea is prediction. In some cases it can be faster on average to guess and start working rather than wait until you know for sure, assuming that the mechanism to recover from a misprediction is not too expensive and your prediction is relatively accurate.
 
 ## f. Hierarchy of Memories
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/60cce1c4-3dab-4976-8952-f0aa9c5f407d" alt="image" height="15%" width="15%">*HIERARCHY*
+<img class="lazy" data-src="https://github.com/user-attachments/assets/f9f6663b-63bb-493a-beeb-0c3513259233" alt="image" height="15%" width="15%">*HIERARCHY*
 
 &nbsp;&nbsp; Programmers want memory to be fast, large, and cheap, as memory speed often shapes performance, capacity limits the size of problems that can be solved, and the cost of memory today is often the majority of computer cost. Architects have found that they can address these conflicting demands with a hierarchy of memories, with the fastest, smallest, and most expensive memory per bit at the top of the hierarchy and the slowest, largest, and cheapest per bit at the bottom. We use a layered triangle icon to represent the memory hierarchy. The shape indicates speed, cost, and size: the closer to the top, the faster and more expensive per bit the memory; the wider the base of the layer, the bigger the memory.
 
 ## g. Dependability via Redundancy
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/8ae93553-52e1-418a-b4f1-02a63c7daf96" alt="image" height="15%" width="15%">*DEPENDABILITY*
+<img class="lazy" data-src="https://github.com/user-attachments/assets/dd898c34-d716-4990-b07e-9eb6b0bf625c" alt="image" height="15%" width="15%">*DEPENDABILITY*
 
 &nbsp;&nbsp; Computers not only need to be fast; they need to be dependable. Since any physical device can fail, we make systems **dependable** by including redundant components that can take over when a failure occurs *and* to help detect failures. 
 
 # 1.3 Below Your Program
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/6ea4ec22-b848-4765-8045-42c91600041a#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; The hardware in a computer can only execute extremely simple low-level instructions. To go from a complex application to the simple instructions involves several layers of software that interpret or translate high-level operations into simple computer instructions, an example of the great idea of **abstraction**.*
+<img class="lazy" data-src="https://github.com/user-attachments/assets/88804cf0-05c4-4f03-8319-3161edd6f5b7#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; The hardware in a computer can only execute extremely simple low-level instructions. To go from a complex application to the simple instructions involves several layers of software that interpret or translate high-level operations into simple computer instructions, an example of the great idea of **abstraction**.*
 
 <div class="bg"></div>
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/b9fd9b31-ff63-4674-b4ad-10e26dd1de08#center" alt="image" height="30%" width="30%">
+<img class="lazy" data-src="https://github.com/user-attachments/assets/789e20a1-818f-43f4-8505-4dcaa0b7a9e9#center" alt="image" height="30%" width="30%">
 
 &nbsp;&nbsp; Image shows that these layers of software are organized primarily in a hierarchical fashion, with applications being the outermost ring and a variety of **systems software**[^9] sitting between the hardware and applications software.
 
@@ -139,10 +139,10 @@ and the assembler would translate this notation into
 
 &nbsp;&nbsp; This instruction tells the computer to add the two numbers A and B. The name coined for this symbolic language, still used today, is **assembly language**[^14]. In contrast, the binary language that the machine understands is the **machine language**[^15]. However assembly language requires the programmer to write one line for every instruction that the computer will follow, forcing the programmer to think like the computer.
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/6ea4ec22-b848-4765-8045-42c91600041a#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; The recognition that a program could be written to translate a more powerful language into computer instructions was one of the great breakthroughs in the early days of computing. Programmers today owe their productivity—and their sanity—to the creation of **high-level programming languages**[^16] and compilers that translate programs in such languages into instructions. The figure below shows the relationships among these programs and languages, which are further examples of the power of **abstraction**.*
+<img class="lazy" data-src="https://github.com/user-attachments/assets/88804cf0-05c4-4f03-8319-3161edd6f5b7#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; The recognition that a program could be written to translate a more powerful language into computer instructions was one of the great breakthroughs in the early days of computing. Programmers today owe their productivity—and their sanity—to the creation of **high-level programming languages**[^16] and compilers that translate programs in such languages into instructions. The figure below shows the relationships among these programs and languages, which are further examples of the power of **abstraction**.*
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/8f27c9e0-ee56-473a-8ea8-07b670b8ceae#center" alt="Light Mode Image" id="light-mode-img" height="60%" width="60%">
-<img class="lazy" data-src="https://github.com/user-attachments/assets/9be0c3f5-51ad-4f68-a9a7-b15aebb68b27#center" alt="Dark Mode Image" id="dark-mode-img" height="60%" width="60%">
+<img class="lazy" data-src="https://github.com/user-attachments/assets/745c66a1-9892-442f-9fa4-ec5eb098026d#center" alt="Light Mode Image" id="light-mode-img" height="60%" width="60%">
+<img class="lazy" data-src="https://github.com/user-attachments/assets/87d8268e-7e6d-4c1e-80e7-1962316c90c9#center" alt="Dark Mode Image" id="dark-mode-img" height="60%" width="60%">
 
 <div class="bg"></div>
 
@@ -158,7 +158,7 @@ and the assembler would translate this notation into
 
 <div class="bg"></div>
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/7bea33ef-6672-4191-82dd-81a361d31a03#center" alt="image" height="75%" width="75%">
+<img class="lazy" data-src="https://github.com/user-attachments/assets/8a839a5b-f100-48e3-b178-3f6e5551f54a#center" alt="image" height="90%" width="90%">
 
 &nbsp;&nbsp; The five classic components of a computer are input, output, memory, datapath, and control, with the last two sometimes combined and called the processor. This standard organization of computer is independent of harware technology: you can place every piece of every computer, past and present, into one of these five categories.
 
@@ -174,7 +174,7 @@ and the assembler would translate this notation into
 
 ## c. Opening the Box
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/bbc12320-b4ff-420d-9c76-83e2a967d545#center" alt="image" height="75%" width="75%">
+<img class="lazy" data-src="https://github.com/user-attachments/assets/adfe0940-91da-4fc1-becb-c3c76cb120e3#center" alt="image" height="90%" width="90%">
 
 &nbsp;&nbsp; The small rectangels contain the devices that drive our advancing technology, called **integrated circuits**[^22] and nicknamed **chips**. The *processor* is the active part of the computer, following the instructions of a program to the letter. It adds numbers, tests numbers, signals I/O devices to activate, and so on. Occasionally, people call the processor the **CPU**, for more bureaucratic-sounding **central processor unit**[^23].
 
@@ -182,7 +182,7 @@ and the assembler would translate this notation into
 
 &nbsp;&nbsp; The **memory**[^26] is where the programs are kept when they are running; it also contains the data needed by the running programs. The memory is a DRAM chip. *DRAM* stands for **dynamic random access memory**[^27]. DRAMs are used together to contain the instructions and data of a program.
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/60cce1c4-3dab-4976-8952-f0aa9c5f407d#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; Inside the processor is another type of memory—cache memory. **Cache memory**[^28] consists of a small, fast memory that acts as a buffer for the DRAM memory. Cache is built using a different memory technology, **static random access memory(SRAM)**[^29]. SRAM is faster but less dense, and hence more expensive, than DRAM. SRAM and DRAM are two layers of the **memory hierarchy**.*
+<img class="lazy" data-src="https://github.com/user-attachments/assets/f9f6663b-63bb-493a-beeb-0c3513259233#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; Inside the processor is another type of memory—cache memory. **Cache memory**[^28] consists of a small, fast memory that acts as a buffer for the DRAM memory. Cache is built using a different memory technology, **static random access memory(SRAM)**[^29]. SRAM is faster but less dense, and hence more expensive, than DRAM. SRAM and DRAM are two layers of the **memory hierarchy**.*
 
 &nbsp;&nbsp; One of the most important **abstractions** is the interface between the hardware and the lowest-level software. Software communicates to hardware via a vocabulary which are called instructions, and the vocabulary itself is called the **instruction set architecture**[^30], or simply **architecture**, of a computer. The intruction set architecture includes anything programmers need to know to make a binary machine language program work correctly, including instructions, I/O devices, and so on.
 
@@ -194,7 +194,7 @@ and the assembler would translate this notation into
 
 &nbsp;&nbsp; If we were to lose power to the computer, everything would be lost because the memory inside the computer is **volatile**[^33]—that is, when it loses power, it forgets. In contrast, a DVD disk doesn't forget the movie when you turn off the power to the DVD player, and is thus a **nonvolatile memory**[^34] technology.
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/60cce1c4-3dab-4976-8952-f0aa9c5f407d#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; To distinguish between the volatile memory used to hold data and programs while they are running and this nonvolatile memory used to store data and programs between runs, the term **main memory** or **primary memory** is used for the former, and **secondary memory** for the latter. Secondary memory forms the next lower layer of the **memory hierarchy**.*
+<img class="lazy" data-src="https://github.com/user-attachments/assets/f9f6663b-63bb-493a-beeb-0c3513259233#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; To distinguish between the volatile memory used to hold data and programs while they are running and this nonvolatile memory used to store data and programs between runs, the term **main memory** or **primary memory** is used for the former, and **secondary memory** for the latter. Secondary memory forms the next lower layer of the **memory hierarchy**.*
 
 ## e. Communicating with Other Computers
 
@@ -212,13 +212,13 @@ and the assembler would translate this notation into
 
 <div class="bg"></div>
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/351469b9-14e6-49ac-9bf8-42bd9330c645#center" alt="image" height="75%" width="75%">*&nbsp;&nbsp; The DRAM industry quadrupled capacity almost every three years, a 60% increase per year, for 20 years. In recent years, the rate has slowed down and is somewhat closer to doubling three years. With the slowing of Moore's Law and difficulties in reliable manufacturing of smaller DRAM cells given the challenging aspect ratios of their three-dimensional structure.*
+<img class="lazy" data-src="https://github.com/user-attachments/assets/066033fd-e539-4dc8-aee2-0ab2a2a68d8a#center" alt="image" height="90%" width="90%">*&nbsp;&nbsp; The DRAM industry quadrupled capacity almost every three years, a 60% increase per year, for 20 years. In recent years, the rate has slowed down and is somewhat closer to doubling three years. With the slowing of Moore's Law and difficulties in reliable manufacturing of smaller DRAM cells given the challenging aspect ratios of their three-dimensional structure.*
 
 # 1.6 Performance
 
 ## a. Defining Performance
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/7ee4ff11-791e-4540-bc8a-63df5ff054ad#center" alt="image" height="75%" width="75%">
+<img class="lazy" data-src="https://github.com/user-attachments/assets/c23dd429-68f4-46ea-9868-2c8bcd071a25#center" alt="image" height="90%" width="90%">
 
 &nbsp;&nbsp; You could define the fastest plane as the one with the highest cruising speed, taking a single passenger from one point to another in the least time. If you were interested in transporting 500 passengers from one point to another, however, the Airbus A380-800 would clearly be the fastest. Similarly, we can define computer performance in several different ways.
 
@@ -266,7 +266,7 @@ $$
 
 <div class="bg"></div>
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/df7c4a29-541c-497f-aa5b-268b543d95a9#center" alt="image" height="50%" width="50%">
+<img class="lazy" data-src="https://github.com/user-attachments/assets/74f60a50-adcb-4c3b-aab6-ce7da4bbb949#center" alt="image" height="50%" width="50%">
 
 &nbsp;&nbsp; We will use the term *system performance* to refer to elapsed time on an unloaded system and *CPU performance* to refer to user CPU time. Almost all computers are constructed using a clock that determines when events take place in the hardware. These discrete time intervals are called **clock cycles**[^40] (or **ticks**, **clock ticks**, **clock periods**, **clocks**, **cycles**). Designers refer to the length of a **clock period**[^41] both as the time for a complete *clock cycle* and as the *clock rate*, which is the inverse of the clock period.
 
@@ -508,7 +508,7 @@ $$
 
 ## f. Summary of Key Points
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/94d5e3b3-fd21-4200-a6c5-41cfbaa7ae30#center" alt="image" height="90%" width="90%">
+<img class="lazy" data-src="https://github.com/user-attachments/assets/b714f9aa-1f44-4cac-a4c2-33670ee5f6a9#center" alt="image" height="90%" width="90%">
 
 &nbsp;&nbsp; It shows the basic measurements at different levels in the computer and what is being measured in each case. We can see how these factors are combined to yield exectution time measured in seconds per program:
 
@@ -533,14 +533,64 @@ $$
 
 # 1.7 The Power Wall
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/0daab28a-bb7d-4c5e-8940-1ce677021f0d#center" alt="image" height="75%" width="75%">
+<img class="lazy" data-src="https://github.com/user-attachments/assets/a57ecc50-84b9-4a21-9c72-49052a8fbf81#center" alt="image" height="90%" width="90%">
 
 &nbsp;&nbsp; It shows the increase in clock rate and power of nine generations of Intel microprocessors over 36 years. Both clock rate and pewer increased rapidly for decades, and then flattened or dropped off recently.
 
-&nbsp;&nbsp; The dominant technology for 
+&nbsp;&nbsp; The dominant technology for integrated circuits is called **CMOS**(complementary metal oxide semiconductor). For CMOS, the primary source of energy consumption is so-called dynamic energy—that is, energy that is consumed when transistors switch states from 0 to 1 and vice versa. The dynamic energy depends on the capacitive loading of each transistor and the voltage applied. This equation is the energy of a pulse during the logic transition of 0 → 1 → 0 or 1 → 0 → 1. The power required per transistor is just the product of energy of a transition and the frequency of transistions:
+
+$$
+Power \propto \frac{1}{2} \times Capacitive\ load \times Voltage^2 \times Frequency\ switched
+$$
+
+&nbsp;&nbsp; Frequency switched is a function of the clock rate. The capacitive load per transistor is a function of both the number of transistors connected to an output (called the *fanout*) and the technology, which determines the capacitance of both wires and transistors. In 20 years, voltages have gone from 5 V to 1 V, which is why the increase in power is only 30 times.
+
+> **Relative Power**
+>
+> &nbsp;&nbsp; Suppose we developed a new, simpler processor that has 85% of the capacitive load of the more complex older processor. Further, assume that it has adjustable voltage so that it can reduce voltage 15% compared to processor B, which results in a 15% shrink in frequency. What is the impact on dynamic power?
+> 
+> <div class="bg"></div>
+> 
+> <details><summary><strong>Answer</strong></summary>
+>
+> $$
+> \frac{\textrm{Power}_\textrm{new}}{\textrm{Power}_\textrm{old}} =  \frac{ \left< \textrm{Capacitive load} \times 0.85 \right> \times \left< \textrm{Voltage} \times 0.85 \right>^2 \times \left< \textrm{Frequency switched} \times 0.85 \right> }{ \textrm{Capacitive load} \times \textrm{Voltage}^2 \times \textrm{Frequency switched} }
+> $$
+>
+> &nbsp;&nbsp; Thus the power ratio is
+>
+> $$
+> 0.85^4 = 0.52
+> $$
+>
+> &nbsp;&nbsp; Hence, the new processor uses about half the power of the old processor.
+> 
+> </details>
+
+# 1.8 The Sea Change: The Switch from Uniprocessors to Multiprocessors.
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/1eae69f2-5b01-4411-a5eb-c6dd6a324c56#center" alt="image" height="90%" width="90%">
+
+&nbsp;&nbsp; Rather than continuing to decrease the response time of a single program running on the single processor, as of 2006 all desktop and server companies are shipping microprocessors with multiple processors per chip, where the benefit is often more on throughput than on response time. To reduce confusion between the words processorand microprocessor, companies refer to processors as "cores", and such microprocessors are generically called multicore microprocessor.
+
+&nbsp;&nbsp; Today, for programmmers to get significant improvement in response time, they need to rewrite their programs to take advantage of muliple processors. Moreover, to get the historic benefit of running faster on new microprocessors, programmers will have to continue to improve performance of their code as the number of cores increases.
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/f0e6cc2f-a921-4dad-a52a-dccd080125dd#right" alt="image" height="2.5%" width="2.5%"><img class="lazy" data-src="https://github.com/user-attachments/assets/2d4f131b-1d75-4d15-b842-748a12abf82e#right" alt="image" height="2.5%" width="2.5%">*&nbsp;&nbsp; To reinforce how the software and hardware systems work hand in hand, we use a special section, <em>Hardware/software Interface</em>. **Parallelism** has always been critical to performance in computing, but it was often hidden. **Pipelining** is one example of <em>instruction-level parallelism</em>, where the parallel nature of the hardware is abstracted away so the programmer and compiler can think of the hardware a executing instructions sequentially.*
+
+&nbsp;&nbsp; Why has it been so hard for programmers to write explicitly parallel programs? The first reason is that parallel programming is by definition performance programming, which increases the difficulty programming. Not only does the program need to be correct, solve an important problem, and provide a useful interface to the people or other programs that invoke it, the program must also be fast.
+
+&nbsp;&nbsp; The second reason is that fast for parallel hardware means that the programmer must divide an application so that each processor has roughly the same amount to do at the same time, and that the overhead of scheduling and coordination doesn’t fritter away the potential performance benefits of parallelism.
+
+# 1.9 Real Stuff: Benchmarking the Intel Core i7
+
+## a. SPEC CPU Benchmark
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/d564b128-6384-454a-a8fd-182afbe5ebcb#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; The set of programs run would form a **workload**[^44]. To evaluate two computer systems, a user would simply compare the execution time of the workload on the two computers. This alternative is ususally followed by evaluating the computer using a sef of **benchmarks**—programs specifically chosen to measure performance. As we noted above, to make the **common case fast**, you first need to know accurately which case is common, so benchmarks play a critical role in computer architecture.*
+
+&nbsp;&nbsp; **SPEC** (*System Performance Evaluation Cooperative*)
 
 ---
-<!-- 
+
 [^1]: A computer designed for use by an individual, usually incorporating a graphics display, a keyboard, and a mouse.
 [^2]: A computer used for running larger programs for multiple users, often simultaneously, and typically accessed only via a network.
 [^3]: A class of computers with the highest performance and cost; they are configured as servers and typically cost tens to hundreds of millions of dollars
@@ -583,4 +633,5 @@ $$
 [^40]: Also called **tick**, **clock tick**, **clock period**, **clock**, or **cycle**. The time for one clock period, usually of the processor clock, which runs at a constant rate.
 [^41]: The length of each clock cycle.
 [^42]: Average number of clock cycles per instruction for a program or program fragment. 
-[^43]: The number of instructions executed by the program. -->
+[^43]: The number of instructions executed by the program.
+[^44]: A set of programs run on a computer that is either the actual collection of applications run by a user or constructed from real programs to approximate such a mix. A typical workload specifies both the programs and the relative frequencies.
