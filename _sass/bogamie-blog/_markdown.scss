@@ -550,6 +550,9 @@ mjx-container {
     overflow-x: auto;
     overflow-y: hidden;
     max-width: 100%;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 img + em {
@@ -559,7 +562,7 @@ img + em {
     text-align: left;
 }
 
-@media (max-width: 479px) {
+@media (max-width: 1279px) {
     .markdown-body .highlight pre,
     .markdown-body pre {
         padding: 0.25rem;
