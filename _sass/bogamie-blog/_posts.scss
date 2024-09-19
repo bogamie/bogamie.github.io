@@ -183,3 +183,15 @@
         transform: rotate(90deg);
     }
 }
+@media (max-width: 767px) {
+    .post-item {
+        &__excerpt {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
