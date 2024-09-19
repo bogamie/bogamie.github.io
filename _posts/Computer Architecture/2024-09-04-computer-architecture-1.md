@@ -4,7 +4,7 @@ excerpt: "&nbsp;&nbsp; This chapter introduces key concepts in computer architec
 date:   2024-09-04 19:02:54 +0900
 categories: Computer Architecture
 permalink: posts/1-Computer-Abstractions-and-Technology
-published: false
+published: true
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 # ![Light Mode Image](){: class="light-mode-img" height="90%" width="90%"}
 
@@ -587,7 +587,102 @@ $$
 
 <img class="lazy" data-src="https://github.com/user-attachments/assets/d564b128-6384-454a-a8fd-182afbe5ebcb#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; The set of programs run would form a **workload**[^44]. To evaluate two computer systems, a user would simply compare the execution time of the workload on the two computers. This alternative is ususally followed by evaluating the computer using a sef of **benchmarks**—programs specifically chosen to measure performance. As we noted above, to make the **common case fast**, you first need to know accurately which case is common, so benchmarks play a critical role in computer architecture.*
 
-&nbsp;&nbsp; **SPEC** (*System Performance Evaluation Cooperative*)
+&nbsp;&nbsp; **SPEC** (*System Performance Evaluation Cooperative*) is an effort funded and supported by a number of computer vendors to create standard sets of benchmarks for modern computer systems. In 1989, SPEC originally created a benchmark set focusing on processor performance (now called SEPC89), which has evolved through five generations. The latest is SPEC CPU2017, which consists of a set of 10 integer benchmarks (SPECspeed 2017 Integer) and 13 floating-point benchmarks (SPECspeed 2017 Floating Point). 
+
+<div class="bg"></div>
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/057838f0-a007-4636-aa99-5a06dd9777a0#center" alt="image" height="90%" width="90%">
+
+&nbsp;&nbsp; It describes the SPEC integer benchmarks and their execution time on the Intel Core i7 and shows the factors that explain execution time: instruction count, CPI, and clock cycle time. Note that CPI varies by more than a factor of 4.
+
+&nbsp;&nbsp; To simplify the marketing of computers, SPEC decided to report a single number to summarize all 10 integer benchmarks. Dividing the execution time of a reference processor by the execution time of the measured computer normalizes the execution time measurments; this normalization yields a measure, called the *SPECratio*, which has the advantage that bigger numeric results indicate faster performance. That is, the SPECratio is the inverse of execution time.
+
+# 1.10 Fallacies and Pitfalls
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/d564b128-6384-454a-a8fd-182afbe5ebcb#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; The great idea of making the common case fast has a demoralizing corollary that has plagued designers of both hardware and software. It reminds us that the opportunity for improvement is affected by how much time the event consumes.*
+
+&nbsp;&nbsp; Suppose a program runs in 100 seconds on a computer, with multiply operations responsible for 80 seconds of this time. How much do I have to improve the speed of multiplication if I want my program to run five times faster?
+
+&nbsp;&nbsp; The execution time of the program after making the improvement is given by the following simple equation known as **Amdahl's Law**[^45]:
+
+$$
+\textrm{Execution time after improvement} = \frac{ \textrm{Execution time affected by improvement} }{ \textrm{Amount of improvement} } + \textrm{Execution time unaffected}
+$$
+
+&nbsp;&nbsp; For this problem:
+
+$$
+\textrm{Execution time after improvement} = \frac{ \textrm{80 seconds} }{ n } + \textrm{20 seconds}
+$$
+
+&nbsp;&nbsp; Since we want the performance to be five times faster, the new execution time should be 20 seconds, giving
+
+$$
+\begin{aligned}
+    \textrm{20 seconds} &= \frac{ \textrm{80 seconds} }{ n } + \textrm{20 seconds} \\
+                      0 &= \frac{ \textrm{80 seconds} }{ n }
+\end{aligned}
+$$
+
+&nbsp;&nbsp; That is, there is *no amount* by which we can enhance-multiply to achieve a fivefold increase in performance, if multiply accounts for only 80% of the workload. The performance enhancement possible with a given improvement is limited by the amount that the improved feature is used.
+
+<div class="bg"></div>
+
+&nbsp;&nbsp; We have already warned about the danger of predicting performance based on simply one of clock rate, instruction count, or CPI. Another common mistake is to use only two of the three factors to compare performance. Although using two of the three factors may be valid in a limited context, the concept is also easily misused.
+
+&nbsp;&nbsp; One alternative to time is **MIPS (million instructions per second)**[^46]. For a given program, MIPS is simply
+
+$$
+\textrm{MIPS} = \frac{\textrm{Instruction count}}{ \textrm{Execution time} \times 10^6 }
+$$
+
+&nbsp;&nbsp; Since MIPS is an instruction execution rate, MIPS specifies performance inverselyto execution time; faster computers have a higher MIPS rating. The good news about MIPS is that it is easy to understand, and faster computers mean bigger MIPS, which matches intuition.
+
+&nbsp;&nbsp; There are three problems with using MIPS as a measure for comparing computers. First, MIPS specifies the instruction execution rate but does not take into account the capabilities of the instructions. We cannot compare computers with different instruction sets using MIPS, since the instruction counts will certainly differ.
+
+&nbsp;&nbsp; Second, MIPS varies between programs on the same computer; thus, a computer cannot have a single MIPS rating. For example, by substituting for execution time, we see the relationship between MIPS, clock rate, and CPI:
+
+$$
+\begin{aligned}
+    \textrm{MIPS} &= \frac{ \textrm{Instruction count} }{ \frac{\textrm{Instruction count} \times \textrm{CPI} }{ \textrm{Clock rate} } \times 10^6 } \\
+&= \frac{ \textrm{Clock rate} }{ \textrm{CPI} \times 10^6 }
+\end{aligned}
+$$
+
+<div class="bg"></div>
+
+&nbsp;&nbsp; Finally, and most importantly, if a new program executes more instructions but each instruction is faster, MIPS can vary independently from performance. As a result, since CPI can vary depending on the program even on the same computer, performance comparisons should take into account the number of instructions, CPI, and clock speed.
+
+> **Check Yourself**[^47]
+>
+> &nbsp;&nbsp; Consider the follwing performance measurements for a program:
+>
+> <style type="text/css">.tg  {border-collapse:collapse;border-spacing:0;min-width:100%}.tg td{border-color:var(--color-primary-600);border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:0.875rem;overflow:hidden;padding:10px 5px;word-break:normal;}.tg th{border-color:var(--color-primary-600);border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:1rem;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}.tg .tg-iqjm{background-color:var(--color-primary-500);border-color:var(--color-primary-600);text-align:center;vertical-align:middle}.tg .tg-0pky{border-color:var(--color-primary-600);text-align:left;vertical-align:top}</style><table class="tg"><thead><tr><th class="tg-iqjm">Measurment</th><th class="tg-iqjm">Computer A</th><th class="tg-iqjm">Computer B</th></tr></thead><tbody><tr><td class="tg-0pky">Instruction count</td><td class="tg-0pky">10 biliion</td><td class="tg-0pky">8 billion</td></tr><tr><td class="tg-0pky">Clock rate</td><td class="tg-0pky">4 GHz</td><td class="tg-0pky">4 GHz</td></tr><tr><td class="tg-0pky">CPI</td><td class="tg-0pky">1.0</td><td class="tg-0pky">1.1</td></tr></tbody></table>
+>
+> <div class="bg"></div>
+> 
+> a. Which computer has the higher MIPS rating?
+> 
+> b. Which computer is faster?
+> 
+> <div class="bg"></div>
+> 
+> <details><summary><strong>Answer</strong></summary>
+>
+> $$
+> \frac{\textrm{Power}_\textrm{new}}{\textrm{Power}_\textrm{old}} =  \frac{ \left< \textrm{Capacitive load} \times 0.85 \right> \times \left< \textrm{Voltage} \times 0.85 \right>^2 \times \left< \textrm{Frequency switched} \times 0.85 \right> }{ \textrm{Capacitive load} \times \textrm{Voltage}^2 \times \textrm{Frequency switched} }
+> $$
+>
+> &nbsp;&nbsp; Thus the power ratio is
+>
+> $$
+> 0.85^4 = 0.52
+> $$
+>
+> &nbsp;&nbsp; Hence, the new processor uses about half the power of the old processor.
+> 
+> </details>
+
 
 ---
 
@@ -635,3 +730,6 @@ $$
 [^42]: Average number of clock cycles per instruction for a program or program fragment. 
 [^43]: The number of instructions executed by the program.
 [^44]: A set of programs run on a computer that is either the actual collection of applications run by a user or constructed from real programs to approximate such a mix. A typical workload specifies both the programs and the relative frequencies.
+[^45]: A rule stating that the performance enhancement possible with a given improvement is limited by the amount that the improved feature is used. It is a quantitative version of the law of diminishing returns.
+[^46]: A measurement of program execution speed based on the number of millions of instructions. MIPS is computed as the instruction count divided by the product of the execution time and $10^{6}$.
+[^47]: <style type="text/css">.tg{border-collapse:collapse;border-spacing:0;width:100%}.tg td,.tg th{border-color:#000;border-style:solid;border-width:1px;font-family:Arial,sans-serif;font-size:.875rem;overflow:hidden;padding:10px 5px;word-break:normal}.tg td{background-color:var(--color-primary-300)}.tg th{background-color:var(--color-primary-600)}.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}.tg .tg-yz93{border-color:inherit;text-align:right;vertical-align:middle}.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}.tg .tg-dvpl{border-color:inherit;text-align:right;vertical-align:top}</style><table class="tg"><colgroup><col style="width:33.33%"><col style="width:33.33%"><col style="width:33.33%"></colgroup><thead><tr><th class="tg-c3ow" colspan="3">NUMERICAL CHART</th></tr></thead><tbody><tr><td class="tg-yz93">1</td><td class="tg-c3ow">$10^{0}$</td><td class="tg-0pky">one</td></tr><tr><td class="tg-dvpl">10</td><td class="tg-c3ow">$10^{1}$</td><td class="tg-0pky">ten</td></tr><tr><td class="tg-yz93">100</td><td class="tg-c3ow">$10^{2}$</td><td class="tg-0pky">one hundred</td></tr><tr><td class="tg-yz93">1,000</td><td class="tg-c3ow">$10^{3}$</td><td class="tg-0pky">one thousand</td></tr><tr><td class="tg-yz93">10,000</td><td class="tg-c3ow">$10^{4}$</td><td class="tg-0pky">ten thousand</td></tr><tr><td class="tg-yz93">100,000</td><td class="tg-c3ow">$10^{5}$</td><td class="tg-0pky">one hundred thousand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr><tr><td class="tg-yz93">1,000,000</td><td class="tg-c3ow">$10^{6}$</td><td class="tg-0pky">one million</td></tr><tr><td class="tg-yz93">10,000,000</td><td class="tg-c3ow">$10^{7}$</td><td class="tg-0pky">ten million</td></tr><tr><td class="tg-yz93">100,000,000</td><td class="tg-c3ow">$10^{8}$</td><td class="tg-0pky">one hundred million</td></tr><tr><td class="tg-yz93">1,000,000,000</td><td class="tg-c3ow">$10^{9}$</td><td class="tg-0pky">one billion</td></tr><tr><td class="tg-yz93">10,000,000,000</td><td class="tg-c3ow">$10^{10}$</td><td class="tg-0pky">ten billion</td></tr><tr><td class="tg-yz93">100,000,000,000</td><td class="tg-c3ow">$10^{11}$</td><td class="tg-0pky">one hundred billion</td></tr><tr><td class="tg-yz93">1,000,000,000,000</td><td class="tg-c3ow">$10^{12}$</td><td class="tg-0pky">one trillion</td></tr><tr><td class="tg-yz93">10,000,000,000,000</td><td class="tg-c3ow">$10^{13}$</td><td class="tg-0pky">ten trillion</td></tr><tr><td class="tg-yz93">100,000,000,000,000</td><td class="tg-c3ow">$10^{14}$</td><td class="tg-0pky">one hundred trillion</td></tr></tbody></table>
