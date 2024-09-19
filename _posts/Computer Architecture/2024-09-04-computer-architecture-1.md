@@ -668,18 +668,52 @@ $$
 > <div class="bg"></div>
 > 
 > <details><summary><strong>Answer</strong></summary>
+> 
+> &nbsp;&nbsp; Since **CPI** means clock cycle per instruction count:
 >
 > $$
-> \frac{\textrm{Power}_\textrm{new}}{\textrm{Power}_\textrm{old}} =  \frac{ \left< \textrm{Capacitive load} \times 0.85 \right> \times \left< \textrm{Voltage} \times 0.85 \right>^2 \times \left< \textrm{Frequency switched} \times 0.85 \right> }{ \textrm{Capacitive load} \times \textrm{Voltage}^2 \times \textrm{Frequency switched} }
+> \textrm{CPI} = \frac{ \textrm{CPU}_\textrm{clock cycles} }{ \textrm{Instruction count} }
 > $$
 >
-> &nbsp;&nbsp; Thus the power ratio is
+> &nbsp;&nbsp; Thus, execution time can be expressed as the product of total clock cycles and clock period:
 >
 > $$
-> 0.85^4 = 0.52
+\begin{aligned}
+    \textrm{CPU}_\textrm{times} &= \textrm{CPU}_\textrm{clock cycles} \times \textrm{Clock rate} \\
+                                &= \textrm{CPI} \times \textrm{Instruction count} \times \textrm{Clock period} \\
+                                &= \frac{ \textrm{CPI} \times \textrm{Instruction count} }{ \textrm{Clock rate}}
+\end{aligned}
 > $$
 >
-> &nbsp;&nbsp; Hence, the new processor uses about half the power of the old processor.
+> &nbsp;&nbsp; Therefore, the MIPS formula is:
+>
+> $$
+> \begin{aligned}
+    \textrm{MIPS} &= \frac{ \textrm{Instruction count} }{ \textrm{Execution time} \times 10^6 } \\
+                  &= \frac{ \textrm{Instruction count} }{ \frac{\textrm{Instruction count} \times \textrm{CPI} }{ \textrm{Clock rate} } \times 10^6 } \\
+&= \frac{ \textrm{Clock rate} }{ \textrm{CPI} \times 10^6 } 
+\end{aligned}
+> $$
+>
+> <br>
+>
+> $$
+> \begin{aligned}
+    \textrm{MIPS}_\textrm{A} &= \frac{ 4 \times 10^9 }{ 1.0 \times 10^6 } = 4000 \textrm{MIPS} \\
+    \textrm{MIPS}_\textrm{B} &= \frac{ 4 \times 10^9 }{ 1.1 \times 10^6 } = 3636 \textrm{MIPS}
+\end{aligned}
+> $$
+>
+> &nbsp;&nbsp; The MIPS value of Computer A is 4000, which is higher than the MIPS value of Computer B at 3636. Therefore, Computer A has a higher MIPS rating.
+>
+> $$
+> \begin{aligned}
+    \textrm{CPU}_{\textrm{times}_\textrm{A}} &= \frac{1.0 \times 10 \times 10^9}{4 \times 10^9 } = 2.5 \textrm{seconds} \\
+    \textrm{CPU}_{\textrm{times}_\textrm{B}} &= \frac{1.1 \times 8 \times 10^9}{4 \times 10^9 } = 2.2 \textrm{seconds}
+\end{aligned}
+> $$
+>
+> &nbsp;&nbsp; The execution time of Computer B is 2.2 seconds, and the execution time of Computer A is 2.5 seconds, so Computer B is faster.
 > 
 > </details>
 
