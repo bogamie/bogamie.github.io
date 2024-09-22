@@ -1,13 +1,13 @@
 ---
-title:  "1. Ubuntu 설치"
-excerpt: ""
+title:  "1. Ubuntu"
+excerpt: "&nbsp;&nbsp; 멀티부팅을 이용하여 Ubuntu를 설치해보자."
 date:   2024-09-21 17:40:10 +0900
 categories: System Programming
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
-permalink: posts/1-ubuntu-설치
+permalink: posts/1-ubuntu
 published: true
 ---
-# 1. Ubuntu 설치
+# 1.1 Ubuntu 설치
 
 &nbsp;&nbsp; 우분투를 사용하기 위한 방법에는 여러 가지가 있다. 예를 들어 가상 머신에 우분투 설치, wsl2를 통한 사용, 그리고 멀티부팅을 활용한 방법 등이 있다. 이 포스트에서는 멀티부팅으로 우분투를 설치하는 과정을 다룬다.
 
