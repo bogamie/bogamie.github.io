@@ -5,7 +5,7 @@ date:   2024-09-21 17:40:10 +0900
 categories: System Programming
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 permalink: posts/1-ubuntu-설치
-published: false
+published: true
 ---
 # 1. Ubuntu 설치
 
@@ -90,6 +90,80 @@ vssadmin delete shadows /for=C: /all
 
 &nbsp;&nbsp; 64GB로 할당 완료하면 이런 식으로 확인 가능하다.
 
+## d. BIOS 진입
+
+&nbsp;&nbsp; 윈도우 다시 시작 후 로고가 보이기 전까지 `f2` 연타로 BIOS 진입을 해준다. 
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/83149ff3-cdec-4f7c-96a1-5b8c09bad0e8#center" alt="image" height="90%" width="90%">
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/4317e578-e323-4f94-bc89-16a00f5506ab#center" alt="image" height="90%" width="90%">
+
+&nbsp;&nbsp; Boot 메뉴에서 Secure Boot Control을 꺼준다. 보안 부팅을 설정한 상태에서는 Ubuntu를 설치할 수 없었다. 그 후 밑에 있는 Boot Device Priority에서 USB를 1순위로 부팅 순서를 조정해준다.(이미 Ubuntu가 깔려져 있는 상태여서 Boot option이 3개이다.)
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/e38421a5-2328-4274-bddd-af072d37b0e7#center" alt="image" height="90%" width="90%">
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/7ef2df87-c223-41bb-96e1-e494e385caf0#center" alt="image" height="90%" width="90%">
+
+&nbsp;&nbsp; 여기까지 진행하였으면 Boot Option #1은 USB, #2는 윈도우로 설정되었을 것이다.(마찬가지로 이미 Ubuntu를 설치한 상태이기 때문에 #3에 Ubuntu가 있는 것을 볼 수 있다.) 그리고 Save를 누르고 잠깐의 시간 후에 우분투가 실행 될 것이다.
+
+## e. Ubuntu 설정
+
+&nbsp;&nbsp; Ubuntu가 실행되었다면 언어 설정, 키보드 설정, 인터넷 연결 설정을 해준다.
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/5f330711-3435-4cc5-809e-61b9c223e31f#center" alt="image" height="75%" width="75%">
+
+&nbsp;&nbsp; 간단한 설정을 해주면 Install Ubuntu와 Try Ubuntu 선택지가 나온다. 우리는 설치를 해야하므로 Install Ubuntu를 선택한다. 
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/4224de8b-5594-40f9-9344-8d4d92c36389#center" alt="image" height="75%" width="75%">
+
+&nbsp;&nbsp; Interactive installation 선택
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/b7a8fe70-bd9f-4473-b876-869d5743dedd#center" alt="image" height="75%" width="75%">
+
+&nbsp;&nbsp; Default selection 선택
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/56a2c02d-a58a-4119-b16c-29d500be26c4#center" alt="image" height="75%" width="75%">
+
+&nbsp;&nbsp; 모두 선택
+
+### i. 디스크 할당
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/16fbf815-3446-495d-8358-8e2e88516df4#center" alt="image" height="75%" width="75%">
+
+&nbsp;&nbsp; 우리는 이전에 할당해놓은 디스크 공간에 Ubuntu를 설치해야 하므로 수동 설치를 선택한다.
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/9fc48da4-94b5-4cb2-b5cb-fff4bed0e08f#center" alt="image" height="75%" width="75%">
+
+&nbsp;&nbsp; 공간 할당을 완료한 모습이다. 먼저 전에 할당한 공간을 클릭한 후 좌하단의 `+` 버튼을 클릭한다. "파티션 만들기" 창이 뜨고 Ext4 형식으로 `/`, `/boot`, `/tmp`, `/home` 영역을 생성해준다.
+
+* `/boot`
+  * 부팅 관련 파일이 저장되는 곳으로 용량이 많이 필요하지 않다.
+  * 1GB로 설정함
+* `/tmp`
+  * 일반 user가 tmp에 들어가서 root 권한을 획득할 수 있다는 보안의 취약점이 발견되었다고 한다. 따라서 파티션 나누는 것을 추천한다.[^2]
+  * 임시 파일 저장 용도로 마음대로 할당
+  * 2GB로 설정함
+* `/home`
+  * 개인 파일 저장을 위한 공간이다. 저장할 파일이 코드 외엔 많지 않으므로 12GB로 설정하였다.
+  * 12GB로 설정함
+* `/`
+  * 루트 파티션으로 우분투의 시스템 파일과 프로그램이 설치된다.
+  * 마지막으로 남은 공간을 모두 할당해주었다.
+  * 51.72GB로 설정함
+
+<div class="bg"></div>
+
+&nbsp;&nbsp; 무조건 이렇게 하지 않아도 된다. 저장할 개인 파일이 많다면 루트 파티션을 줄이고 `/home` 파티션을 늘려도 된다. 파티셔닝은 정답이 없기 때문에 참고만 하자.
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/cc1e41e6-a862-4ffc-8f6d-82020a89575c#center" alt="image" height="75%" width="75%">
+
+&nbsp;&nbsp; 이제 계정을 생성하고 거주하는 곳을 선택하면 끝이다. 본인이 설정한 파티션에 문제가 없는지 확인하고 install 버튼을 클릭한다. 그럼 Ubuntu 설치가 완료되었다.
+
+## f. 설치 완료
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/fdebec92-fe44-472a-9a45-ec17cf50ca7b#center" alt="image" height="100%" width="100%">
+
 ---
 
 [^1]: [vssadmin delete shadows](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/vssadmin-delete-shadows)
+[^2]: [[Linux] 리눅스 설치시 수동 파티션 나누기](https://0561blue.tistory.com/44)
