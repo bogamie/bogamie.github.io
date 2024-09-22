@@ -78,6 +78,9 @@
 
 .markdown-body a {
     background-color: initial;
+    color: var(--text-primary-100);
+    font-weight: 600;
+    text-decoration: none;
 }
 
 .markdown-body a:active,
