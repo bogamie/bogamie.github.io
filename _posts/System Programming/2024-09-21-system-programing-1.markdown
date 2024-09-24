@@ -134,7 +134,7 @@ vssadmin delete shadows /for=C: /all
 
 <img class="lazy" data-src="https://github.com/user-attachments/assets/9fc48da4-94b5-4cb2-b5cb-fff4bed0e08f#center" alt="image" height="75%" width="75%">
 
-&nbsp;&nbsp; 공간 할당을 완료한 모습이다. 먼저 전에 할당한 공간을 클릭한 후 좌하단의 `+` 버튼을 클릭한다. "파티션 만들기" 창이 뜨고 Ext4 형식으로 `/`, `/boot`, `/tmp`, `/home` 영역을 생성해준다.
+&nbsp;&nbsp; 공간 할당을 완료한 모습이다. 먼저 전에 할당한 공간을 클릭한 후 좌하단의 `+` 버튼을 클릭한다. "파티션 만들기" 창이 뜨고 Ext4 형식으로 `/`, `/boot`, `/tmp`, `/home`, `/swap` 영역을 생성해준다.
 
 * `/boot`
   * 부팅 관련 파일이 저장되는 곳으로 용량이 많이 필요하지 않다.
