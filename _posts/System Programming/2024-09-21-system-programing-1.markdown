@@ -92,7 +92,7 @@ vssadmin delete shadows /for=C: /all
 
 ## d. BIOS 진입
 
-&nbsp;&nbsp; 윈도우 다시 시작 후 로고가 보이기 전까지 `f2` 연타로 BIOS 진입을 해준다. 
+&nbsp;&nbsp; 윈도우 다시 시작 후 로고가 보이기 전까지 `f2` 연타로 BIOS 진입해준다. 
 
 <img class="lazy" data-src="https://github.com/user-attachments/assets/83149ff3-cdec-4f7c-96a1-5b8c09bad0e8#center" alt="image" height="90%" width="90%">
 
