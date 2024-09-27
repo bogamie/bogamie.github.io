@@ -4,7 +4,7 @@ excerpt: "&nbsp;&nbsp; Linux 시스템에서 C 언어로 간단한 전화번호�
 date:   2024-09-25 20:30:20 +0900
 categories: System Programming
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
-permalink: posts/2-Linux-시스템에서-프로그램-작성
+permalink: posts/2-writing-programs-on-linux-systems
 published: true
 ---
 # 2.1 프로그램 설계

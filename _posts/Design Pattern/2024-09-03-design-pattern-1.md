@@ -3,7 +3,7 @@ title:  "1. 디자인 패턴의 개요"
 excerpt: "객체 지향 프로그래밍의 객체 개념과 자바의 기본 문법, 예외 처리, 반복문, 배열 및 Java Collections Framework를 학습한다."
 date:   2024-09-03 12:14:34 +0900
 categories: Design Pattern
-permalink: posts/1-디자인-패턴의-개요
+permalink: posts/1-overview-of-design-patterns
 published: true
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 ---
