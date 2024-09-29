@@ -58,6 +58,8 @@ add a, a, e     # The sum of b, c, d and e is now in a
 
 &nbsp;&nbsp; The MIPS convention is to use two-character names following a dollar sign to represent a register. [Section 2.8](/posts/2-instructions-language-of-the-computer#28-supporting-procedures-in-computer-hardware) will explain the reasons behind these names. For now, we will use `$s0`, `$s1`, ... for registers that correspond to variables in C and Java programs and `$t0`, `$t1`, ... for temporary registers needed to compile the program into MIPS instructions.
 
+<div class="bg"></div>
+
 > **Compiling a C Assignment Using Registers**
 > 
 > &nbsp;&nbsp The assignment statement from our ealier example:
@@ -66,17 +68,19 @@ add a, a, e     # The sum of b, c, d and e is now in a
     \textrm{f}=(\textrm{g}+\textrm{h})-(\textrm{i}+\textrm{j});
 > $$
 >
-> &nbsp;&nbsp; The variable f, g, h, i and j are assigned to the registers $s0, $s1, $s2, $s3 and $s4 respectively. What is the compiled MIPS code?
+> &nbsp;&nbsp; The variable `f`, `g`, `h`, `i` and `j` are assigned to the registers `$s0`, `$s1`, `$s2`, `$s3` and `$s4` respectively. What is the compiled MIPS code?
 >
 > <details><summary><strong>Answer</strong></summary>
 > 
-> ```assembly
-> add $t0 $s1 $s2   # register $t0 contains g + h
-> add $t1 $s3 $s4   # register $t1 contains i + j
-> sub $s0 $t0 $t1   # f gets $t0 - $t1, which is (g + h) - (i + j)
-> ```
-> 
-> </details>
+> <div class="bg"></div>
+>
+> <pre><code class="language-asm">add $t0, $s1, $s2   # register $t0 contains g + h
+add $t1, $s3, $s4   # register $t1 contains i + j
+sub $s0, $t0, $t1   # f gets $t0 - $t1, which is (g + h) - (i + j)
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> </details> 
+
 
 ## a. Memory Operands
 
@@ -84,7 +88,118 @@ add a, a, e     # The sum of b, c, d and e is now in a
 
 &nbsp;&nbsp; The arithmetic operations occur only on registers in MIPS instructions; thus, MIPS must include instructions that transfer data between memory and registers. Such instructions are called **data transfer instructions**[^3]. To access a word in memory, the instruction must supply the memory **address**[^4].
 
-&nbsp;&nbsp; The data transfer instruction that copies data from memory to register is traditionally called *load*. The format of the load instruction is the name of the operation followed by the register to be loaded, then a constant and register used to access memoryt.
+&nbsp;&nbsp; The data transfer instruction that copies data from memory to register is traditionally called *load*. The format of the load instruction is the name of the operation followed by the register to be loaded, then a constant and register used to access memory. The sum of the constant portionof the instruction and the contents of the second register forms the memory address. The actual MIPS name for this instruction is ***lw***, standing for ***load word***.
+
+<div class="bg"></div>
+
+> **Compiling an Assignment When an Operand Is in Memory**
+> 
+> &nbsp;&nbsp Let's assume that `A` is an array of 100 words and that the compiler has associated the variables `g` and `h` with the registers `$s1` and `$s2` as before. Let's also assume that the starting address, or *base address*, of the array is in `$3`. Compile this C assignment statement:
+>
+> $$
+    \textrm{g}=\textrm{h}+\textrm{A[8]};
+> $$
+>
+> <details><summary><strong>Answer</strong></summary>
+> 
+> &nbsp;&nbsp; Although there is a single operation in this assignment statement, one of the operands is in memory, so we must first transfer <code>A[8]</code> to a register. The address of this array element is the sum of the base of the array <code>A</code>, found in register <code>$s3</code>, plus the number to select element 8. The data should be placed in a temporary register for use in the next instruction. The first compiled instruction is
+>
+> <pre><code class="language-asm">lw $t0, 8($s3)       # Temporary reg $t0 gets A[8] $s4
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> 
+> &nbsp;&nbsp; The following instruction can operate on the value in <code>$t0</code> since it is in a register. The instruction must add <code>h</code> to <code>A[8]</code> and put the sum in the register corresponding to <code>g</code>:
+>
+> <pre><code class="language-asm">add $s1, $s2, $t0    # g = h + A[8]
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> &nbsp;&nbsp; The constant in a data transfer instruction (8) is called the <em>offset</em>, and the register added to form the address (<code>$s3</code>) is called the <em>base register</em>.
+>
+> </details>
+
+<div class="bg"></div>
+
+> **Hardware/Software Interface**
+>
+> In addition to associating variables with registers, the compiler allocate data structure like arrays and structures to locations in memory. The compiler can then place the proper starting address into the data transfer instructions.
+>
+> <img class="lazy" data-src="https://github.com/user-attachments/assets/817f66ad-fa6a-4396-b270-003998166ab9#center" alt="image" height="50%" width="50%">
+> 
+> &nbsp;&nbsp; In MIPS, words must start at addresses that are multiples of 4. This requirement is called and **alignment restriction**, and many architectures have it.
+
+<div class="bg"></div>
+
+> **alignment restriction**
+>
+> &nbsp;&nbsp; A requirement that data be aligned in memory on natural boundaries.
+>
+> &nbsp;&nbsp; Computers divide into those that use the address of the leftmost or "big end" byte as the word address versus those that use the rightmost or "little end" byte. MIPS is in the *big-endian* camp. 
+>
+> &nbsp;&nbsp; Byte addressing also affects the array index. To get the proper byte address in the code above, *the offset to be added to the base register `$s3` must be 4 x 8, or 32, so that the load address will select `A[8]` and not `A[8/4]`.
+
+<div class="bg"></div>
+
+&nbsp;&nbsp; The instruction complementary to load is traditionally called ***store***; it copies data from a register to memory. The format of a store is similar to that of a load: the name of the operation, followed by the register to be stored, then offset to select the array element, and finally the base register. The actual MIPS name is ***sw***, standing for ***store word***.
+
+<div class="bg"></div>
+
+> **Hardware/Software Interface**
+>
+> &nbsp;&nbsp; As the addresses in loads and stores are binary numbers, we can see why the DRAM for main memory comes in binary sizes rather than in decimal sizes. That is, in gebibytes ($2^{30}$) of tebibytes ($2^{40}$), not in gigabytes ($10^{9}$) or terabytes ($10^{12}$).
+>
+
+<div class="bg"></div>
+
+> **Compiling Using Load and Store**
+>
+> &nbsp;&nbsp; Assume variable `h` is associated with register `$s2` and the base address of the array `A` is in `$s3`. What is the MIPS assembly code for the C assignment statement below?
+>
+> $$
+> \textrm{A[12]}=\textrm{h}+\textrm{A[8]};
+> $$
+> 
+> <details><summary><strong>Answer</strong></summary>
+>
+> &nbsp;&nbsp; The first two instructions are the same as the prior example, except this time we use the proper offset of 32 for byte addressing in the load word instruction to select <code>A[8]</code>, and the add instruction places the sum in <code>$t0</code>:
+>
+> <pre><code class="language-asm">lw $t0, 32($s3)      # Temporary reg $t0 gets A[8]
+> add $t0, $s2, $t0    # Temporary reg $t0 gets h + A[8]
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> &nbsp;&nbsp; The final instruction stores the sum into <code>A[12]</code>, using 48 (4 x 12) as the offset and register <code>$s3</code> as the base register.
+>
+> <pre><code class="language-asm">sw $t0, 48($s3)      # Stores h + A[8] back into A[12]
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> </details>
+
+<div class="bg"></div>
+
+> **Hardware/Software Interface**
+>
+> &nbsp;&nbsp; Many programs have more variable than computers have registers. Consequently, the compiler tries to keep the most frequently used variables in registers and places the rest in memory, using load and stores to move variables between registers and memory. The process of putting less commonly used variables (or those needed later) into memory is called ***spilling*** registers.
+>
+> &nbsp;&nbsp; To achieve highest performance and conserve energy, an instruction set architecture must have a sufficient number of registers, and compilers must use registers effectively.
+
+## a. Constant or Immediate Operands
+
+&nbsp;&nbsp; Many times a program will use a constant in an operation—for example, incrementing an index to point to the next element of an array. Using only the instructions we have seen so far, we would have to laod a constant from memory to use one. For example, to add the constant 4 to register `$s3`, we could use the code
+
+```asm
+lw $t0, AddrConstant4($s1)    # $t0 = constant 4
+add $s3, $s3, $t0             # $s3 = $s3 + $t0 ($t0 == 4)
+```
+
+&nbsp;&nbsp; assuming that `$s1 + AddrConstant4` is the memory address of the constant 4.
+
+&nbsp;&nbsp; An alternative that avoidsthe load instruction is to offer versions of the arithmetic instructions in which one operand is a constant. This quick add instruction with one constant operand is called ***add immediate*** or ***addi***. To add 4 to register `$s3`, we just write
+
+```asm
+addi $s3, $s3, 4    # $s3 = $s3 + 4
+```
+
+&nbsp;&nbsp; Constant operands occur frequently, and by including constants inside arithmetic instructions, operations are much faster and useless energy than if constants were loadedform memory.
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/d564b128-6384-454a-a8fd-182afbe5ebcb#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; The constant zero has another role, which is to simplify the instruction set by offering useful variations. For example, the move operation is just an add instruction where on operand is zero. Hence, MIPS dedicates a register `$zero` to be hard-wired to the value zero. Using frequency to justify the inclusions of constants is another example of the great idea of making the **common case fast**.*
 
 <div class="bg"></div>
 
