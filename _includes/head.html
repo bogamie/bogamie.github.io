@@ -10,9 +10,6 @@
 <noscript>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css">
 </noscript>
-{% if page.use_math %}
-  {% include mathjax_support.html %}
-{% endif %}
 <link id="highlight-style-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 <link id="highlight-style-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" disabled>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -31,7 +28,10 @@
   hljs.highlightAll();
   hljs.configure({ignoreUnescapedHTML: true});
 </script>
+{% if page.use_math %}
+  {% include mathjax_support.html %}
+{% endif %}
 
 {% if page.use_uml %}
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@11.2.1/dist/mermaid.min.js"></script>
+    <script src="/assets/js/mermaid.js"></script>
 {% endif %}
