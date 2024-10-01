@@ -276,8 +276,12 @@
     padding: 0.2em 0.4em;
     margin: 0;
     font-size: 85%;
-    background-color: var(--color-primary-600);
     border-radius: 6px;
+ 
+    &.language-mermaid {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 .markdown-body pre {
@@ -348,7 +352,6 @@
         box-shadow: none;
         background-color: transparent;
     }
-
 }
 
 .markdown-body .commit-tease-sha {
