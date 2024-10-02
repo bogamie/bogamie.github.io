@@ -277,7 +277,8 @@
     margin: 0;
     font-size: 85%;
     border-radius: 6px;
- 
+    background-color: var(--color-primary-600);
+
     &.language-mermaid {
         display: flex;
         justify-content: center;

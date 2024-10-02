@@ -44,7 +44,7 @@ layout: default
 <script src="/assets/js/gumshoe.js"></script>
 {% if page.use_uml %}
 <script>
-mermaid.initialize({startOnLoad:true});
+mermaid.initialize({startOnLoad:true,theme:'neutral'});
 window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
 document.addEventListener("DOMContentLoaded", function() {const mermaidLanguageElements = document.querySelectorAll('.language-mermaid');mermaidLanguageElements.forEach(function(element) {const parentPre = element.closest('pre');if (parentPre) {parentPre.style.backgroundColor = 'transparent';}});});
 </script>
