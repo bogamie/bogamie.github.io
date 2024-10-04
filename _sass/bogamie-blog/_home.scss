@@ -31,3 +31,15 @@
     border-color: tranparent;
   }
 }
+
+@media (max-width: 1279px) {
+    .typewrite {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .typewrite {
+        font-size: 1.5rem;
+    }
+}
