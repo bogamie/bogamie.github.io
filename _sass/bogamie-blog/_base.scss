@@ -40,6 +40,7 @@
   --md-block-color: #c2d1e4;
   --theme-switch: #ffeac1;
   --theme-switch-hover: #fff4de;
+  --cursor-color: #226640;
 
   --category-bg-data-structure: #ffa07a;
   --category-bg-algorithm: #90ee90;
@@ -74,7 +75,7 @@
   --highlight-comment-italic: #6e7781;
   --highlight-comment-bold: #6e7781;
 
-  .markdown-body img {
+  img {
     &#light-mode-img {
         display: block;
     }
@@ -117,6 +118,7 @@
   --md-block-color: #adbac7;
   --theme-switch: #babdc8;
   --theme-switch-hover: #898b8d;
+  --cursor-color: #3cb354;
 
   --category-bg-data-structure: #cc5233;
   --category-bg-algorithm: #2e8b57;
@@ -151,7 +153,7 @@
   --highlight-comment-italic: #8b949e;
   --highlight-comment-bold: #8b949e;
 
-  .markdown-body img {
+  img {
     &#light-mode-img {
         display: none;
     }
