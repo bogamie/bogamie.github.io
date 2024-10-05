@@ -8,6 +8,21 @@
     transform: translateY(-60px);
 }
 
+.streak {
+    max-width: 100%;
+    
+    &__item{
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        object-fit: contain;
+    }
+}
+.github-contribution__wrapper {
+    overflow-x: auto;
+    max-width: 100%; 
+}
+
 .typewrite {
     color: var(--text-primary-100);
     font-size: 3.5rem;
