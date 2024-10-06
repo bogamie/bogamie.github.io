@@ -1,6 +1,6 @@
 ---
 title:  "3. SimUDuck Program"
-excerpt: "&nbsp;&nbsp; "
+excerpt: "&nbsp;&nbsp; SimUDuck is a simulation game where various species of ducks swim and make sounds. It explains how to abstract behaviors and refactor the code according to the SOLID principles by introducing the Flyable interface to add flying ducks."
 date:   2024-10-01 22:20:14 +0900
 categories: Design Pattern
 permalink: posts/3-simuduck-program
