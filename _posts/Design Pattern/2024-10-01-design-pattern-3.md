@@ -4,7 +4,7 @@ excerpt: "&nbsp;&nbsp; "
 date:   2024-10-01 22:20:14 +0900
 categories: Design Pattern
 permalink: posts/3-simuduck-program
-published: false
+published: true
 use_uml: true
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 ---
@@ -185,3 +185,443 @@ class FlyNoWay {
 FlyBehavior <|.. FlyWithWings
 FlyBehavior <|.. FlyNoWay
 ```
+
+> **"Program to an interface" really means "Program to a supertype[^1]".**
+
+&nbsp;&nbsp; It means taking advantage of polymorphism by programming to a supertype so that the actual runtime object[^2] isn't locked into the code. And we could rephrase "program to a supertype" as "the declared type of the variables should be a supertype, usually an abstract class or interface, so that the objects assigned to those variables can be of any concrete implementation of the supertype, which means the class declaring the variables doesn't have to know about the actual object types."
+
+&nbsp;&nbsp; Here's a simple example of using polymorphism type—imagine an abstract class Animal, with two concrete implementations, Dog and Cat.
+
+```mermaid
+classDiagram
+class Animal {
+    makeSound()*
+}
+class Dog {
+    makeSound(): bark()
+    bark()
+}
+class Cat {
+    makeSound(): meow()
+    meow()
+}
+Animal <|-- Dog
+Animal <|-- Cat
+```
+
+&nbsp;&nbsp; **Programming to an implementation** would be:
+
+```java
+Dog d = new Dog();
+d.bark();
+
+/* 
+*  Declaring the variable "d" as type Dog forces
+*  us to code to a concrete implementation.
+*/
+```
+
+&nbsp;&nbsp; But **programming to an interface/supertype** would be:
+
+```java
+Animal animal = new Dog();
+animal.makeSound();
+
+/*
+*  We know it's a Dog, but we can now use the
+*  animal reference polymorphically.
+*/
+```
+
+&nbsp;&nbsp; Even better, rather than hardcoding the instantiation of the subtype (like new Dog()) into the code, **assign the concrete implementation object at runtime**:
+
+```java
+a = getAnimal();
+a.makeSound();
+
+/*
+*  We don't know WHAT the actual animal subytype
+*  is... all we care about is that it knows how
+*  to respond to makeSound().
+*/
+```
+
+## c. Integrating the Duck Behaviors
+
+&nbsp;&nbsp; Here's the key: A duck will now delegate its flying and quacking behaviors, instead of using quacking and flying methods defined in the Duck class.
+
+&nbsp;&nbsp; 1. **First, we'll add two instance variables of type Flybehavior and QuackBehavior**—let's call them `flyBehavior` and `quackBehavior`. Each concrete duck object will assign to those variables a *specific* behavior at runtims, like `FlyWithWings` or `Squeak` for quacking.
+
+```mermaid
+classDiagram
+class Duck {
+    flyBehavior: FlyBehavior
+    quackBehavior: QuackBehavior
+    performQuack()
+    swim()
+    display()*
+    performFly()
+}
+```
+
+&nbsp;&nbsp; 2. **Now we implement performQuack():**
+
+<div class="bg"></div>
+
+```java
+public abstract class Duck {
+    QuackBehavior quackBehavior;
+    // more
+    /* 
+    *  Each Duck has a reference to something that
+    *  implements the QuackBehavior interface.
+    */
+
+    public void performQuack() {
+        quackBehavior.quack();
+    }
+    /*
+    *  Rather than handling th quack behavior itself,
+    *  the Duck object delegates that behavior to the
+    *  object referenced by quackBehavior.
+    */
+}
+```
+
+&nbsp;&nbsp; To perform the quack, a Duck asks the object that is referenced by quackBehavior to quack for it. In this part of the code we don't care *what kind* of object the Duck is, ***all we care about is that it knows how to quack().***
+
+&nbsp;&nbsp; 3. **How the flyBehavior and quackBehavior instance variables are set:**
+
+```java
+public class MallardDuck extends Duck {
+
+    public MallardDuck() {
+        quackBehavior = new Quack();
+        flyBehavior = new FlyWithWings();
+    }
+
+    public void display() {
+        System.out.println("I'm a real Mallard duck");
+    }
+}
+```
+
+&nbsp;&nbsp; When a MallardDuck is instantiated, its constructor initializes the MallardDuck's inherited quackBehavior instance variable to a new instance of type Quack (a QuackBehavior concrete implementation class).
+
+&nbsp;&nbsp; And the same is true for the duck's flying behavior—the MallardDuck's constructor initializes the inherited flyBehavior instance variable with an instance of type FlyWithWings (a FlyBehavior concrete implementation class).
+
+# 3.3 Testing the Duck Code
+
+## a. Client
+
+```mermaid
+classDiagram
+class Duck {
+    FlyBehavior flyBehavior
+    QuackBehavior quackBehavior
+    swim()
+    display()*
+    performQuack()
+    performFly()
+    setFlyBehavior()
+    setQuackBehavior()
+}
+class MallardDuck {
+    display()
+}
+class RedheadDuck {
+    display()
+}
+class RubberDuck {
+    display()
+}
+class DecoyDuck {
+    display()
+}
+Duck <|-- MallardDuck
+Duck <|-- RedheadDuck
+Duck <|-- RubberDuck
+Duck <|-- DecoyDuck
+```
+
+## b. Encapsulated Behaviors
+
+```mermaid
+classDiagram
+class FlyBehavior {
+    <<interface>>
+    fly()*
+}
+class FlyWithWings {
+    fly()
+}
+class FlyNoWay {
+    fly()
+}
+class QuackBehavior {
+    <<interface>>
+    quack()*
+}
+class Quack {
+    quack()
+}
+class Squeak {
+    quack()
+}
+class MuteQuack {
+    quack()
+}
+FlyBehavior <|.. FlyWithWings
+FlyBehavior <|.. FlyNoWay
+
+QuackBehavior <|.. Quack
+QuackBehavior <|.. Squeak
+QuackBehavior <|.. MuteQuack
+```
+
+## c. Duck Simulator
+
+```mermaid
+classDiagram
+class Duck {
+    FlyBehavior flyBehavior
+    QuackBehavior quackBehavior
+    swim()
+    display()*
+    performQuack()
+    performFly()
+    setFlyBehavior()
+    setQuackBehavior()
+}
+class MallardDuck {
+    display()
+}
+class RedheadDuck {
+    display()
+}
+class RubberDuck {
+    display()
+}
+class DecoyDuck {
+    display()
+}
+class FlyBehavior {
+    <<interface>>
+    fly()*
+}
+class FlyWithWings {
+    fly()
+}
+class FlyNoWay {
+    fly()
+}
+class QuackBehavior {
+    <<interface>>
+    quack()*
+}
+class Quack {
+    quack()
+}
+class Squeak {
+    quack()
+}
+class MuteQuack {
+    quack()
+}
+QuackBehavior <|.. Quack
+QuackBehavior <|.. Squeak
+QuackBehavior <|.. MuteQuack
+
+FlyBehavior <-- Duck
+QuackBehavior <-- Duck
+
+FlyBehavior <|.. FlyWithWings
+FlyBehavior <|.. FlyNoWay
+
+Duck <|-- MallardDuck
+Duck <|-- RedheadDuck
+Duck <|-- RubberDuck
+Duck <|-- DecoyDuck
+```
+
+## d. Java Code
+
+### i. `Duck.java`
+
+```java
+abstract public class Duck {
+    FlyBehavior flyBehavior;
+    QuackBehavior quackBehavior;
+    public Duck() {}
+
+    abstract public void display();
+
+    public void swim() {
+        System.out.println("All ducks float, even decoys!");
+    }
+    public void performQuack() {
+        quackBehavior.quack();
+    }
+    public void performFly() {
+        flyBehavior.fly();
+    }
+    public void setQuackBehavior(QuackBehavior qb) {
+        quackBehavior = qb;
+    }
+    public void setFlyBehavior(FlyBehavior fb) {
+        flyBehavior = fb;
+    }
+}
+```
+
+### ii. `MallardDuck.java`
+
+```java
+public class MallardDuck extends Duck {
+    public MallardDuck() {
+        quackBehavior = new Quack();
+        flyBehavior = new FlyWithWings();
+    }
+    public void display() {
+        System.out.println("I'm a real Mallard duck");
+    }
+}
+```
+
+### iii. `FlyBehavior.java`
+
+```java
+interface FlyBehavior {
+    public void fly();
+}
+```
+
+### iv. `FlyWithWings.java`
+
+```java
+public class FlyWithWings implements FlyBehavior {
+    public void fly() {
+        System.out.println("I'm flying!!");
+    }
+}
+```
+
+### v. `FlyNoWay.java`
+
+```java
+public class FlyNoWay implements FlyBehavior {
+    public void fly() {
+        System.out.println("I can't fly");
+    }
+}
+```
+### vi. `QuackBehavior.java`
+
+```java
+interface QuackBehavior {
+    public void quack();
+}
+```
+
+### vii. `Quack.java`
+
+```java
+public class Quack implements QuackBehavior {
+    public void quack() {
+        System.out.println("Quack");
+    }
+}
+```
+
+### viii. `MuteQuack.java`
+
+```java
+public class MuteQuack implements QuackBehavior {
+    public void quack() {
+        System.out.println("<< Silence >>");
+    }
+}
+```
+
+### ix. `Squeak.java`
+
+```java
+public class Squeak implements QuackBehavior {
+    public void quack() {
+        System.out.println("Squeak");
+    }
+}
+```
+
+### x. `MiniDuckSimulator.java`
+
+```java
+public class MiniDuckSimulator {
+    public static void main(String[] args) {
+        Duck mallard = new MallardDuck();
+        mallard.performQuack();
+        mallard.performFly();
+    }
+}
+```
+
+### xi. Running the Code
+
+```shell
+javac *.java
+```
+
+```shell
+java MiniDuckSimulator
+```
+
+## e. Setting Behavior Dynamically
+
+### i. `ModelDuck.java`
+
+```java
+public class ModelDuck extends Duck {
+    public ModelDuck() {
+        flyBehavior = new FlyNoWay();
+        quackBehavior = new Quack();
+    }
+
+    public void display() {
+        System.out.println("I'm a model duck");
+    }
+}
+```
+
+### ii. `FlyRocketPowered.java`
+
+```java
+public class FlyRocketPowered implements FlyBehavior {
+    public void fly() {
+        System.out.println("I'm flying with a rocket!");
+    }
+}
+```
+
+### iii. Change the `MiniDuckSimulator.java`
+
+```java
+public class MiniDuckSimulator {
+    public static void main(String[] args) {
+        Duck mallard = new MallardDuck();
+        mallard.performQuack();
+        mallard.performFly();
+
+        System.out.println("");
+
+        Duck model = new ModelDuck();
+        model.performFly();
+        model.setFlyBehavior(new FlyRocketPowered());
+        model.performFly();
+    }
+}
+```
+
+---
+
+[^1]: In Java, the supertype is a class or interface that is considered relative to another type, if its corresponding class or interface has been extended or implemented directly or indirectly by the class or interface of the other type. In contrast, a subtype is a class or interface type that is considered relative to another type when its corresponding class or interface is extending or implementing, either directly or indirectly, the class or interface of the other type.
+[^2]: The runtime object is an application specific object that contains both state and behavior that provides an application specific function.
