@@ -22,7 +22,7 @@ published: false
 
 &nbsp;&nbsp; Every computer must be able to perform arithmetic. The MIPS assembly language notation
 
-```assembly
+```nasm
 add a, b, c
 ```
 
@@ -32,7 +32,7 @@ add a, b, c
 
 &nbsp;&nbsp; The following sequence of instructions adds the four variables:
 
-```assembly
+```nasm
 add a, b, c     # The sum of b and c is placed in a
 add a, a, d     # The sum of b, c and d is now in a
 add a, a, e     # The sum of b, c, d and e is now in a
@@ -180,9 +180,9 @@ sub $s0, $t0, $t1   # f gets $t0 - $t1, which is (g + h) - (i + j)
 >
 > &nbsp;&nbsp; To achieve highest performance and conserve energy, an instruction set architecture must have a sufficient number of registers, and compilers must use registers effectively.
 
-## a. Constant or Immediate Operands
+## b. Constant or Immediate Operands
 
-&nbsp;&nbsp; Many times a program will use a constant in an operation—for example, incrementing an index to point to the next element of an array. Using only the instructions we have seen so far, we would have to laod a constant from memory to use one. For example, to add the constant 4 to register `$s3`, we could use the code
+&nbsp;&nbsp; Many times a program will use a constant in an operation—for example, incrementing an index to point to the next element of an array. Using only the instructions we have seen so far, we would have to load a constant from memory to use one. For example, to add the constant 4 to register `$s3`, we could use the code
 
 ```asm
 lw $t0, AddrConstant4($s1)    # $t0 = constant 4
@@ -191,13 +191,13 @@ add $s3, $s3, $t0             # $s3 = $s3 + $t0 ($t0 == 4)
 
 &nbsp;&nbsp; assuming that `$s1 + AddrConstant4` is the memory address of the constant 4.
 
-&nbsp;&nbsp; An alternative that avoidsthe load instruction is to offer versions of the arithmetic instructions in which one operand is a constant. This quick add instruction with one constant operand is called ***add immediate*** or ***addi***. To add 4 to register `$s3`, we just write
+&nbsp;&nbsp; An alternative that avoids the load instruction is to offer versions of the arithmetic instructions in which one operand is a constant. This quick add instruction with one constant operand is called ***add immediate*** or ***addi***. To add 4 to register `$s3`, we just write
 
 ```asm
 addi $s3, $s3, 4    # $s3 = $s3 + 4
 ```
 
-&nbsp;&nbsp; Constant operands occur frequently, and by including constants inside arithmetic instructions, operations are much faster and useless energy than if constants were loadedform memory.
+&nbsp;&nbsp; Constant operands occur frequently, and by including constants inside arithmetic instructions, operations are much faster and useless energy than if constants were loaded from memory.
 
 <img class="lazy" data-src="https://github.com/user-attachments/assets/d564b128-6384-454a-a8fd-182afbe5ebcb#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; The constant zero has another role, which is to simplify the instruction set by offering useful variations. For example, the move operation is just an add instruction where on operand is zero. Hence, MIPS dedicates a register `$zero` to be hard-wired to the value zero. Using frequency to justify the inclusions of constants is another example of the great idea of making the **common case fast**.*
 
@@ -205,6 +205,15 @@ addi $s3, $s3, 4    # $s3 = $s3 + 4
 
 # 2.4 Signed and Unsigned Numbers
 
+&nbsp;&nbsp; Numbers are kept in computer hardware as a series of high and low electronic signals, and so they are considered base 2 numbers. (Just as base 10 numbers are called *decimal* numbers, base 2 numbers are called *binary* numbers.)
+
+&nbsp;&nbsp; A single digit of a binary number is thus the "atom" of computing, since all information is composed of **binary digits**[^5] or ***bits***. This fundamental building block can be one of two values, which can be thought of as several alternatives: high and low, on or off, true or false, or 1 or 0.
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/ce19a559-8ba7-4d92-8cf4-3c53909f1a0f#center" alt="image" height="95%" width="95%">
+
+&nbsp;&nbsp; Since words are drawn vertically as well as horizontally, leftmost and rightmost may be unclear. Hence, the phrase **least significant bit** is used to refer to the right-most bit (bit 0 above) and **most significant bit** to the leftmost bit (bit 31).
+
+&nbsp;&nbsp; The MIPS word is 32 bits long, so it can
 <div class="bg"></div>
 
 # 2.5 Representing Instructions in the Computer
@@ -289,3 +298,4 @@ addi $s3, $s3, 4    # $s3 = $s3 + 4
 [^2]: The natural unit of access in a computer, usually a group of 32 bits; corresponds to the size of a register in the MIPS architecture.
 [^3]: A command that moves data between memory and registers.
 [^4]: A value used to delineate the location of a specific data element within a memory array.
+[^5]: Also called **binary bit**. One of the two numbers in base 2, 0 or 1, that are the components of inforamtion.
