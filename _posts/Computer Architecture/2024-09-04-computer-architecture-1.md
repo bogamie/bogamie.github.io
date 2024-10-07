@@ -669,7 +669,7 @@ $$
 > 
 > <details><summary><strong>Answer</strong></summary>
 > 
-> &nbsp;&nbsp; Since **CPI** means clock cycle per instruction count:
+> &nbsp;&nbsp; Since <strong>CPI</strong> means clock cycle per instruction count:
 >
 > $$
 > \textrm{CPI} = \frac{ \textrm{CPU}_\textrm{clock cycles} }{ \textrm{Instruction count} }

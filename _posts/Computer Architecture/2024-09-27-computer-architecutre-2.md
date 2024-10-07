@@ -81,7 +81,6 @@ sub $s0, $t0, $t1   # f gets $t0 - $t1, which is (g + h) - (i + j)
 >
 > </details> 
 
-
 ## a. Memory Operands
 
 &nbsp;&nbsp; The processor can keep only a small amount of data in registers, but computer memory contains billions of data elements. Hence, data structures (arrays and structures) are kept in memory.
@@ -213,7 +212,63 @@ addi $s3, $s3, 4    # $s3 = $s3 + 4
 
 &nbsp;&nbsp; Since words are drawn vertically as well as horizontally, leftmost and rightmost may be unclear. Hence, the phrase **least significant bit** is used to refer to the right-most bit (bit 0 above) and **most significant bit** to the leftmost bit (bit 31).
 
-&nbsp;&nbsp; The MIPS word is 32 bits long, so it can
+&nbsp;&nbsp; The MIPS word is 32 bits long, so it can represent $2^{32}$ different 32-bit patterns. It is natural to let these combinations represent the numbers from 0 to 2<sup>32</sup>-1 (4,294,967,295<sub>10</sub>):
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/a44c2ee0-8616-4772-81bc-ecbb94852bac#center" alt="image" height="95%" width="95%">
+
+&nbsp;&nbsp; These positive numbers are called **unsigned numbers**.
+
+<div class="bg"></div>
+
+&nbsp;&nbsp; Computer programs calculate both positive and negative numbers, so we need a representation that distinguishes the positive from the negative. The most obvious solution is to add a separate sign, which conveniently can be represented in a single bit; the name for this representation is ***sign and magnitude***.
+
+&nbsp;&nbsp; However, sign and magnitude representation has several shortcomings. First, it's not obvious where to put the sign bit. Second, adders for sign and magnitude may need an extra step to set the sign because we can't know in advance what the proper sign will be. Finally, a seperate sign bit means that sign and magnitude has both a positive and a negative zero, which can lead to problems for inattentive programmers. As a result of these shortcomings, sign and magnitude representation was soon abandoned.
+
+&nbsp;&nbsp; The final solution was to pick the representation that made the hardware simple: leading 0s mean positive, and leading 1s mean negative. This convention for representing signed binary numbers is called ***two's complement*** representation:
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/930872cb-3082-440c-aec4-f276b2c73be3#center" alt="image" height="95%" width="95%">
+
+&nbsp;&nbsp; The positive half of the numbers, from 0 to 2,147,483,647<sub>10</sub> (2<sup>31</sup>-1), use the same representation as before. The following bit pattern (1000 ... 0000<sub>2</sub>) represents the most negative number -2,147,483,648<sub>10</sub> (-2<sup>31</sup>). It is followed by a declining set of negative numbers: -2,147,483,647<sub>10</sub> (1000 ... 0001<sub>2</sub>) down to -1<sub>10</sub> (1111 ... 1111<sub>2</sub>).
+
+&nbsp;&nbsp; Two's complement representation has the advantage that all negative numbers have a 1 in the most significant bit. This bit is often called the ***sign bit***. By recognizing the role of the sign bit, we can represent positive and negative 32-bit numbers in terms of the bit value times a power of 2:
+
+$$
+(x31 \times -2^{31}) + (x30 \times 2^{30}) + \cdots + (x1 \times 2^1) + (x0 \times 2^0)
+$$
+
+> **Binary to Decimal Conversion**
+> 
+> &nbsp;&nbsp; What is the decimal value of this 32-bit two's complement number?
+>
+> &nbsp;&nbsp;&nbsp;&nbsp; 1111 1111 1111 1111 1111 1111 1111 1100<sub>2</sub>
+>
+> <details><summary><strong>Answer</strong></summary>
+> 
+> <div class="bg"></div>
+>
+> &nbsp;&nbsp; Substituting the number's bit values into the formula above:
+>
+> $$
+> \begin{aligned}
+> &(1 \times -2^{31}) + (1 \times 2^{30}) + (1 \times 2^{29}) + \cdots + (1 \times 2^2) \times (0 \times 2^1) + (0 \times 2^0) \\
+> &= -2^{31} + 2^{30} + 2^{29} + \cdots + 2^2 + 0 + 0 \\
+> &= -2,147,483,648_{10} + 2,147,483,644_{10} \\
+> &= -4_{10}
+> \end{aligned}
+> $$
+>
+> </details>
+
+<div class="bg"></div>
+
+&nbsp;&nbsp; Overflow occurs when the leftmost retained bit of the binary bit pattern is not the same as the infinite number of digits to the left (the sign bit is incorrect): a 0 on the left of the bit pattern when the number is negative or a 1 when the number is positive.
+
+> **Hardware/Software Interface**
+> 
+> &nbsp;&nbsp; The *function* of signed load is to copy the sign repeatedly to fill the rest of the register—called *sign extension*—but its *purpose* is to place a correct representation of the number within that register. Unsigned loads simply fill with 0s to the left of the data, since the number represented by the bit pattern is unsigned.
+>
+> &nbsp;&nbsp; When loading a 32-bit word into a 32-bit register, the point is moot; signed and unsigned are identical. MIPS does offer two flavors of byte loads: ***load byte*** (`lb`) treats the byte as a signed number and thus sign-extends to fill the 24 left-most bits of the register, while ***load byte unsigned*** (`lbu`) works with unsigned integers. Since C programs almost always use bytes to represent characters, `lbu` is used practically exclusively for byte loads.
+
 <div class="bg"></div>
 
 # 2.5 Representing Instructions in the Computer
