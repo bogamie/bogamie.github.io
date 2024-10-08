@@ -8,7 +8,62 @@ published: true
 use_uml: true
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 ---
-# 3.1 Overview of SimUDuck
+# 3.1 Strategy Pattern
+
+## a. Intent
+
+&nbsp;&nbsp; The Strategy Pattern, a behavioral design pattern, defines a family of algorithms, encapsulates each one, and makes them interchangeable. It enables the client to choose and switch between algorithms at runtime, without altering the client’s code.
+
+## b. Motivation
+
+&nbsp;&nbsp; Consider a scenario where a class has multiple algorithms or behaviors encapsulated within it. Traditionally, these behaviors are hardcoded, leading to inflexibility. The Strategy Pattern addresses this by isolating each behavior into its own class, allowing clients to select and switch between them dynamically.
+
+## c. Applicability
+
+&nbsp;&nbsp; Use the Strategy Pattern when:
+
+* You want to define a family of algorithms.
+* You need to encapsulate and make the algorithms interchangeable.
+* You want to allow clients to choose an algorithm at runtime.
+* You have a class with a complex conditional statement based on multiple algorithms.
+
+## d. Structure
+
+* Context: Maintains a reference to the chosen strategy.
+* Strategy: Interface or abstract class representing the family of algorithms.
+* ConcreteContext: Implements specific context behavior.
+* ConcreteStrategyX: Implements a specific algorithm from the strategy.
+
+## e. Participants
+
+### i. Context
+
+* Defines the interface of interest to clients.
+* Maintains a reference to a strategy object.
+
+### ii. Strategy
+
+* Declares an interface common to all supported algorithms.
+
+### iii. ConcreteContext
+
+* Implements the algorithm defined by the strategy.
+
+### iv. ConcreteStrategyX
+
+* Implements a specific algorithm.
+
+## f. Collaboration
+
+&nbsp;&nbsp; The client interacts with the Context class, which, in turn, delegates the algorithm to the currently set Strategy.
+
+## g. Consequences
+
+* **Flexibility and Extensibility**: Clients can easily switch between algorithms, and new algorithms can be added without modifying existing code.
+* **Isolation of Concerns**: Each algorithm is encapsulated, promoting a clean and modular design.
+* **Increased Code Complexity**: The number of classes can increase, potentially making the codebase more complex.
+
+# 3.2 Overview of SimUDuck
 
 &nbsp;&nbsp; SimUDuck is a highly successful duck pond simulation game. The game can show a large variety of duck species swimming and making quacking sounds. The initial designers used standard OO techniques and created one Duck superclass from which all other duck types inherit.
 
@@ -144,7 +199,7 @@ Duck <|-- DecoyDuck
 
 > **SRP OCP ISP**
 
-# 3.2 Strategy Pattern
+# 3.3 Encapsulating Duck Behaviors 
 
 &nbsp;&nbsp; The Java interfaces typically have no implementation code, so no code reuse. In either case, whenever you need to modify a behavior, you're often forced to track down and change it in all different sublcasses where that behavior is defined, probably introducing *new* bugs along the way.
 
@@ -310,7 +365,7 @@ public class MallardDuck extends Duck {
 
 &nbsp;&nbsp; And the same is true for the duck's flying behavior—the MallardDuck's constructor initializes the inherited flyBehavior instance variable with an instance of type FlyWithWings (a FlyBehavior concrete implementation class).
 
-# 3.3 Testing the Duck Code
+# 3.4 Testing the Duck Code
 
 ## a. Client
 
