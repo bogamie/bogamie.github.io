@@ -29,6 +29,29 @@ use_uml: true
 
 ## d. Structure
 
+```mermaid
+classDiagram
+class SortingService {
+    - strategy: SortingStrategy
+    + SortingService(strategy : SortingStrategy)
+    + setStrategy(strategy : SortingStrategy) void
+    + sort(array : int[ ]) void
+}
+class SortingStrategy {
+    <<interface>>
+    + sort(array : int[ ]) void
+}
+class BubbleSort {
+    + sort(array : int[ ]) void
+}
+class QuickSort {
+    + sort(array : int[ ]) void
+}
+SortingService *-- SortingStrategy : Context
+SortingStrategy <|.. BubbleSort : Concrete Strategy
+SortingStrategy <|.. QuickSort : Concrete Strategy
+```
+
 * Context: Maintains a reference to the chosen strategy.
 * Strategy: Interface or abstract class representing the family of algorithms.
 * ConcreteContext: Implements specific context behavior.
