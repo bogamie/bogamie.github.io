@@ -352,7 +352,8 @@ $$
 
 # 2.5 Representing Instructions in the Computer
 
-<table align="center">
+<p align="center">
+<table>
   <thead>
     <tr>
       <th>Register name</th>
@@ -503,6 +504,7 @@ $$
     </tr>
   </tbody>
 </table>
+</p>
 
 <div class="bg"></div>
 
