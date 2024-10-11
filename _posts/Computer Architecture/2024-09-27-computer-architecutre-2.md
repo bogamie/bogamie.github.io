@@ -4,7 +4,7 @@ excerpt: "&nbsp;&nbsp; "
 date:   2024-09-27 21:35:57 +0900
 categories: Computer Architecture
 permalink: posts/2-instructions-language-of-the-computer
-published: false
+published: true
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 # ![Light Mode Image](){: class="light-mode-img" height="90%" width="90%"}
 
@@ -42,7 +42,7 @@ add a, a, e     # The sum of b, c, d and e is now in a
 
 &nbsp;&nbsp; The natural number of operands for an operation like addition is three: the two numbers being added together and a place to put the sum. Requiring every instruction to have exactly three operands, no more and no less, conforms to the philosophy of keeping the hardware simple: hardware for a variable number of operands is more complicated than hardware for a fixed number. This situation illustrates the first of three underlying of hardware design:
 
-&nbsp;&nbsp; *Design Principle 1: **Simplicity favors regularity.***
+<p style="text-align: center; font-size: 1.25rem"><em>Design Principle 1: <strong>Simplicity favors regularity.</strong></em></p>
 
 <div class="bg"></div>
 
@@ -52,7 +52,7 @@ add a, a, e     # The sum of b, c, d and e is now in a
 
 &nbsp;&nbsp; The three operands of MIPS arithmetic instructions must each be chosen from one of the 32 32-bit registers. The reason for the limit of 32 registers may be found in the second of our three underlying design principles of hardware technology:
 
-&nbsp;&nbsp; *Design Principle 2: **Smaller is faster.***
+<p style="text-align: center; font-size: 1.25rem"><em>Design Principle 2: <strong>Smaller is faster.</strong></em></p>
 
 &nbsp;&nbsp; A very large number of registers may increase the clock cycle time simply because it takes electronic signals longer when they must travel farther. Guidlines such as "smaller is faster" are not absolutes; 31 registers may not be faster than 32.
 
@@ -271,9 +271,327 @@ $$
 
 <div class="bg"></div>
 
-# 2.5 Representing Instructions in the Computer
+&nbsp;&nbsp; Let's examine two useful shorcuts when working with two's complement numbers. The first shortcut is a quick way to negate a two's complement binary number. Simple invert every 0 to 1 and every 1 to 0, then add one to result. This shortcut is based on the observation that the sum of a number and its inverted representation must be 111 ... 111<sub>2</sub>, which represents -1.
+
+> **Negative Shortcut**
+> 
+> Negate 2<sub>10</sub>, and then check the result by negating -2<sub>10</sub>.
+>
+> &nbsp;&nbsp; 2<sub>10</sub> = 0000 0000 0000 0000 0000 0000 0000 0010<sub>2</sub>
+>
+> <details><summary><strong>Answer</strong></summary>
+> 
+> Negating this number by inverting the bits and adding one:
+>
+> <pre><code class="language-cmd">    1111 1111 1111 1111 1111 1111 1111 1101
++                                         1
+————————————————————————————————————————————
+=   1111 1111 1111 1111 1111 1111 1111 1110
+=   -2
+</code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> 
+> &nbsp;&nbsp; Going the other direction,
+> <br>
+> 1111 1111 1111 1111 1111 1111 1111 1110<sub>2</sub>
+> <br>
+> is first inverted and then incremented:
+>
+> <pre><code class="language-cmd">    0000 0000 0000 0000 0000 0000 0000 0001
++                                         1
+————————————————————————————————————————————
+=   0000 0000 0000 0000 0000 0000 0000 0010
+=   2
+</code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> </details>
 
 <div class="bg"></div>
+
+&nbsp;&nbsp; Our next shortcut tells us how to convert a binary number represented in *n* bits to a number represented with more than *n* bits. To add a 16-bit register to a 32-bit register, the computer must convert that 16-bit number to its 32-bit equivalent. The shortcut is to take the most significant bit from the smaller quantity—**the sign bit**—and replicate it to fill the new bits of the larger quantity. The old nonsign bits are simply copied into the right portion of the new word. This shortcut is called ***sign extension***.
+
+> **Sign Extension Shortcut**
+> 
+> &nbsp;&nbsp; Convert 16-bit binary versions of 2<sub>10</sub> and -2<sub>10</sub> to 32-bit binary numbers.
+>
+> <details><summary><strong>Answer</strong></summary>
+> 
+> &nbsp;&nbsp; The 16-bit binary version of the number 2 is
+>
+> <pre><code class="language-cmd">0000 0000 0000 0010 = 2
+</code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> 
+> <div class="bg"></div>
+> 
+> &nbsp;&nbsp; It is converted to a 32-bit number by making 16 copies of the value in the most significant bit (0) and placing that in the left-hand half of the word. The right half gets the old value:
+>
+> <pre><code class="language-cmd">0000 0000 0000 0000 0000 0000 0000 0010 = 2
+</code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> 
+> <div class="bg"></div>
+> 
+> &nbsp;&nbsp; Let's negate the 16-bit binary version of 2 using the earlier shortcut. Thus,
+>
+> <pre><code class="language-cmd">0000 0000 0000 0010
+</code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> &nbsp;&nbsp; becomes
+>
+> <pre><code class="language-cmd">1111 1111 1111 1101
++                      1
+————————————————————————
+=   1111 1111 1111 1110
+</code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> &nbsp;&nbsp; Creating a 32-bit version of the negative number means copying the sign but 16 times and placing it on the left:
+>
+> <pre><code class="language-cmd">1111 1111 1111 1111 1111 1111 1111 1110 = -2
+</code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> </details>
+
+<div class="bg"></div>
+
+# 2.5 Representing Instructions in the Computer
+
+<table align="center">
+  <thead>
+    <tr>
+      <th>Register name</th>
+      <th>Number</th>
+      <th>Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$zero</td>
+      <td>0</td>
+      <td rowspan="1">constant 0</td>
+    </tr>
+    <tr>
+      <td>$at</td>
+      <td>1</td>
+      <td rowspan="1">reserved for assembler</td>
+    </tr>
+    <tr>
+      <td>$v0</td>
+      <td>2</td>
+      <td rowspan="2">expression evaluation and results of a function</td>
+    </tr>
+    <tr>
+      <td>$v1</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>$a0</td>
+      <td>4</td>
+      <td rowspan="4">argument</td>
+    </tr>
+    <tr>
+      <td>$a1</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>$a2</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>$a3</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>$t0</td>
+      <td>8</td>
+      <td rowspan="8">temporary (not preserved across call)</td>
+    </tr>
+    <tr>
+      <td>$t1</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>$t2</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>$t3</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>$t4</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>$t5</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>$t6</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td>$t7</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>$s0</td>
+      <td>16</td>
+      <td rowspan="8">saved temporary (preserved across call)</td>
+    </tr>
+    <tr>
+      <td>$s1</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <td>$s2</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <td>$s3</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>$s4</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>$s5</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <td>$s6</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>$s7</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <td>$t8</td>
+      <td>24</td>
+      <td rowspan="2">temporary (not preserved across call)</td>
+    </tr>
+    <tr>
+      <td>$t9</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>$k0</td>
+      <td>26</td>
+      <td rowspan="2">reserved for OS kernel</td>
+    </tr>
+    <tr>
+      <td>$k1</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td>$gp</td>
+      <td>28</td>
+      <td rowspan="1">pointer to global area</td>
+    </tr>
+    <tr>
+      <td>$sp</td>
+      <td>29</td>
+      <td rowspan="1">stack pointer</td>
+    </tr>
+    <tr>
+      <td>$fp</td>
+      <td>30</td>
+      <td rowspan="1">frame pointer</td>
+    </tr>
+    <tr>
+      <td>$ra</td>
+      <td>31</td>
+      <td rowspan="1">return address (used by function call)</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="bg"></div>
+
+&nbsp;&nbsp; Since registers are referred to by almost all instructions, there must be a convention to map register names into numbers. In MIPS assembly language, registers `$s0` to `$s7` map onto registers 16 to 23, and registers `$t0` to `$t7` map onto registers 8 to 15. Hence, `$s0` means register 16, `$s1` means register 17, `$s2` means register 18,..., `$t0` means register 8, `$t1` means register 9, and so on. 
+
+> **Translating a MIPS Assembly Instruction into a Machine Instruction**
+> 
+> <pre><code class="language-asm">add $t0, $s1, $s2
+</code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> 
+> <details><summary><strong>Answer</strong></summary>
+> 
+> The decimal representation is
+> 
+> <pre><code class="language-text hljs language-plaintext" data-highlighted="yes">⏐     0     ⏐     17    ⏐     18    ⏐     8     ⏐     0     ⏐     32    ⏐
+</code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> 
+> <div class="bg"></div>
+> 
+> &nbsp;&nbsp; Each of these segments of an instruction is called a <em><strong>field</strong></em>. The first and last fields (containing 0 and 32 in this case) in combination tell the MIPS computer that this instruction performs addition. The second field gives the number of the register that is the first source operand of the addition operation (17 = <code>$s1</code>), and the third field gives the other source operand (18 = <code>$s2</code>). The fourth field contains the number of the register that is to receive the sum (8 = <code>$t0</code>). The fifth field is unused in this instruction, so it is set to 0. Thus, this instruction adds register <code>$s1</code> to register <code>$s2</code> and places the sum in register <code>$t0</code>. <br>
+> &nbsp;&nbsp; This instruction can also be represented as fields of binary numbers as opposed to decimal:
+>
+> <pre><code class="language-text hljs language-plaintext" data-highlighted="yes">⏐   000000  ⏐   10001   ⏐   10010   ⏐   01000   ⏐   00000   ⏐   100000  ⏐
+     6bits      5bits       5bits       5bits       5bits        6bits
+</code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+
+<div class="bg"></div>
+
+&nbsp;&nbsp; This layout of the instruction is called the **instruction format**[^6]. As you can see from counting the number of bits, this MIPS instruction takes exactly 32 bits—the same size as a data word.
+
+&nbsp;&nbsp; To distinguish it from assembly language, we call the numberic version of instructions **machine language**[^7] and a sequence of such instructions *machine code*.
+
+<div class="bg"></div>
+
+&nbsp;&nbsp; Since almost all computer data sizes are multiples of 4, **hexadecimal**[^8] (base 16) numbers are popular. Since base 16 is a power of 2, we can convert by replacing each group of four binary digits by a single hexadecimal digit, and vice versa.
+
+> **Binary to Hexadecimal and Back**
+>
+> &nbsp;&nbsp; Convert the following hexadecimal and binary numbers into the other base:
+>
+> <pre><code class="language-text">eca8 6420
+0001 0011 0101 0111 1001 1011 1101 1111
+</code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> 
+> <details><summary><strong>Answer</strong></summary>
+> 
+> <pre><code class="language-text">[0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15]
+ 0   1   2   3   4   5   6   7   8   9    a    b    c    d    e    f
+</code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> <div class="bg"></div>
+> 
+> <pre><code class="language-text">e    c    a    8    6    4    2    0
+1110 1100 1010 1000 0110 0100 0010 0000
+</code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> 
+> <div class="bg"></div>
+> 
+> <pre><code class="language-text">0001 0011 0101 0111 1001 1011 1101 1111
+> 1    3    5    7    9    b    d    f
+> 
+> 1357 9bdf
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+
+## a. MIPS Fields
+
+&nbsp;&nbsp; MIPS fields are given names to make them easier to discuss:
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/7742339a-6abd-4e92-b39b-52aae40e7da5#center" alt="image" height="95%" width="95%">
+
+&nbsp;&nbsp; Here is the meaning of each name of the fields in MIPS instructions:
+
+* ***op***: Basic operation of the instruction, traditionally called the **opcode**[^9].
+* ***rs***: The first register source operand.
+* ***rt***: The second register source operand.
+* ***rd***: The register destination operand. It gets the result of the operation.
+* ***shamt***: Shift amount. A constant value for shift instructions.
+* ***funct***: Function. This field, often called the ***function code***, selects the specific variant of the operation in the op field.
+
+<div class="bg"></div>
+
+<p style="text-align: center; font-size: 1.25rem"><em>Design Principle 3: <strong>Good design demands good compormises.</strong></em></p>
+
+&nbsp;&nbsp; The compromise chosen by the MIPS designers is to keep all instructions the same length, thereby requiring different kinds of instruction formats for different kinds of instructions. For example, the format above is called ***R-type*** (for register) or ***R-format***. A second type of instruction format is called ***I-type*** (for immediate) or ***I-format*** and is used by the immediate and data transfer instructions. The fields of I-format are
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/74470109-f013-4ed6-a279-3e44684e130e#center" alt="image" height="95%" width="95%">
+
+&nbsp;&nbsp; The 16-bit address means a load word instruction can load any word within a region of ±2<sup>15</sup> or 32,768 bytes (±2<sup>13</sup> or 8192 words) of the address in the base register `rs`. Similarily, add immediate is limited to constants no larger than ±2<sup>15</sup>.
 
 # 2.6 Logical Operations
 
@@ -354,3 +672,7 @@ $$
 [^3]: A command that moves data between memory and registers.
 [^4]: A value used to delineate the location of a specific data element within a memory array.
 [^5]: Also called **binary bit**. One of the two numbers in base 2, 0 or 1, that are the components of inforamtion.
+[^6]: A form of representation of an instruction composed of fields of binary numbers.
+[^7]: Binary representation used for communication within a computer system.
+[^8]: Numbers in base 16.
+[^9]: The field that denotes the operation and format of an instruction.
