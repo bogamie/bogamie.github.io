@@ -36,7 +36,7 @@ published: true
 
 ## b. Welcome to the PostPC Era
 
-&nbsp;&nbsp; **Personal mobile device(PMD)**[^6] is battery operated with wireless connectivity to the Internet, and, like PCs, users can download software("apps") to run on them. Unlike PCs, they no longer have a keyboard and mouse, and are more likely to rely on a touch-sensitibe screen or even speech input. Taday's PMD is a smart phone or a tablet computer, but tomorrow it may include electronic glasses.
+&nbsp;&nbsp; **Personal mobile device(PMD)**[^6] is battery operated with wireless connectivity to the Internet, and, like PCs, users can download software("apps") to run on them. Unlike PCs, they no longer have a keyboard and mouse, and are more likely to rely on a touch-sensitive screen or even speech input. Taday's PMD is a smart phone or a tablet computer, but tomorrow it may include electronic glasses.
 
 &nbsp;&nbsp; Taking over from the traditional server is **Cloud Computing**[^7], which relies upon giant datacenters that are known as Warehouse Scale Computers(WSCs). Companies like Amazon and Google build these WSCs and then let companies rent portions of them. Indeed, **Software as a Service(SaaS)**[^8] deployed via the cloud is revolutionizing the software industry just as PMDs and WSCs are revolutionizing the hardware industry.
 
@@ -69,7 +69,7 @@ published: true
 
 &nbsp;&nbsp; Making the **common case fast** will tend to enhance performance better than optimizing the rare case. Ironically, the common case is often simpler than the rare case and hence is often easier to enhance. This common sense advice implies that you know what the common case is, which is only possible with careful experimentation and measurement.
 
-## c. Performance via 
+## c. Performance via Parallelism
 
 <img class="lazy" data-src="https://github.com/user-attachments/assets/f0e6cc2f-a921-4dad-a52a-dccd080125dd" alt="image" height="15%" width="15%">*PARALLELISM*
 
@@ -79,13 +79,13 @@ published: true
 
 <img class="lazy" data-src="https://github.com/user-attachments/assets/2d4f131b-1d75-4d15-b842-748a12abf82e" alt="image" height="15%" width="15%">*PIPELINING*
 
-&nbsp;&nbsp; A particular patern of parallelism is so prevalent in computer architecture that it merits its own name: **pipelining**.
+&nbsp;&nbsp; A particular pattern of parallelism is so prevalent in computer architecture that it merits its own name: **pipelining**.
 
 ## e. Performance via Prediction
 
 <img class="lazy" data-src="https://github.com/user-attachments/assets/0fc5ecc4-2e97-4229-ac7f-e32b8d5def95" alt="image" height="15%" width="15%">*PREDICTION*
 
-&nbsp;&nbsp; Following the saying that it can be beer to ask for forgiveness than to ask for permission, the next great idea is prediction. In some cases it can be faster on average to guess and start working rather than wait until you know for sure, assuming that the mechanism to recover from a misprediction is not too expensive and your prediction is relatively accurate.
+&nbsp;&nbsp; Following the saying that it can be better to ask for forgiveness than to ask for permission, the next great idea is prediction. In some cases it can be faster on average to guess and start working rather than wait until you know for sure, assuming that the mechanism to recover from a misprediction is not too expensive and your prediction is relatively accurate.
 
 ## f. Hierarchy of Memories
 
