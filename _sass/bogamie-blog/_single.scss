@@ -127,6 +127,7 @@
 .related-posts {
     margin: 2rem 0;
     &__title {
+        color: var(--text-primary-100);
         margin-bottom: 0.875rem;
     }
     &__line {
