@@ -595,6 +595,9 @@ $$
 
 &nbsp;&nbsp; The 16-bit address means a load word instruction can load any word within a region of ±2<sup>15</sup> or 32,768 bytes (±2<sup>13</sup> or 8192 words) of the address in the base register `rs`. Similarily, add immediate is limited to constants no larger than ±2<sup>15</sup>.
 
+<div class="bg"></div>
+
+
 # 2.6 Logical Operations
 
 <div class="bg"></div>
