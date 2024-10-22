@@ -121,7 +121,7 @@ published: true
 
 ## a. From a High-Level Language to the Language of Harware
 
-&nbsp;&nbsp; To speak to electronic hardware, you need to send electrical signals. The easiest signals for computers to understand are *on* and *off*, and so the computer alphabet is just two letters. These two letters of the computer alphabet do not limit what computers can do. The tow symbols for these two letters are the numbers 0 and 1, we refer to each "letter" as a **binary digit**[^12] or **bit**. Computers are slaves to our commands, which are called **instructions**[^13]. Instructions, which are just collections of bits that the computer understands and obeys, can be thought of as numbers.
+&nbsp;&nbsp; To speak to electronic hardware, you need to send electrical signals. The easiest signals for computers to understand are *on* and *off*, and so the computer alphabet is just two letters. These two letters of the computer alphabet do not limit what computers can do. The two symbols for these two letters are the numbers 0 and 1, we refer to each "letter" as a **binary digit**[^12] or **bit**. Computers are slaves to our commands, which are called **instructions**[^13]. Instructions, which are just collections of bits that the computer understands and obeys, can be thought of as numbers.
 
 ### i. assembler
 
@@ -585,7 +585,7 @@ $$
 
 ## a. SPEC CPU Benchmark
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/d564b128-6384-454a-a8fd-182afbe5ebcb#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; The set of programs run would form a **workload**[^44]. To evaluate two computer systems, a user would simply compare the execution time of the workload on the two computers. This alternative is ususally followed by evaluating the computer using a sef of **benchmarks**—programs specifically chosen to measure performance. As we noted above, to make the **common case fast**, you first need to know accurately which case is common, so benchmarks play a critical role in computer architecture.*
+<img class="lazy" data-src="https://github.com/user-attachments/assets/d564b128-6384-454a-a8fd-182afbe5ebcb#right" alt="image" height="5%" width="5%">*&nbsp;&nbsp; The set of programs run would form a **workload**[^44]. To evaluate two computer systems, a user would simply compare the execution time of the workload on the two computers. This alternative is usually followed by evaluating the computer using a sef of **benchmarks**—programs specifically chosen to measure performance. As we noted above, to make the **common case fast**, you first need to know accurately which case is common, so benchmarks play a critical role in computer architecture.*
 
 &nbsp;&nbsp; **SPEC** (*System Performance Evaluation Cooperative*) is an effort funded and supported by a number of computer vendors to create standard sets of benchmarks for modern computer systems. In 1989, SPEC originally created a benchmark set focusing on processor performance (now called SEPC89), which has evolved through five generations. The latest is SPEC CPU2017, which consists of a set of 10 integer benchmarks (SPECspeed 2017 Integer) and 13 floating-point benchmarks (SPECspeed 2017 Floating Point). 
 
