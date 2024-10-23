@@ -679,7 +679,7 @@ $$
 >
 > $$
 \begin{aligned}
-    \textrm{CPU}_\textrm{times} &= \textrm{CPU}_\textrm{clock cycles} \times \textrm{Clock rate} \\
+    \textrm{CPU}_\textrm{times} &= \textrm{CPU}_\textrm{clock cycles} \times \textrm{Clock cycle time} \\
                                 &= \textrm{CPI} \times \textrm{Instruction count} \times \textrm{Clock period} \\
                                 &= \frac{ \textrm{CPI} \times \textrm{Instruction count} }{ \textrm{Clock rate}}
 \end{aligned}
