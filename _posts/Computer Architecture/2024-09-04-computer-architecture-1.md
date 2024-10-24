@@ -717,7 +717,6 @@ $$
 > 
 > </details>
 
-
 ---
 
 [^1]: A computer designed for use by an individual, usually incorporating a graphics display, a keyboard, and a mouse.
