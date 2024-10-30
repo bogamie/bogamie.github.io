@@ -597,8 +597,117 @@ $$
 
 <div class="bg"></div>
 
+&nbsp;&nbsp; Let's look at the load word instruction:
+
+```text
+lw $t0, 32($s3)     # Temporary reg $t0 gets A[8]
+```
+
+&nbsp;&nbsp; Here, 19 (for `$s3`) is placed in the `rs` field, 8 (for `$t0`) is placed in the `rt` field, and 32 is placed in the address field. In a load word instruction, the `rt` field specifies the ***destination*** register, which receives the result of the load.
+
+<div class="bg"></div>
 
 # 2.6 Logical Operations
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/dc90d13c-fd41-438e-a7a9-5da4166c73ea#center" alt="image" height="80%" width="80%">
+
+&nbsp;&nbsp; The first class of such operations is called ***shifts***. They move all the bits in a word to the left or right,filling the emptied bits with 0s. For example, if register `$s0` contained
+
+```text
+0000 0000 0000 0000 0000 0000 0000 1001 = 9
+```
+
+and the instruction to shift left by 4 was executed, the new value would be:
+
+```text
+0000 0000 0000 0000 0000 0000 1001 0000 = 144
+```
+
+&nbsp;&nbsp; The dual of a shift left is a shift right. The actual name of the two MIPS shift instructions are called ***shift left logical*** (sll) and ***shift right logical*** (srl). The following instruction performs the operation above, assuming that the original vaalue was in register `$s0` and the result should go in register `$t2`:
+
+```text
+sll $t2, $s0, 4    # reg $r2 = reg $s0 << 4 bits
+```
+
+&nbsp;&nbsp; Used in shift instructions, it stands for ***shift amount***. Hence, the machine language version of the instruction above is
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/eafc0db0-c44e-4f1e-a073-122882a071b0#center" alt="image" height="80%" width="80%">
+
+&nbsp;&nbsp; The encoding of `sll` is 0 in both the `op` and `funct` fields, `rd` contains 10 (register `$t2`), `rt` contains 16 (register `$s0`), and `shamt` contains 4. The `rs` field is unused and thus is set to 0.
+
+&nbsp;&nbsp; Shift left logical provides a bonus benefit. Shifting left by *i* bits gives the same result as multiplying by 2<sup>*i*</sup>. For example, the above `sll` shifts by 4, which gives the same result as multiplying by 2<sup>4</sup> or 16.
+
+<div class="bg"></div>
+
+&nbsp;&nbsp; Another useful operation that isolates fields is **AND**. AND is bit-by-bit operation that leaves a 1 in the result only if both bits of the operands are 1. For example, if register `$t2` contains
+
+```text
+0000 0000 0000 0000 0000 1101 1100 0000
+```
+
+and register `$t1` contains
+
+```text
+0000 0000 0000 0000 0011 1100 0000 0000
+```
+
+then, after executing the MIPS instruction
+
+```text
+and $t0, $t1, $t2    # reg $t0 = $t1 & $t2
+```
+
+the value if register `$t0` would be
+
+```text
+0000 0000 0000 0000 0000 1101 1100 0000
+0000 0000 0000 0000 0011 1100 0000 0000
+---------------------------------------
+0000 0000 0000 0000 0000 1100 0000 0000
+```
+
+&nbsp;&nbsp; As you can see, AND can apply a bit pattern to a set of bits to force 0s where there is a 0 in the bit pattern. Such a bit pattern in conjunction with AND is called a ***mask***, since the mask "conceals" some bits.
+
+<div class="bg"></div>
+
+&nbsp;&nbsp; **OR** is a bit-by-bit operation that places a 1 in the result if *either* operand bit is a 1. For example
+
+```text
+or $t0, $t1, $t2    # reg $t0 = $t1 | $t2
+```
+
+then the value of register `$t0` would be
+
+```text
+0000 0000 0000 0000 0000 1101 1100 0000 
+0000 0000 0000 0000 0011 1100 0000 0000
+---------------------------------------
+0000 0000 0000 0000 0011 1101 1100 0000
+```
+
+<div class="bg"></div>
+
+&nbsp;&nbsp; The final logical operation is a contrarian. **NOT** takes one operand and places a 1 in the result if one operand bit is a 0, and vice versa. 
+
+&nbsp;&nbsp; The MIPS instruction for NOT is called ***NOR*** (NOT OR). It calculates a 1 only if there is a 0 in *both* operands. If one operand is zero, then it is equivalent to NOT: 
+
+```text
+A NOR 0 = NOT (A OR 0) = NOT A
+```
+
+&nbsp;&nbsp; If the register `$t1` is unchanged from the preceding example and register `$t3` has the value 0, the result of the MIPS instruction
+
+```text
+nor $t0, $t1, $t3    # reg $t0 = ~($t1 | $t3)
+```
+
+is this value in register `$t0`:
+
+```text
+1111 1111 1111 1111 1100 0011 1111 1111
+```
+
+&nbsp;&nbsp; Constants are useful in AND and OR logical operations as well as in arithmetic operations, so MIPS also provides the instructions ***and immediate*** (andi) and ***or immediate*** (ori). Constants are rare for NOR, since its main use is to invert the bits of a single operand; thus, the MIPS instruction set architecture has no immediate version.
 
 <div class="bg"></div>
 
@@ -663,10 +772,6 @@ $$
 <div class="bg"></div>
 
 # 2.22 Concluding Remarks
-
-<div class="bg"></div>
-
-# 2.23 Historical Perspectives and Further Reading
 
 <div class="bg"></div>
 
