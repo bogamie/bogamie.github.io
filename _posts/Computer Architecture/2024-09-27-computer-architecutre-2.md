@@ -882,7 +882,7 @@ bne register1, register2, L1
 >
 > </details>
 
-
+<!--
 # 2.8 Supporting Procedures in Computer Hardware
 
 <div class="bg"></div>
@@ -942,7 +942,7 @@ bne register1, register2, L1
 # 2.22 Concluding Remarks
 
 <div class="bg"></div>
-
+-->
 ---
 
 [^1]: The vocabulary of commands understood by a given architecture.
