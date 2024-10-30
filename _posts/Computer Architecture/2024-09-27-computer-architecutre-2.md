@@ -713,7 +713,175 @@ is this value in register `$t0`:
 
 # 2.7 Instructions for Making Decisions
 
+## a. Conditional Operations
+
+&nbsp;&nbsp; MIPS assembly language includes two decision-making instructions, similar to an *if* statement with a *go to*. The first instruction is
+
+```text
+beq register1, register2, L1
+```
+
+&nbsp;&nbsp; This instruction means go to the statement labeled `L1` if the value in `register1` equals the value in `register2`. The mnemonic `beq` stands for ***branch if equal***. The second instruction is
+
+```text
+bne register1, register2, L1
+```
+
+&nbsp;&nbsp; It means go to the statement labeled `L1` if the value in `register1` does ***not*** equal the value in `register2`. The mnemonic `bne` stands for ***branch if not equal***. These two instructions are called ***conditional branches***[^10].
+
+> **Compiling *if-then-else* into Conditional Branches**
+>
+> &nbsp;&nbsp; In the following code segment, `f`, `g`, `h`, `i`, and `j` are variables. If the five variables `f` through `j` correspond to the five registers `$s0` through `$s4`, what is the compiled MIPS code for this C `if`
+> 
+> ```c
+> if (i == j)
+>    f = g + h;
+> else
+>   f = g - h;
+> ```
+>
+> <details><summary><strong>Answer</strong></summary>
+>
+> &nbsp;&nbsp; The first expression compares for equality, so it would seem that we would want the branch if registers are equal instruction (beq). In general, the code will be more efficient if we test for the opposite condition to branch over the codethat performs the subsequent <em>then</em> part of the <em>if</em> and so we use the branch if registers are <em>not</em> equal instruction (bne):
+>
+> <div class="bg"></div>
+>
+> <pre><code class="language-text">bne $s3, $s4, Else         # go to Else if i != j
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> 
+> <div class="bg"></div>
+> 
+> &nbsp;&nbsp; The next assignment statement performs a single operation, and if all the operands are allocated to registers, it is just one instruction:
+>
+> <div class="bg"></div>
+> 
+> <pre><code class="language-text">add $s0, $s1, $s2          # f = g + h (skipped if i != j)
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> <div class="bg"></div>
+>
+> We now need to go to the end of the <em>if</em> statement. This example introduces another kind of branch, often called an <strong><em>unconditional branch</em></strong>. This instruction says that the processor always follows the branch. To distinguish between conditional and unconditional branches, the MIPS name for this type of instruction is <strong><em>jump</em></strong>, abbreviated <code>j</code>.
+> 
+> <div class="bg"></div>
+> 
+> <pre><code class="language-text">j Exit                    # go to Exit
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> <div class="bg"></div>
+> 
+> &nbsp;&nbsp; The assignment statement in the <em>else</em> portion of the <em>if</em> statement can again be compiled into a single instruction. We just need to append the label <code>Else</code> to the instruction. We also show the label <code>Exit</code> that is after this instruction, showing the end of the <em>if-then-else</em> compiled code.
+>
+> <div class="bg"></div>
+> 
+> <pre><code class="language-text">Else: sub $s0, $s1, $s2   # f = g - h (skipped if i == j)
+> Exit:
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> <div class="bg"></div>
+> 
+> &nbsp;&nbsp; The complete compiled code for the <em>if-then-else</em> statement is
+>
+> <div class="bg"></div>
+>
+> <pre><code class="language-text">bne $s3, $s4, Else        # go to Else if i != j
+> add $s0, $s1, $s2         # f = g + h (skipped if i != j)
+> j Exit                    # go to Exit
+>
+> Else: sub $s0, $s1, $s2   # f = g - h (skipped if i == j)
+> Exit:
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> 
+> </details>
+
 <div class="bg"></div>
+
+## b. Loops
+
+&nbsp;&nbsp; Decisions are important both for choosing between two alternatives—found in if statements—and for iterating a computation—found in loops. The same assembly instructions are the building blocks for both cases.
+
+> **Compiling a *while* Loop in C
+>
+> &nbsp;&nbsp; Here is a traditional loop in C:
+>
+> <div class="bg"></div>
+>
+> ```c
+> while (save[i] == k)
+>    i += 1;
+> ```
+> 
+> <div class="bg"></div>
+> 
+> &nbsp;&nbsp; Assume that `i` and `k` correspond to registers `$s3` and `$s5` and the base of the array `save` is in `$s6`. What is the MIPS assembly code corresponding to this C segment?
+>
+> <details><summary><strong>Answer</strong></summary>
+> 
+> &nbsp;&nbsp; The first step is to load <code>save[i]</code> into a temporary register. Before we can load <code>save[i]</code> into a temporary register, we need to have its address. Before we can add <code>i</code> to the base of array <code>save</code> to form the address, we must multiply the index <code>i</code> by 4 due to form the addressing. We can use shift left logical, since shifting left by 2 bits multiplies by 2<sup>2</sup> or 4. We need to add the label <code>Loop</code> to it so that we can branch back to that instruction at the end of the loop:
+>
+> <div class="bg"></div>
+> 
+> <pre><code class="language-text">Loop: sll  $t1, $s3, 2      # Temp reg $t1 = i * 4
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> <div class="bg"></div>
+> 
+> &nbsp;&nbsp; To get the address of <code>save[i]</code>, we need to add <code>$t1</code> and the base of save in <code>$s6</code>:
+>
+> <div class="bg"></div>
+>
+> &nbsp;&nbsp; Now we can use that address to load <code>save[i]</code> into a temporary register:
+>
+> <div class="bg"></div>
+> 
+> <pre><code class="language-text">add  $t1, $t1, $s6    # $t1 = address of save[i]
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> <div class="bg"></div>
+>
+> &nbsp;&nbsp; The next instruction performs the loop test, exiting if <code>save[i] != k</code>:
+>
+> <div class="bg"></div>
+> 
+> <pre><code class="language-text">lw   $t0, 0($t1)      # Temp reg $t0 = save[i]
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> <div class="bg"></div>
+> 
+> <pre><code class="language-text">bne  $t0, $s5, Exit   # go to Exit if save[i] != k
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> 
+> <div class="bg"></div>
+>
+> &nbsp;&nbsp; The next instruction adds 1 to <code>i</code>:
+>
+> <div class="bg"></div>
+> 
+> <pre><code class="language-text">addi $s3, $s3, 1      # i = i + 1
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> <div class="bg"></div>
+> 
+> <pre><code class="language-text">j    Loop             # go to Loop
+> Exit:
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> <div class="bg"></div>
+> 
+> &nbsp;&nbsp; The complete compiled code for the <em>while</em> loop is
+>
+> <div class="bg"></div>
+>
+> <pre><code class="language-text">Loop: sll  $t1, $s3, 2      # Temp reg $t1 = i * 4
+>       add  $t1, $t1, $s6    # $t1 = address of save[i]
+>       lw   $t0, 0($t1)      # Temp reg $t0 = save[i]
+>       bne  $t0, $s5, Exit   # go to Exit if save[i] != k
+>       addi $s3, $s3, 1      # i = i + 1
+>       j    Loop             # go to Loop
+> Exit:
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> </details>
+
 
 # 2.8 Supporting Procedures in Computer Hardware
 
@@ -786,3 +954,4 @@ is this value in register `$t0`:
 [^7]: Binary representation used for communication within a computer system.
 [^8]: Numbers in base 16.
 [^9]: The field that denotes the operation and format of an instruction.
+[^10]: An instruction that requires the comparison of two values and that allows for a subsequent transfer of control to a new address in the program based on the outcome of the comparison.
