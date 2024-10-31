@@ -799,7 +799,7 @@ bne register1, register2, L1
 
 &nbsp;&nbsp; Decisions are important both for choosing between two alternatives—found in if statements—and for iterating a computation—found in loops. The same assembly instructions are the building blocks for both cases.
 
-> **Compiling a *while* Loop in C
+> **Compiling a *while* Loop in C**
 >
 > &nbsp;&nbsp; Here is a traditional loop in C:
 >
@@ -882,11 +882,177 @@ bne register1, register2, L1
 >
 > </details>
 
-<!--
-# 2.8 Supporting Procedures in Computer Hardware
+<div class="bg"></div>
+
+## c. For Loops
+
+```text
+slt $d, $s, $t      # $d = ($s < $t)
+```
+
+&nbsp;&nbsp; The instruction `slt` stands for ***set on less than***. It compares two registers and sets a third register to 1 if the first is less than the second; otherwise, it is set to 0.
+
+```text
+slti $t, $s, i      # $t = ($s < SE(i))
+```
+
+&nbsp;&nbsp; Constant operands are popular in comparisons, so there is an immediate version of the set on less than instruction.
+
+> **Hardware/Software Interface**
+> 
+> &nbsp;&nbsp; MIPS compilers use the `slt`, `slti`, `beq`, `bne`, and the fixed value of 0 (`$zero`) to create all relative conditions: equal, not equal, less than, less than or equal, greater than, and greater than or equal.
+>
+> <div class="bg"></div>
+> 
+> **1. equal**
+> 
+> <div class="bg"></div>
+> 
+> ```text
+> beq $t1, $t2, label       # if ($t1 == $t2) go to label
+> ```
+>
+> <div class="bg"></div>
+>
+> **2. not equal**
+>
+> <div class="bg"></div>
+>
+> ```text
+> bne $t1, $t2, label       # if ($t1 != $t2) go to label
+> ```
+>
+> <div class="bg"></div>
+>
+> **3. less thanl**
+>
+> <div class="bg"></div>
+> 
+> ```text
+> slt $t0, $t1, $t2         # if ($t1 < $t2) $t0 = 1; else $t0 = 0
+> bne $t0, $zero, label     # if ($t1 < $t2) go to label
+> ```
+> 
+> <div class="bg"></div>
+> 
+> **4. less than or equal**
+>
+> <div class="bg"></div>
+>
+> ```text
+> slt $t0, $t2, $t1         # if ($t2 < $t1) $t0 = 1; else $t0 = 0
+> beq $t0, $zero, label     # if ($t2 >= $t1) go to label
+> ```
+>
+> <div class="bg"></div>
+>
+> **5. greater than**
+>
+> <div class="bg"></div>
+>
+> ```text
+> slt $t0, $t2, $t1         # if ($t2 < $t1) $t0 = 1; else $t0 = 0
+> bne $t0, $zero, label     # if ($t2 < $t1) go to label
+> ```
+>
+> <div class="bg"></div>
+>
+> **6. greater than or equal**
+>
+> <div class="bg"></div>
+>
+> ```text
+> slt $t0, $t1, $t2         # if ($t1 < $t2) $t0 = 1; else $t0 = 0
+> beq $t0, $zero, label     # if ($t1 >= $t2) go to label
+> ```
+
+<div class="bg"></div>
+<div class="bg"></div>
+
+```text
+sltu $d, $s, $t     # $d = ($s < $t)
+```
+
+```text
+sltiu $t, $s, i     # $t = ($s < SE(i))
+```
 
 <div class="bg"></div>
 
+&nbsp;&nbsp; Unsigned integers are compared using ***set on less than unsigned*** (`sltu`) and ***set on less than immediate unsigned*** (`sltiu`).
+
+> **Signed versus Unsigned Comparison**
+>
+> &nbsp;&nbsp; Suppose register `$s0` has the binary number
+> 
+> ```text
+> 1111 1111 1111 1111 1111 1111 1111 1111
+> ```
+>
+> and that register `$s1` has the binary number
+>
+> ```text
+> 0000 0000 0000 0000 0000 0000 0000 0001
+> ```
+> &nbsp;&nbsp; What are the values of registers `$t0` and `$t1` after these two instructions?
+>
+> ```text
+> slt  $t0, $s0, $s1
+> sltu $t1, $s0, $s1
+> ```
+>
+> <details><summary><strong>Answer</strong></summary>
+>
+> &nbsp;&nbsp; The value in register <code>$s0</code> represents -1<sub>10</sub> if it is an integer and 4,294,967,295<sub>10</sub> if it is an unsigned integer. The value in register <code>$s1</code> represents 1<sub>10</sub> in either case. Then register <code>$t0</code> has the value 1, since -1 < 1, and register <code>$t1</code> has the value 0, because 4,294,967,295 > 1.
+>
+> </details>
+
+<div class="bg"></div>
+# 2.8 Supporting Procedures in Computer Hardware
+
+&nbsp;&nbsp; In the execution of a procedure[^11], the program must follow these six steps:
+
+<ol style="margin-left: 0.5rem;">
+    <li>Put parameters in a place where the procedure can access them.</li>
+    <li>Transfer control to the procedure.</li>
+    <li>Acquire the storage resources needed for the procedure.</li>
+    <li>Perform the desired task.</li>
+    <li>Put the result value in a place where the calling program can access it.</li>
+    <li>Return control to the point of origin, since a procedure can be called from several points in a program.</li>
+</ol>
+
+<div class="bg"></div>
+
+&nbsp;&nbsp; The registers are the fastest place to hold data in a computer, so we want to use them as possible. MIPS software follows the following convention for procedure calling in allocating its 32 registers:
+
+<ol style="margin-left: 0.5rem;">
+    <li><code>$a0</code> - <code>$a3</code>: four argument registers in which to pass parameters</li>
+    <li><code>$v0</code> - <code>$v1</code>: two value registers in which to return values</li>
+    <li><code>$ra</code>: one return address register to return to the point of origin</li>
+</ol>
+
+<div class="bg"></div>
+<div class="bg"></div>
+
+```text
+jal label           # $31 = pc; pc += i << 2
+```
+
+&nbsp;&nbsp; The ***jump-and-link*** instruction (`jal`) is used to call a procedure. It jumps to an address and simultaneously saves the address of the following instruction in register `$ra`.
+
+&nbsp;&nbsp; The *link* portion of the name means that an address or link is formed that points to the calling site to allow the procedure to return to the proper address. This "link", stored in register `$ra` (register 31), is called the **return address**[^12]. The return address is needed because the same procedure could be called from several parts of the program.
+
+<div class="bg"></div>
+
+```text
+jr $s              # pc = $s (or $ra)
+```
+
+&nbsp;&nbsp; The ***jump register*** instruction (`jr`) jumps to the address stored in register `$ra`—which is just what we want. Thus, the calling program, or **caller**[^13]m puts the parameter values in `$a0`-`$a3` and uses `jal label` to jump to procedure `label` (sometimes named the **callee**[^14]). The `callee` then performs the calculations, places the result in `$v0` and `$v1`, and returns control to the caller using `jr $s`.
+
+
+
+<!--
 # 2.9 Communicating with People
 
 <div class="bg"></div>
@@ -955,3 +1121,7 @@ bne register1, register2, L1
 [^8]: Numbers in base 16.
 [^9]: The field that denotes the operation and format of an instruction.
 [^10]: An instruction that requires the comparison of two values and that allows for a subsequent transfer of control to a new address in the program based on the outcome of the comparison.
+[^11]: A stored subroutine that performs a speciﬁc task based on the parameters with which it is provided.
+[^12]: A link to the calling site that allows a procedure to return to the proper address; in MIPS it is stored in register `$ra`.
+[^13]: The program that instigates a procedure and provides the necessary parameter values.
+[^14]: A procedure that executes a series of stored instructions based on parameters provided by the caller and then returns control to the caller.
