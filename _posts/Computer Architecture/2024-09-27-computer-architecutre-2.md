@@ -1,6 +1,6 @@
 ---
 title:  "2. Instructions: Language of the Computer"
-excerpt: "&nbsp;&nbsp; " 
+excerpt: "&nbsp;&nbsp; This chapter explains the basics of computer hardware operations, instruction representation, MIPS addressing, parallelism, and the differences between arrays and pointers, concluding with examples in C and Java code." 
 date:   2024-09-27 21:35:57 +0900
 categories: Computer Architecture
 permalink: posts/2-instructions-language-of-the-computer
