@@ -1008,7 +1008,10 @@ sltiu $t, $s, i     # $t = ($s < SE(i))
 > </details>
 
 <div class="bg"></div>
+
 # 2.8 Supporting Procedures in Computer Hardware
+
+## a. Procedures and Procedure Calls
 
 &nbsp;&nbsp; In the execution of a procedure[^11], the program must follow these six steps:
 
@@ -1050,9 +1053,169 @@ jr $s              # pc = $s (or $ra)
 
 &nbsp;&nbsp; The ***jump register*** instruction (`jr`) jumps to the address stored in register `$ra`—which is just what we want. Thus, the calling program, or **caller**[^13]m puts the parameter values in `$a0`-`$a3` and uses `jal label` to jump to procedure `label` (sometimes named the **callee**[^14]). The `callee` then performs the calculations, places the result in `$v0` and `$v1`, and returns control to the caller using `jr $s`.
 
+<div class="bg"></div>
 
+&nbsp;&nbsp; Implicit in the stored-program idea is the need to have a register to hold the address of the current instruction being executed. This register is called the **program counter**, abreviated `pc` in the MIPS architecture, although a more sensible name would have benn ***instruction address register***. The `jal` instruction actually saves PC + 4 in register `$ra` to link to the following instruction to set up the procedure return.
 
+<div class="bg"></div>
+
+## b. Using More Registers
+
+&nbsp;&nbsp; The ideal data structure for spilling registers is a **stack**[^15]—a last-in-first-out queue. The **stack pointer**[^16] is adjusted by one word for each register that is saved or restored. MIPS software reserves register 29 for the stack pointer, named `$sp`. Stacks have their own buzzwords for transferring data to and from the stack: placing data onto the stack is called a **push**[^17], and removing data from the stack is called a **pop**[^18].
+
+&nbsp;&nbsp; The stacks "grow" from higher addresses to lower addresses. This convention means that you push values onto the stack by subtracting from the stack pointer. Adding to the stack pointer shrinks the stack, thereby popping values off the stack.
+
+<div class="bg"></div>
+
+> **Compiling a C Procedure That Doesn't Call Another Procedure**
+>
+> ```c
+> int leaf_example(int g, int h, int i, int j)
+> {
+>     int f;
+>
+>     f = (g + h) - (i + j);
+>     return f;
+> }
+> ```
+>
+> &nbsp;&nbsp; What is the compiled MIPS assembly code?
+>
+> <details><summary><strong>Answer</strong></summary>
+>
+> &nbsp;&nbsp; The parameter variables <code>g</code>, <code>h</code>, <code>i</code>, and <code>j</code> correspond to the argument registers <code>$a0</code>, <code>$a1</code>, <code>$a2</code>, and <code>$a3</code>, and <code>f</code> corresponds to <code>$s0</code>. The compiled program starts with the label of the procedure.
+> 
+> <div class="bg"></div>
+>
+> <pre><code class="language-text">leaf_example:
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> 
+> <div class="bg"></div>
+> 
+> &nbsp;&nbsp; The next step is to save the registers used by the procedure. We need to save three regiters: <code>$s0</code>, <code>$t0</code>, and <code>$t1</code>. We "push" the old values onto the stack by creating space for three words (12 bytes) on the stack and then store them:
+>
+> <div class="bg"></div>
+>
+> <pre><code class="language-text">addi $sp, $sp, -12      # adjust stack to make room for 3 items
+> sw   $t1, 8($sp)        # save register $t1 for use afterwards
+> sw   $t0, 4($sp)        # save register $t0 for use afterwards
+> sw   $s0, 0($sp)        # save register $s0 for use afterwards
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> <div class="bg"></div>
+>
+> <img class="lazy" data-src="https://github.com/user-attachments/assets/eee56981-6402-42ce-94b1-23fc284ced1c#center" alt="image" height="80%" width="80%">
+>
+> <div class="bg"></div>
+> 
+> &nbsp;&nbsp; The stack pointer always points to the "top" of the stack, or the last word in the stack in this drawing.
+>
+> <div class="bg"></div>
+>
+> &nbsp;&nbsp; The next three statements correspond to the body of the procedure:
+>
+> <div class="bg"></div>
+>
+> <pre><code class="language-text">add  $t0, $a0, $a1      # register $t0 contains g + h
+> add  $t1, $a2, $a3      # register $t1 contains i + j
+> sub  $s0, $t0, $t1      # f = (g + h) - (i + j)
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> 
+> <div class="bg"></div>
+> 
+> &nbsp;&nbsp; To return the value of <code>f</code>, we copy it into a return value register:
+>
+> <div class="bg"></div>
+>
+> <pre><code class="language-text">add  $v0, $s0, $zero    # return f
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+> 
+> <div class="bg"></div>
+> 
+> &nbsp;&nbsp; Before returning, we restore the three old values of the reigsters we saved by "popping" them from the stack:
+>
+> <div class="bg"></div>
+>
+> <pre><code class="language-text">lw   $s0, 0($sp)        # restore register $s0 for caller
+> lw   $t0, 4($sp)        # restore register $t0 for caller
+> lw   $t1, 8($sp)        # restore register $t1 for caller
+> addi $sp, $sp, 12       # adjust stack to delete 3 items
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> <div class="bg"></div>
+>
+> &nbsp;&nbsp; The procedure ends with a jump register using the return address:
+>
+> <div class="bg"></div>
+> 
+> <pre><code class="language-text">jr   $ra                # jump back to calling routine
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre> 
+> 
+> <div class="bg"></div>
+> 
+> &nbsp;&nbsp; The complete compiled code for the procedure is
+>
+> <div class="bg"></div>
+>
+> <pre><code class="language-text">leaf_example:
+>     addi $sp, $sp, -12      # adjust stack to make room for 3 items
+>     sw   $t1, 8($sp)        # save register $t1 for use afterwards
+>     sw   $t0, 4($sp)        # save register $t0 for use afterwards
+>     sw   $s0, 0($sp)        # save register $s0 for use afterwards
+>
+>     add  $t0, $a0, $a1      # register $t0 contains g + h
+>     add  $t1, $a2, $a3      # register $t1 contains i + j
+>     sub  $s0, $t0, $t1      # f = (g + h) - (i + j)
+>
+>     add  $v0, $s0, $zero    # return f
+>
+>     lw   $s0, 0($sp)        # restore register $s0 for caller
+>     lw   $t0, 4($sp)        # restore register $t0 for caller
+>     lw   $t1, 8($sp)        # restore register $t1 for caller
+>     addi $sp, $sp, 12       # adjust stack to delete 3 items
+>
+>     jr   $ra                # jump back to calling routine
+> </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
+>
+> </details>
+
+<div class="bg"></div>
+
+&nbsp;&nbsp; MIPS software separates 18 of the registers into two groups:
+
+<ol style="margin-left: 0.5rem;">
+    <li><code>$t0</code> - <code>$t9</code>: temporary registers that are *not* preserved by the callee (called procedure) on a procedure call</li>
+    <li><code>$s0</code> - <code>$s7</code>: saved registers that must be preserved on a procedure call (if used, the callee saves and restore them)</li>
+</ol>
+
+&nbsp;&nbsp; This simple convention reduces register spilling. In the example above, since the caller does not expect registers `$t0` and `$t1` to be preserved across a procedure call, we can drop two stores and two loads from the code. We still must save and restore `$s0`, since the callee must assume that the caller needs its value.
+
+```text
+leaf_example:
+    addi $sp, $sp, -4       # adjust stack to make room for 1 items
+    sw   $s0, 0($sp)        # save register $s0 for use afterwards
+
+    add  $t0, $a0, $a1      # register $t0 contains g + h
+    add  $t1, $a2, $a3      # register $t1 contains i + j
+    sub  $s0, $t0, $t1      # f = (g + h) - (i + j)
+
+    add  $v0, $s0, $zero    # return f
+
+    lw   $s0, 0($sp)        # restore register $s0 for caller
+    addi $sp, $sp, 4        # adjust stack to delete 1 items
+
+    jr   $ra                # jump back to calling routine
+```
 <!--
+
+## c. Nested Procedures
+
+## d. Allocating Space for New Data on the Stack
+
+## e. Allocating Space for New Data on the Heap
+
+<div class="bg"></div>
+
 # 2.9 Communicating with People
 
 <div class="bg"></div>
@@ -1125,3 +1288,7 @@ jr $s              # pc = $s (or $ra)
 [^12]: A link to the calling site that allows a procedure to return to the proper address; in MIPS it is stored in register `$ra`.
 [^13]: The program that instigates a procedure and provides the necessary parameter values.
 [^14]: A procedure that executes a series of stored instructions based on parameters provided by the caller and then returns control to the caller.
+[^15]: A data structure for spilling registers organized as a last-in-ﬁrst-out queue.
+[^16]: A value denoting the most recently allocated address in a stack that shows where registers should be spilled or where oldregister values can be found. In MIPS, it is register `$sp`.
+[^17]: Add element to stack.
+[^18]: Remove element from stack.
