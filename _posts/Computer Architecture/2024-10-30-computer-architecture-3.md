@@ -4,7 +4,7 @@ excerpt: "&nbsp;&nbsp; This chapter covers integer operations, including additio
 date:   2024-10-30 21:40:02 +0900
 categories: Computer Architecture
 permalink: posts/3-arithmetic-for-computers
-published: true
+published: false
 # ![Light Mode Image](){: class="light-mode-img" height="90%" width="90%"}
 
 # ![Dark Mode Image](){: class="dark-mode-img" height="90%" width="90%"}
@@ -51,8 +51,3 @@ published: true
 > =     0000 0000 0000 0000 0000 0000 0000 0001 = 1
 > </code><button class="copy" type="button" aria-label="Copy code to clipboard"><i class="fa-regular fa-clone"></i></button></pre>
 
-## a. Overflow
-
-&nbsp;&nbsp; Recall that overflows occurs when the result from an operation cannot be represented with the available hardware, in this case a 32-bit word. When can overflow occur in addition? When adding operands with different signs, overflow cannot occur. The reason is the sum must be no larger than one of the operands. For example, -10 +4 = -6.
-
-&nbsp;&nbsp; Overflow occurs when adding operands with the same sign. For example, whe
