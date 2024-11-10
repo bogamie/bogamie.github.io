@@ -12,9 +12,9 @@ footer:
     - label: ""
       icon: "fa-brands fa-github"
       url: https://github.com/Bogamiee
-    - label: ""
-      icon: "fab fa-instagram"
-      url: https://www.instagram.com/bogamiee/
+        # - label: ""
+        # icon: "fab fa-instagram"
+        # url: https://www.instagram.com/bogamiee/
     - label: ""
       icon: "fa-brands fa-google"
       url: "mailto:bogamie02@gmail.com"
