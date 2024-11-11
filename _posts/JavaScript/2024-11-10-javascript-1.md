@@ -518,3 +518,254 @@ case a > 3: // 오류. 식은 사용 불가
 ```
 
 * case 문의 값은 변수나 식을 사용할 수 없다.
+
+### ii. break 문
+
+* `break` 문을 사용하지 않으면 `case` 문이 끝날 때까지 실행된다.
+
+# 1.5 반복문
+
+## a. for 문
+
+```javascript
+for(초기문; 조건식; 반복 후 작업) {
+    ... 작업문 ...
+}
+```
+
+## b. while 문
+
+```javascript
+while(조건식) {
+    ... 작업문 ...
+}
+```
+
+## c. do-while 문
+
+```javascript
+do {
+    ... 작업문 ...
+} while(조건식); // 조건식이 참이면 반복
+```
+
+## d. break 문
+
+```javascript
+break; // 반복문을 빠져나옴
+```
+
+* `break` 문은 반복문을 빠져나올 때 사용한다.
+* 여러 반복문으로 중첩된 경우 **현재 반복문 하나만 빠져나온다.**
+
+## e. continue 문
+
+```javascript
+continue; // 반복문의 나머지 부분을 건너뜀
+```
+
+* `continue` 문은 반복문의 나머지 부분을 건너뛰고 다음 반복을 시작한다.
+
+# 1.6 함수
+
+## a. 함수의 개념
+
+* 목적을 가지고 작성된 코드 블록
+* 데이터를 전달받아 정해진 작업을 수행하고 그 결과를 반환하는 코드 블록
+
+## b. 함수의 구성
+
+```javascript
+function 함수 이름(arg1, arg2, ..., argn) {
+    ...프로그램 코드...
+    return 반환값;
+}
+```
+
+* **`function`** - **함수 선언**을 표시하는 키워드
+* **함수 이름** - 함수의 목적에 맞는 이름
+* **`arg1`**, **`arg2`**, ..., **`argn`** - **매개변수**. 함수를 호출할 때 전달되는 값
+* **프로그램 코드** - 함수가 수행할 작업
+* **`return`** - 함수의 결과를 반환하는 키워드
+
+## c. 함수의 호출
+
+```javascript
+function adder(a, b) {
+    let sum;
+    sum = a + b;
+    return sum;
+}
+
+let result = adder(3, 5);
+```
+
+## d. Javascript의 전역 함수
+
+### i. `eval()`
+
+```javascript
+let result = eval("2 * 3 + 4 / 2");
+```
+
+* 수식이나 자바스크립트 문장을 문자열 형태로 전달받아 실행한 후 결과를 반환한다.
+
+### ii. `parseInt()`
+
+```javascript
+let a = parseInt("32");     // "32"를 10진수로 변환, a = 32
+let b = parseInt("32", 16); // "32"를 16진수로 해석, b = 50
+let c = parseInt("0x32");   // "0x32"를 자동으로 16진수로 해석, c = 50
+```
+
+* 문자열을 정수로 변환한다.
+
+### iii. `isNaN()`
+
+```javascript
+let a = NaN;
+let b = isNaN(a); // true
+```
+
+* **`NaN`**은 **숫자가 아님을 나타내는 리터럴 키워드**이다.
+* `isNaN()`은 매개 변수의 값이 `NaN`인지 비교하여 맞으면 `true`를 반환한다.
+
+<div class="bg"></div>
+
+```javascript
+let n = parseInt("abc");    // "abc"는 정수로 변환할 수 없으므로 NaN 반환
+if (isNaN(n)) {
+    console.log("숫자가 아닙니다.");
+}
+```
+
+* `isNaN()`은 주로 `parseInt()` 함수의 리턴값을 검사하기 위해 사용한다.
+
+<div class="bg"></div>
+
+```javascript
+isNaN(32)       // false
+isNaN("32")     // false
+isNaN("32abc")  // true
+isNaN(NaN)      // true
+```
+
+* 직접 매개변수를 넣어 비교할 수도 있다.
+
+<div class="bg"></div>
+<div class="bg"></div>
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/da967e69-96ea-4e98-8ceb-5a44acfbfea4#center" alt="image" height="80%" width="80%">
+
+<div class="bg"></div>
+
+# 1.7 이벤트
+
+## a. 이벤트와 이벤트 리스터의 동작
+
+<img class="lazy" data-src="https://github.com/user-attachments/assets/eee01bdf-fa55-45bb-9bec-c9ff09757bb8#center" alt="image" height="80%" width="80%">
+
+## b. Javascript의 이벤트 종류
+
+### i. 마우스 이벤트
+
+* **`click`**: 마우스 클릭
+* **`dblclick`**: 마우스 더블 클릭
+* **`mouseover`**: 마우스 포인터가 HTML 요소 위로 올라갈 때
+* **`mousedown`**: 마우스 버튼을 누르는 순간
+* **`mouseup`**: 마우스 버튼을 눌렀다 놓을 때
+* **`mousemove`**: 마우스 포인터가 움직일 때
+* **`focus`**: HTML 요소가 포커스를 받을 때
+* **`blur`**: HTML 요소가 포커스를 잃을 때
+
+### ii. 키보드 이벤트
+
+* **`keypress`**: 키보드 키를 누르는 순간
+* **`keyup`**: 키보드 키를 눌렀다 놓을 때
+* **`keydown`**: 키보드 키를 누르는 순간
+
+### iii. 윈도우 이벤트
+
+* **`read`**: 문서 객체가 준비되었을 때
+* **`load`**: 윈도우가 로딩될 때
+* **`unload`**: 윈도우를 닫을 때
+* **`resize`**: 윈도우 크기를 조절할 때
+* **`scroll`**: 윈도우를 스크롤할 때
+* **`error`**: 에러가 발생했을 때
+
+### iv. 폼 이벤트
+
+* **`change`**: 폼 요소의 값이 변경될 때
+* **`focus`**: 폼 요소가 포커스를 받을 때
+* **`focusin`**: 폼 요소에 포커스가 들어오기 바로 전에 동작
+* **`blur`**: 폼 요소가 포커스를 잃을 때
+* **`select`**: 입력 양식을 선택할 때 (text, textarea 제외)
+* **`submit`**: 폼을 제출할 때
+
+## c. 이벤트 리스너 작성 방법
+
+### i. HTML 태그에 작성
+
+```html
+<p onclick="this.style.backgroundColor='yellow'">클릭하세요</p>
+```
+
+### ii. 이벤트 리스너 속성에 등록
+
+```html
+<script>
+function click() {
+    this.style.backgroundColor = 'yellow';
+}
+
+let pObj = document.getElementById('p1');
+pObj.onclick = click;
+</script>
+
+<p id="p1">클릭하세요</p>
+```
+
+### iii. `addEventListener()` 메서드 사용
+
+```html
+<script>
+function start() {
+    let pObj = document.getElementById('p1');
+    pObj.addEventListener("clickEvent", click);
+    pObj.addEventListener("clickEvent", over);
+}
+
+function click() {
+    this.style.backgroundColor = 'yellow';
+}
+
+function over() {
+    this.style.color = 'red';
+}
+</script>
+
+<p id="p1">클릭하세요</p>
+```
+
+### iv. 익명 함수 사용
+
+```html
+<script>
+let pObj;
+
+function init() {
+    pObj = document.getElementById('p1');
+    pObj.onclick = function() {
+        this.style.backgroundColor = 'yellow';  // 익명 함수
+    }
+    pObj.addEventListener("mouseover", function() {
+        this.style.color = 'red';  // 익명 함수
+    });
+}
+</script>
+
+<body onload="init()">
+
+...
+<p id="p1">클릭하세요</p>
+```
