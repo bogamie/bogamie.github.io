@@ -5,13 +5,16 @@
     transition: top $nav-transition;
 
     &.wrap {
-        background-color: var(--color-primary-200);
         border-radius: 16px;
         padding: 1rem 0px;
         &.stickyHead{
             top: 1rem;
             transition: top $nav-transition;
         }
+    }
+
+    #post {
+        background-color: var(--color-primary-200);
     }
 
     .category {

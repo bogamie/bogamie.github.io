@@ -1,7 +1,6 @@
 .main__content {
     border-radius: 16px;
     padding: 1.25rem 1rem 1rem 1rem;
-    background-color: var(--color-primary-200);
 
     .page__title {
         font-size: 2rem;
@@ -21,7 +20,6 @@
     scrollbar-width: none;
     overflow-y: auto;
     border-radius: 16px;
-    background-color: var(--color-primary-200);
     transition: max-height $nav-transition;
 
     &.sticky {
