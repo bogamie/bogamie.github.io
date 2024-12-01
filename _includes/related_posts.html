@@ -25,15 +25,18 @@
 			{% assign curr_index = curr_index | plus: 1 %}
 		{% endfor %}
 
-		{% assign adjusted_value = total_related | minus: 3 %}
-
-		{% if curr_index <= 2 %}
-			{% assign show_posts=related_posts | slice: 0, 5 %}
-		{% elsif curr_index >= adjusted_value %}
-			{% assign start_index = total_related | minus: total_related %}
-			{% assign show_posts = related_posts | slice: start_index, 5 %}
+		{% if total_related < 5 %}
+			{% assign show_posts = related_posts %}
 		{% else %}
 			{% assign start_index = curr_index | minus: 2 %}
+			{% assign tmp = total_related | minus: 5 %}
+			{% if start_index > tmp %}
+				{% assign start_index = tmp %}
+			{% else %}
+				{% if start_index < 0 %}
+					{% assign start_index = 0 %}
+				{% endif %}
+			{% endif %}
 			{% assign show_posts = related_posts | slice: start_index, 5 %}
 		{% endif %}
 
