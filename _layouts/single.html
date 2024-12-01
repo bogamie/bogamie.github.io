@@ -39,6 +39,10 @@ layout: default
 	{% include related_posts.html %}
 </div>
 
+<div class="modal" id="imageModal" onclick="hideImage()">
+  <img src="" alt="Zoomed Image" id="zoomedImage">
+</div>
+
 <script src="/assets/js/single.js"></script>
 <script src="/assets/js/gumshoe.js"></script>
 {% if page.use_uml %}

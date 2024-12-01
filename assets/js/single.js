@@ -25,3 +25,15 @@ if ('IntersectionObserver' in window) {
     imageObserver.observe(image);
   });
 }
+
+function showImage(image) {
+  const modal = document.getElementById("imageModal");
+  const zoomedImage = document.getElementById("zoomedImage");
+  zoomedImage.src = image.dataset.src;
+  modal.style.display = "flex";
+}
+
+function hideImage() {
+  const modal = document.getElementById("imageModal");
+  modal.style.display = "none";
+}
