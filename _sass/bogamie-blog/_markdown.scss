@@ -104,11 +104,10 @@
     border-style: none;
     max-width: 100%;
     box-sizing: initial;
-}
-
-.markdown-body img:hover {
-    transform: scale(1.01);
-    box-shadow: 0 0 10px var(--shadow-color);
+    &:hover {
+        transform: scale(1.01);
+        box-shadow: 0 0 0.5rem var(--shadow-color);
+    }
 }
 
 .markdown-body code,
@@ -555,7 +554,6 @@ img[src*='#right'] {
 img[src*='#center'] {
     display: block;
     margin: auto;
-    padding-bottom: 8px;
 }
 
 mjx-container {

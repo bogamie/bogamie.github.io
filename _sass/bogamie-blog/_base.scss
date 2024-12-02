@@ -41,7 +41,7 @@
   --theme-switch: #ffeac1;
   --theme-switch-hover: #fff4de;
   --cursor-color: #226640;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.2);
 
   --category-bg-data-structure: #ffa07a;
   --category-bg-algorithm: #90ee90;
@@ -85,6 +85,7 @@
         display: none;
     }
   }
+
 }
 
 [data-theme='dark'] {
@@ -120,7 +121,7 @@
   --theme-switch: #babdc8;
   --theme-switch-hover: #898b8d;
   --cursor-color: #3cb354;
-  --shadow-color: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(255, 255, 255, 0.9);
 
   --category-bg-data-structure: #cc5233;
   --category-bg-algorithm: #2e8b57;
@@ -162,6 +163,12 @@
 
     &#dark-mode-img {
         display: block;
+    }
+  }
+  .markdown-body img.invert {
+    filter: invert(92.94%);
+    &:hover {
+      box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.8);
     }
   }
 }

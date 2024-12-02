@@ -29,7 +29,17 @@ if ('IntersectionObserver' in window) {
 function showImage(image) {
   const modal = document.getElementById("imageModal");
   const zoomedImage = document.getElementById("zoomedImage");
+
   zoomedImage.src = image.dataset.src;
+
+  const isDarkMode = document.documentElement.getAttribute("data-theme") === "dark";
+
+  if (image.classList.contains("invert") && isDarkMode) {
+    zoomedImage.style.filter = "invert(92.94%)";
+  } else {
+    zoomedImage.style.filter = "none";
+  }
+
   modal.style.display = "flex";
 }
 
