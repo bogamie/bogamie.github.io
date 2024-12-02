@@ -23,7 +23,7 @@ published: true
 
 ## d. 구조
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/f8e39eb8-e7b4-4fd7-9bd1-8ffb9ec47c4b#center" alt="image" height="75%" width="75%" onclick="showImage(this)">
+<img class="lazy invert" data-src="https://github.com/user-attachments/assets/f8e39eb8-e7b4-4fd7-9bd1-8ffb9ec47c4b#center" alt="image" height="75%" width="75%" onclick="showImage(this)">
 
 ### i. 관찰 대상자(발행자)
 
@@ -131,7 +131,7 @@ public class WeatherData {
 
 ## b. 옵저버 패턴 적용
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/08a82186-f060-46fe-8342-567b76556f6f#center" alt="image" height="100%" width="100%" onclick="showImage(this)">
+<img class="lazy invert" data-src="https://github.com/user-attachments/assets/be176ff3-dbf4-4cf8-8bd6-606a4187d11c#center" alt="image" height="100%" width="100%" onclick="showImage(this)">
 
 &nbsp;&nbsp; 옵저버 패턴을 적용하여 일대다 의존 관계를 정의해보자. Subject는 WeatherData 클래스이고 Observer는 DisplayElement들이다. WeatherData 클래스는 Subject 인터페이스를 구현하고 DisplayElement 클래스들은 Observer와 DisplayElement 인터페이스를 구현한다.
 
