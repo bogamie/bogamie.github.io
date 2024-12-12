@@ -85,7 +85,7 @@ published: true
 
 * 비디오 스트리밍 플랫폼에서 영화나 동영상을 시청할 때, 각 동영상에는 자막, 언어 선택, 화질 선택, 오디오 선택 등 다양한 기능을 추가할 수 있다. 이와 같이 기본 기능에 동적으로 추가적인 기능을 부여할 때 데코레이터 패턴을 사용한다.
 
-# 4.2 Decorating our Beverages
+# 5.2 Decorating our Beverages
 
 ## a. 안 좋은 예시
 
