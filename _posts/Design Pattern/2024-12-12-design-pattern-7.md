@@ -3,7 +3,7 @@ title: "7. Singleton Pattern"
 excerpt: "&nbsp;&nbsp; 특정 클래스가 단 하나의 인스턴스만 가지도록 보장하고, 이를 전역적으로 접근할 수 있는 방법을 제공한다."
 date:   2024-12-12 16:09:38 +0900
 categories: Design Pattern
-permalink: 7-singleton-pattern
+permalink: post/7-singleton-pattern
 published: true
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 ---
