@@ -1,6 +1,6 @@
 ---
 title:  "6. Factory Method Pattern"
-excerpt: "&nbsp;&nbsp; "
+excerpt: "&nbsp;&nbsp; 객체를 생성하기 위한 인터페이스는 선언하지만 어떤 클래스의 인스턴스를 생성할지는 서브 클래스에서 결정하게 한다. 팩토리 메서드는 객체 생성을 서브 클래스로 미루어 처리하도록 한다."
 date:   2024-12-02 16:22:55 +0900
 categories: Design Pattern
 permalink: post/6-factory-method-pattern
