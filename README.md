@@ -1,6 +1,6 @@
 # bogamiee.github.io
 
-https://bogamiee.github.io
+https://bogamie.github.io
 
 # When Commit your code...
 
