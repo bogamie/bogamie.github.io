@@ -19,7 +19,7 @@ published: true
 
 ## c. 구조
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/d63a7ae8-d1b5-4c19-8215-fe495011e6e0#center" alt="image" height="40%" width="40%" onclick="showImage(this)">
+<img class="lazy invert" data-src="https://github.com/user-attachments/assets/d63a7ae8-d1b5-4c19-8215-fe495011e6e0#center" alt="image" height="40%" width="40%" onclick="showImage(this)">
 
 * `uniqueInstance`는 정적 필드로, Singleton 클래스의 유일한 인스턴스를 저장한다.
 * `getInstance()` 메서드는 정적 메서드로 클래스 메서드를 의미한다. `Singleton.getInstance()`를 사용해 코드 어디에서나 인스턴스에 접근할 수 있다.

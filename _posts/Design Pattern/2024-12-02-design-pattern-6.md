@@ -21,7 +21,7 @@ published: true
 
 ## c. 구조
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/6208cb21-0876-49e6-b545-cd714de11e76#center" alt="image" height="75%" width="75%" onclick="showImage(this)">
+<img class="lazy invert" data-src="https://github.com/user-attachments/assets/6208cb21-0876-49e6-b545-cd714de11e76#center" alt="image" height="75%" width="75%" onclick="showImage(this)">
 
 ### i. The Creator classes
 
@@ -103,7 +103,7 @@ published: true
 
 ## c. 구조
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/f2a4062e-988a-4024-9690-33a12736c679#center" alt="image" height="100%" width="100%" onclick="showImage(this)">
+<img class="lazy invert" data-src="https://github.com/user-attachments/assets/f2a4062e-988a-4024-9690-33a12736c679#center" alt="image" height="100%" width="100%" onclick="showImage(this)">
 
 ### i. Client
 
@@ -190,7 +190,7 @@ Pizza orderPizza(String type) {
 
 ## b. 팩토리 메서드 패턴 적용
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/cada99f2-fcfc-44ff-bbbc-0ee362df71ab#center" alt="image" height="100%" width="100%" onclick="showImage(this)">
+<img class="lazy invert" data-src="https://github.com/user-attachments/assets/cada99f2-fcfc-44ff-bbbc-0ee362df71ab#center" alt="image" height="100%" width="100%" onclick="showImage(this)">
 
 ### i. The Creator classes
 
@@ -389,7 +389,7 @@ Joel ordered a Chicago Style Deep Dish Cheese Pizza
 
 ## c. 추상 팩토리 패턴 적용
 
-<img class="lazy" data-src="https://github.com/user-attachments/assets/904d42ce-c0cb-48a1-afd2-9f9b0fbbefa2#center" alt="image" height="100%" width="100%" onclick="showImage(this)">
+<img class="lazy invert" data-src="https://github.com/user-attachments/assets/904d42ce-c0cb-48a1-afd2-9f9b0fbbefa2#center" alt="image" height="100%" width="100%" onclick="showImage(this)">
 
 &nbsp;&nbsp; 따라서 위에서 언급한 문제를 해결하기 위해 추상 팩토리 패턴을 적용한다.
 
