@@ -253,7 +253,7 @@ var _typeof2 = "function" == typeof Symbol && "symbol" == _typeof(Symbol.iterato
     }, {}, [1])(1);
 });
 
-GitHubCalendar(".calendar", "bogamiee");
+GitHubCalendar(".calendar", "bogamie");
 // GitHubCalendar(".calendar", "bogamiee", {
 //    proxy (username) {
 //      return fetch(`https://your-proxy.com/github?user=${username}`)
