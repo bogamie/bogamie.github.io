@@ -559,6 +559,7 @@ img[src*='#center'] {
 
 mjx-container {
     display: inline-grid;
+    vertical-align: middle !important; 
     overflow-x: auto;
     overflow-y: hidden;
     max-width: 100%;
@@ -573,6 +574,8 @@ img + em {
     color: var(--text-primary-400);
     text-align: left;
 }
+
+
 
 @media (max-width: 1279px) {
     .markdown-body .highlight pre,
