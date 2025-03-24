@@ -1,6 +1,7 @@
-{% assign cs_list = "Data Structure,Computer Architecture,Algorithm,Computer Network" | split: "," %}
+<!-- {% assign cs_list = "Data Structure,Computer Architecture,Algorithm,Computer Network" | split: "," %} -->
 {% assign system_list = "System Programming" | split: "," %}
 {% assign design_list = "Design Pattern" | split: "," %}
+{% assign security_list = "SW Security" | split: "," %}
 <!-- {% assign web_list = "HTML,CSS,JavaScript" | split: "," %} -->
 
 <div class="post__nav lists">
@@ -19,7 +20,7 @@
     </div> -->
     
     <!-- Computer Science -->
-    <div class="post__nav item">
+    <!-- <div class="post__nav item">
       <div class="item__title">Computer Science</div>
       {% for category in cs_list %}
       <a href="javascript:void(0);" class="item__link"
@@ -29,7 +30,7 @@
         </div>
       </a>
       {% endfor %}
-    </div>
+    </div> -->
 
     <!-- System -->
     <div class="post__nav item">
@@ -48,6 +49,19 @@
     <div class="post__nav item">
       <div class="item__title">Data & Design</div>
       {% for category in design_list %}
+      <a href="javascript:void(0);" class="item__link"
+        data-category="{{ category | downcase | replace: ' ', '-' }}">
+        <div class="item__subtitle">
+          <span>{{ category }}</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- Security -->
+    <div class="post__nav item">
+      <div class="item__title">Security</div>
+      {% for category in security_list %}
       <a href="javascript:void(0);" class="item__link"
         data-category="{{ category | downcase | replace: ' ', '-' }}">
         <div class="item__subtitle">
