@@ -4,7 +4,7 @@ excerpt: "&nbsp;&nbsp; This chapter explains the basics of computer hardware ope
 date:   2024-09-27 21:35:57 +0900
 categories: Computer Architecture
 permalink: posts/2-instructions-language-of-the-computer
-published: true
+published: false
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 # ![Light Mode Image](){: class="light-mode-img" height="90%" width="90%"}
 

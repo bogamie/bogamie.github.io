@@ -4,7 +4,7 @@ excerpt: "&nbsp;&nbsp; This chapter introduces key concepts in computer architec
 date:   2024-09-04 19:02:54 +0900
 categories: Computer Architecture
 permalink: posts/1-Computer-Abstractions-and-Technology
-published: true
+published: false
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 # ![Light Mode Image](){: class="light-mode-img" height="90%" width="90%"}
 
