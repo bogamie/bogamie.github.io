@@ -4,7 +4,7 @@ excerpt: "&nbsp;&nbsp; "
 date:   2025-02-15 22:10:58 +0900
 categories: Computer Network
 permalink: posts/1-computer-network-and-internet
-published: true
+published: false
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 # <img class="lazy invert" data-src="#center" alt="image" height="75%" width="75%" onclick="showImage(this)">
 ---
