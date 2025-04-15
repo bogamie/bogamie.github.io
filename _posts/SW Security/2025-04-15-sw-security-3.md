@@ -1,13 +1,13 @@
 ---
-title:  "1. 1강"
-excerpt: "&nbsp;&nbsp; "
-date:   2025-03-24 18:52:41 +0900
+title:  "3. 보안 위협과 공격 유형"
+excerpt: "&nbsp;&nbsp; 보안 위협의 유형(Interruption, Interception, Modification, Fabrication)과 STRIDE 모델, 관련 용어들까지—정보 시스템을 위협하는 다양한 공격 방식과 개념을 정리한다."
+date:   2025-04-15 21:57:05 +0900
 categories: SW Security
-permalink: 
+permalink: posts/3-security-threats-and-attack-types
 published: true
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 ---
-# 1.1 보안 위협의 종류
+# 3.1 보안 위협의 종류
 
 ## a. Interruption
 
@@ -114,7 +114,7 @@ published: true
   <p style="padding-left: 2rem;"><strong>Fabrication</strong></p>
 </details>
 
-# 1.2 STRIDE 모델
+# 3.2 STRIDE 모델
 
 * Microsoft에서 제안한 **보안 위협 분류 모델**이다.
 
@@ -238,5 +238,3 @@ published: true
 * 설계 결함 또는 코딩 실수가 공격자에게 악용될 수 있음
   * **Poor coding**: 쉽게 추측 가능한 비밀번호 허용, 하드코딩된 비밀번호
   * **Design flaws**: 인증 실패, XSS, 잘못된 암호화 사용
-
-
