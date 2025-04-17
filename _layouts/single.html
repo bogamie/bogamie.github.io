@@ -9,7 +9,7 @@ layout: default
 					<nav class="toc">
 						<article class="markdown-body">
 							<header class="nav-items">
-								<h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4>
+								<div class="nav__title"><i class="fas fa-file-alt"></i> On this page</div>
 							</header>
 							<div class="category__content tocd">
 								{% include toc.html sanitize=true html=content h_min=1 h_max=6 class="toc__menu"
@@ -25,9 +25,9 @@ layout: default
 			<div class="main__content">
 				<article class="markdown-body">
 					<div class="post__info">
-						<h1 class="page__title">
+						<div class="page__title">
 							{{ page.title }}
-						</h1>
+						</div>
 					</div>
 					{{ content }}
 				</article>
@@ -45,6 +45,7 @@ layout: default
 
 <script src="/assets/js/single.js"></script>
 <script src="/assets/js/gumshoe.js"></script>
+<script src="/assets/js/indent.js"></script>
 {% if page.use_uml %}
 <script>
 mermaid.initialize({startOnLoad:true,theme:'neutral'});
