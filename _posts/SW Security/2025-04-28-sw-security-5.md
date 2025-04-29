@@ -27,14 +27,29 @@ published: true
 > * 기밀성(Confidentiality)
 > * 무결성(Integrity)
 > * 가용성(Availability)
-> 등에 부정적인 여향을 미치게 하는 조건이나 행동의 집합
+> 
+> 등에 부정적인 dud향을 미치게 하는 조건이나 행동의 집합
 >
 > → 약점(Weakness)이 해커에 의해 악용되어 CIA를 깨트리게 될 때 <br>
 > → **취약점**이 됨
 > 
 > ※ 약점 자체는 아직 문제가 안 될 수 있지만, 악용되면 큰 피해를 초래할 수 있음
 
-## b. CVE ID
+## b. CNA
+
+* CVE Numbering Authority
+* **CNA**란,
+  * 벤더(제품 공급사)
+  * 연구자
+  * CERT(컴퓨터 보안 사고 대응팀)
+  * 호스팅 서비스 제공자
+  * 버그 바운티 제공자
+  * 컨소시엄 형태의 기관
+* 등에서 CVE 프로그램의 승인을 받아
+  * 특정 범위 내에서 취약점에 대해 CVE ID를 부여하고
+  * CVE 레코드를 작성하여 공개할 수 있음
+
+## c. CVE ID
 
 * CVE 식별자, CVE Identifier, CVE ID
 * CVE 레코드의 번호 부분
@@ -64,7 +79,7 @@ published: true
 |특징 | 매년 최대 9,999개 발급 가능 | 필요 시 추가 발급 가능|
 |예시 | CVE-1999-0067CVE-2005-4873CVE-2012-0158 | CVE-2014-0001CVE-2014-12345CVE-2014-7654321|
 
-## c. CVE Record
+## d. CVE Record
 
 * CVE 레코드
 * 취약점을 관리하기 위한 구조화된 데이터
@@ -79,12 +94,12 @@ published: true
 
 ### i. 공개된 CVE 레코드
 
-<img class="lazy invert" data-src="https://github-production-user-asset-6210df.s3.amazonaws.com/181819565/438103995-96060706-515f-45eb-a822-b77bc04e88c1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250428%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250428T084712Z&X-Amz-Expires=300&X-Amz-Signature=87e3be777d81c729107e864b4e63360c8c0cd2d3bddaca397e59a6efce7709ae&X-Amz-SignedHeaders=host#center" alt="image" height="50%" width="50%" onclick="showImage(this)">
+<img class="lazy invert" data-src="https://raw.githubusercontent.com/kisue01/assets/refs/heads/main/Published%20CVE%20Records.avif#center" alt="image" height="50%" width="50%" onclick="showImage(this)">
 
 * 취약점 발견 빈도가 최근에 더 높아지고 있음
 * 이는 자동차 산업의 디지털화(Software-Defined Vehicle, SDV), AI, 클라우드 도입 증가 등의 영향
 
-## d. CVSS
+## e. CVSS
 * CVSS (Common Vulnerability Scoring System)
 * 취약점의 심각도(severity)를 정량적으로 평가하기 위한 방법
 * **CVSS는 위험도(risk)를 측정하는 지표가 아님**
@@ -165,3 +180,53 @@ published: true
 * Value Density (가치 밀도)
 * Vulnerability Response Effort (대응 노력)
 * Provider Urgency (공급자 긴급성)
+
+# 5.2 NVD
+* NVD (National Vulnerability Database)
+* 미국 정부가 운영하는 **표준 기반 취약점 관리 데이터베이스**
+* 2005년 미국 NIST(National Institute of Standards and Technology)에서 시작
+* SCAP(Security Content Automation Protocol)을 사용해 데이터를 표현
+* **기능**
+  * 취약점 관리
+  * 보안 수준 측정
+  * 컴플라이언스 준수 지원(예: FISMA 등 규제 대응)
+* **특징**
+  * 취약점 관리 **자동화** 지원
+  * 취약점 관리 데이터를 **체계적**으로 저장
+* **NVD에 포함된 데이터베이스**
+  * 보안 점검 체크리스트 참조
+  * 보안 관련 소프트웨어 결함 목록
+  * 제품 이름
+  * 영향 메트릭 정보
+
+> 컴플라이언스(Compliance): 법률, 규정, 정책, 기준 등을 준수하는 것
+
+## a. CVE와 NVD의 관계
+* **CVE**와 **NVD**는 별개의 프로그램
+* **CVE 프로그램**
+  * 1999년 MITRE Corporation에 의해 커뮤니티 프로젝트로 시작
+* **CVE 리스트**
+  * 공개된 사이버 보안 취약점과 노출 목록
+  * 검색, 사용, 제품 및 서비스 통합이 무료로 가능
+* **NVD**
+  * 2005년 미국 NIST에서 시작
+  * CVE 리스트를 기반으로 추가 정보 보완
+  * SCAP 데이터 타입으로 변환하여 보다 세밀한 검색 기능과 API 제공
+  * CVE에 비해 정밀 분석 데이터를 추가로 제공
+* **관계**
+  * CVE 리스트가 NVD에 데이터를 제공
+  * NVD는 CVE 레코드 정보를 기반으로 **추가적인 데이터**(보완 정보)를 구축
+  * 둘은 별도 시스템이지만, 모두 공개되고 무료로 사용 가능
+  * CVE 기반으로 NVD가 더 많은 정보 추가 제공
+  * NVD는 CVE와 동기화되어 있음(CVE 리스트에 수정이 발생하면 NVD에도 반영됨)
+
+
+## b. NVD의 동작
+
+* NVD는 매시간 CVE 리스트를 처리하여
+  * 새로운 CVE 게시
+  * 거절된 항목
+  * 수정된 항목 등을 반영
+* **조건**
+  * **공식 CVE 리스트**에 게시된 CVE만 NVD에 반영됨
+  * 아직 **RESERVED** 상태(CVE ID만 부여되고 세부정보 미공개)인 경우, NVD에는 포함되지 않음
