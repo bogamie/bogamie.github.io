@@ -4,7 +4,7 @@ excerpt: "&nbsp;&nbsp; "
 date:   2025-04-17 22:37:37 +0900
 categories: Multimedia System
 permalink: 
-published: true
+published: false
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 ---
 # 3.1 Data Compression

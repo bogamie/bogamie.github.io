@@ -4,7 +4,7 @@ excerpt: "&nbsp;&nbsp; "
 date:   2025-04-17 21:38:05 +0900
 categories: Multimedia System
 permalink: 
-published: true
+published: false
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 ---
 # 1.1 멀티미디어와 멀티미디어 시스템의 정의

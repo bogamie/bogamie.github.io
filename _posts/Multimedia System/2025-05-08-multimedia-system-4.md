@@ -4,7 +4,7 @@ excerpt: "&nbsp;&nbsp; "
 date:   2025-05-08 21:20:02 +0900
 categories: Multimedia System
 permalink: 
-published: true
+published: false
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 ---
 # 4.1 인간의 눈 특성
