@@ -3,15 +3,15 @@ email: bogamie02@gmail.com
 description: ""
 baseurl: ""
 url: ""
-github_username: Bogamiee
-copyright: Bogamiee
+github_username: Bogamie
+copyright: Bogamie
 
 # Site Footer
 footer:
   links:
     - label: ""
       icon: "fa-brands fa-github"
-      url: https://github.com/Bogamiee
+      url: https://github.com/Bogamie
         # - label: ""
         # icon: "fab fa-instagram"
         # url: https://www.instagram.com/bogamiee/
