@@ -2,6 +2,7 @@
 {% assign system_list = "System Programming,Operating System" | split: "," %}
 {% assign design_list = "Design Pattern" | split: "," %}
 {% assign security_list = "SW Security" | split: "," %}
+{% assign projects_list = "Windows" | split: "," %}
 <!-- {% assign web_list = "HTML,CSS,JavaScript" | split: "," %} -->
 
 <div class="post__nav lists">
@@ -71,6 +72,19 @@
       {% endfor %}
     </div>
 
+    <!-- Projects -->
+    <div class="post__nav item">
+      <div class="item__title">Projects</div>
+      {% for category in projects_list %}
+      <a href="javascript:void(0);" class="item__link"
+        data-category="{{ category | downcase | replace: ' ', '-' }}">
+        <div class="item__subtitle">
+          <span>{{ category }}</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    
     <!-- Web Development -->
     <!-- <div class="post__nav item">
       <div class="item__title">Web Development</div>
