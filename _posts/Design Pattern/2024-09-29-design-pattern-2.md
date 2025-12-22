@@ -81,7 +81,3 @@ published: true
 
 * GRASP(General Responsibility Assignment Software Patterns)는 객체지향 설계를 위한 9가지 원칙이다.
 * 구체적인 구조는 없지만, 소프트웨어 설계의 철학을 제시한다.
-
-> **참고**
->
-> * **추상화 
