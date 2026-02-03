@@ -1,10 +1,10 @@
 ---
-title:  "1. Computer Abstractions and Technology"
-excerpt: "&nbsp;&nbsp; This chapter introduces key concepts in computer architecture, focusing on performance, technologies for processors and memory, and the shift from uniprocessors to multiprocessors."
-date:   2024-09-04 19:02:54 +0900
+title:  "1. 컴퓨터 추상화 및 관련 기술"
+excerpt: "&nbsp;&nbsp; "
+date:   2025-12-22 22:14:54 +0900
 categories: Computer Architecture
 permalink: posts/1-Computer-Abstractions-and-Technology
-published: true
+published: false
 # Data Structure / Algorithm / Computer Architecture / System Programming / Computer Network / Database / Design Pattern / Web Programming / JavaScript / Java
 # ![Light Mode Image](){: class="light-mode-img" height="90%" width="90%"}
 
@@ -12,6 +12,85 @@ published: true
 
 # abstration <img class="lazy" data-src="https://github.com/user-attachments/assets/88804cf0-05c4-4f03-8319-3161edd6f5b7#right" alt="image" height="5%" width="5%">**
 ---
+# 1. 컴퓨터 구조 분야의 일곱 가지 위대한 아이디어
+## 1.1. 추상화
+* 하드웨어/소프트웨어의 복잡한 세부 사항을 숨기고 인터페이스만 제공
+* 하위 수준의 세부 사항을 숨겨 상위 수준 모델을 단순화함
+
+## 1.2. 자주 생기는 일을 빠르게
+* 드물게 일어나는 일보다 자주 일어나는 일을 빠르게 하는 것이 효율적임
+
+## 1.3. 병렬성
+* 여러 작업을 동시에 수행
+
+## 1.4. 파이프라이닝
+* 명령어 실행 단계를 분할하여 여러 명령어를 동시에 처리
+* 병렬성의 한 형태
+
+## 1.5. 예측
+* 다음에 무엇을 할지 추측해서 미리 실행
+
+## 1.6. 메모리 계층 구조
+* 빠르고 비싼 메모리(캐시)와 느리고 싼 메모리(디스크)를 계층적으로 배치
+
+## 1.7. 여유분을 이용한 신용도 개선
+* 장애 발생에 대비해 예비 부품을 두어 신뢰성 향상
+
+# 2. 프로그램 밑의 세계
+<img class="lazy invert" data-src="https://github.com/user-attachments/assets/789e20a1-818f-43f4-8505-4dcaa0b7a9e9#center" alt="image" height="30%" width="30%">
+
+## 2.1. 시스템 소프트웨어
+* 하드웨어와 응용 소프트웨어 사이에 존재
+* 핵심 두 가지
+  * 운영체제: 입출력 처리, 하드웨어 자원 관리
+  * 컴파일러: 상위 수준 언어를 어셈블리 언어로 번역
+
+## 2.2. 상위 수준 언어에서 기계어까지
+### 2.2.1. 상위 수준 언어
+* 사람이 이해하기 쉬운 언어 (C, C++, Java 등)
+* 가독성 및 생산성 향상
+* 프로그램을 개발한 기종과 상관없이 어느 컴퓨터에서나 실행 가능
+
+### 2.2.2. 어셈블리 언어
+* 기계어의 기호적 표현
+
+```text
+add A, B
+```
+
+### 2.2.3. 기계어
+* 기계 명령어의 이진 표현
+* 컴퓨터가 이해하고 실행하는 언어
+
+```
+1000110010100000
+```
+
+### 2.2.4. 번역 과정
+<img class="lazy invert" data-src="https://github.com/user-attachments/assets/745c66a1-9892-442f-9fa4-ec5eb098026d#center" alt="image" height="60%" width="60%">
+
+1. 상위 수준 언어를 **컴파일러**가 어셈블리 언어로 번역
+2. 어셈블리 언어를 **어셈블러**가 기계어로 번역
+
+> **어셈블러**
+> 
+> 어셈블리 언어를 이진수 기계어로 번역하는 프로그램
+
+# 3. 컴퓨터의 5대 구성 요소
+<img class="lazy invert" data-src="https://github.com/user-attachments/assets/8a839a5b-f100-48e3-b178-3f6e5551f54a#center" alt="image" height="70%" width="70%" onclick="showImage(this)">
+
+* 입력 (Input): 키보드, 마우스 등
+* 출력 (Output): 모니터, 프린터 등
+* 메모리 (Memory): 실행 중인 프로그램과 프로그램 실행에 필요한 데이터의 저장소
+* 데이터패스 (Datapath): 산술 연산을 수행하는 프로세서 구성 요소
+* 제어 유닛 (Control Unit): 프로그램의 명령어에 따라 데이터패스, 메모리, 입출력 장치에 지시를 하는 프로세서 구성 요소
+
+> **CPU**
+>
+> 프로세서라고도 부름
+> 데이터패스와 제어 유닛으로 구성됨
+
+
 # 1.1 Introduction
 
 ## a. Classes of Computing Applications and Their Characteristics
