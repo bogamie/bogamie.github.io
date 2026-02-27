@@ -1,1 +1,18 @@
+public/
+.hugo_build.lock
+resources/_gen/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Env
+.env
+*.log
 
