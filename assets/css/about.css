@@ -1,0 +1,12 @@
+.post-content table td img,
+.post-content li img {
+    display: inline;
+    vertical-align: middle;
+    margin: 2px;
+}
+
+.post-content table td a,
+.post-content li a {
+    text-decoration: none;
+    box-shadow: none !important;
+}

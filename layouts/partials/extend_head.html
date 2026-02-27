@@ -1,0 +1,4 @@
+{{ if and .File (eq .File.BaseFileName "about") }}
+{{ $css := resources.Get "css/about.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{ end }}

@@ -1,0 +1,62 @@
+baseURL: "https://bogamie.github.io/"
+title: "Home"
+paginate: 5
+theme: "PaperMod"
+
+# 빌드 시 불필요한 파일 생성 방지
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+params:
+  env: production
+  author: "Kim Bogyeom" # RSS 템플릿 빌드 에러 방지용 필수 값
+  defaultTheme: auto
+  disableThemeToggle: false
+
+  # 포트폴리오 가독성 최적화를 위한 부가 기능 제어
+  ShowReadingTime: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true # 코드 블록 복사 버튼 활성화 (파이썬/C 코드 공유용)
+  ShowWordCount: false
+  comments: false
+  
+  # Home-Info 모드 설정
+  homeInfoParams:
+    Title: "추후 업데이트 예정"
+    Content: |
+      추후 업데이트 예정입니다.
+
+  # 연락처 및 링크 연동
+  socialIcons:
+    - name: github
+      url: "https://github.com/Bogamie"
+    - name: email
+      url: "mailto:bogamie02@gmail.com"
+
+# 상단 네비게이션 메뉴 (GNB)
+menu:
+  main:
+    - identifier: about
+      name: About Me
+      url: /about/
+      weight: 10
+    - identifier: research
+      name: Research
+      url: /research/
+      weight: 20
+    - identifier: projects
+      name: Projects
+      url: /projects/
+      weight: 30
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 40
+
+# 마크다운 코드 블록 하이라이팅 설정
+pygmentsUseClasses: true
+markup:
+  highlight:
+    noClasses: false
