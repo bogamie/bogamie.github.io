@@ -1,6 +1,6 @@
 +++
 date = '2026-02-28T16:30:15+09:00'
-draft = true
+draft = false
 title = 'General Purpose Registers'
 categories = ['Intel']
 +++
