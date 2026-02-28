@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="Kim Bogyeom">
 <link rel="canonical" href="http://localhost:1313/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.e856f81b6e89adfe4c0fb58def975857d43fbe7770c5fa8db242a8f4200ccaeb.css" integrity="sha256-6Fb4G26Jrf5MD7WN75dYV9Q/vndwxfqNskKo9CAMyus=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fa8b93373cb2758080305dc612d72d607ad3dfaaa4c90b9beceec21d78e9a23d.css" integrity="sha256-&#43;ouTNzyydYCAMF3GEtctYHrT36qkyQub7O7CHXjpoj0=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -191,7 +191,79 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script>
+document.addEventListener("DOMContentLoaded", function () {
+  const tocWrapper = document.querySelector(".toc-wrapper");
+  if (!tocWrapper) return;
+
+  const tocLinks = Array.from(tocWrapper.querySelectorAll('a[href^="#"]'));
+  if (!tocLinks.length) return;
+
+   
+  const headings = tocLinks
+    .map(function (link) {
+      var id = decodeURIComponent(link.getAttribute("href").slice(1));
+      return document.getElementById(id);
+    })
+    .filter(Boolean);
+
+  if (!headings.length) return;
+
+  var activeId = null;
+  var OFFSET = 100;  
+
+  function setActive(id) {
+    if (activeId === id) return;
+    activeId = id;
+    tocLinks.forEach(function (link) {
+      var linkId = decodeURIComponent(link.getAttribute("href").slice(1));
+      link.classList.toggle("active", linkId === id);
+    });
+  }
+
+  function updateActive() {
+     
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 2) {
+      setActive(headings[headings.length - 1].id);
+      return;
+    }
+
+     
+    var current = null;
+    for (var heading of headings) {
+      if (heading.getBoundingClientRect().top <= OFFSET) {
+        current = heading;
+      } else {
+        break;
+      }
+    }
+
+    if (current) {
+      setActive(current.id);
+    } else {
+       
+      setActive(headings[0].id);
+    }
+  }
+
+   
+  var ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(function () {
+        updateActive();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+
+  updateActive();
+});
+</script>
 
 <script>
     let menu = document.getElementById('menu');

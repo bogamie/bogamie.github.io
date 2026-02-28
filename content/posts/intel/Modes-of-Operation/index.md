@@ -8,7 +8,7 @@ categories = ['Intel']
 
 IA-32 아키텍처는 3개의 operating 모드와 1개의 quasi-operating 모드를 지원
 
-### **Protected mode**
+### Protected mode
 
 - 프로세서의 기본 운영 모드
 - 풍부한 아키텍처 기능, 높은 유연성, 고성능, 기존 서프트웨어 베이스와의 하위 호환성 제공
@@ -16,13 +16,13 @@ IA-32 아키텍처는 3개의 operating 모드와 1개의 quasi-operating 모드
 - 이 모드에서 virtual-8086 모드를 활성화할 수 있음
     - 단, virtual-8086 모드는 독립된 프로세서 모드가 아니라 protected 모드의 한 속성으로 동작
 
-### **Real-address mode**
+### Real-address mode
 
 - Intel 8086 프로세서의 프로그래밍 환경을 제공
 - 전원 인가 또는 리셋 직후 프로세서는 이 모드에서 시작
 - protected 모드나 system management 모드로 전환할 수 있는 기능과 같은 몇 가지 확장 제공
 
-### **System management mode(SMM)**
+### System management mode(SMM)
 
 - 모든 IA-32 프로세서에 포함된 표준 아키텍처 기능
 - 운영체제 또는 실행 환경에 전원 관리나 OEM 차별화 기능을 구현할 수 있는 투명한 메커니즘 제공
@@ -33,7 +33,7 @@ IA-32 아키텍처는 3개의 operating 모드와 1개의 quasi-operating 모드
     - SMM 전용 코드를 투명하게 실행
 - SMM에서 복귀하면, 시스템 관리 인터럽트 이전의 상태로 복원됨
 
-### **Virtual-8086 mode**
+### Virtual-8086 mode
 
 - protected 모드에서 프로세서는 virtual-8086 모드라 불리는 quasi-operating 모드를 지원
 - 이 모드는 프로세서가 보호된 멀티태스킹 환경에서 8086 소프트웨어를 실행할 수 있음
@@ -44,7 +44,7 @@ Intel 64 아키텍처는 IA-32 아키텍처의 모든 operating 모드를 지원
 
 ### IA-32e mode
 
-- 2개의 sub-모드s를 지원
+- 2개의 sub-modes를 지원
 - **compatibility mode**
     - 64비트 운영체제 하에서 대부분의 기존 16비트 및 32비트 애플리케이션을 재컴파일 없이 실행 가능
     - 64-bit 모드 및 protected 모드에서 지원되는 모든 privilege level 지원
@@ -68,7 +68,7 @@ Intel 64 아키텍처는 IA-32 아키텍처의 모든 operating 모드를 지원
 
 ## Operating modes의 전환
 
-![sdm-vol-3a_66.png](sdm-vol-3a_66.png)
+![sdm-vol-3a_66.png](img/sdm-vol-3a_66.png)
 
 - 전원이 켜지거나 리셋이 발생하면 프로세서는 real-address 모드로 전환
 - control 레지스터 CR0의 PE flag는 프로세서가 real-address 모드와 protected 모드 중에 어떤 모드로 동작할지 제어함
@@ -84,7 +84,7 @@ Intel 64 아키텍처는 IA-32 아키텍처의 모든 operating 모드를 지원
 
 IA32_EFER MSR은 IA-32e 모드의 활성화 및 동작과 관련된 여러 필드를 제공함
 
-![sdm-vol-3a_67_1.png](sdm-vol-3a_67_1.png)
+![sdm-vol-3a_67_1.png](img/sdm-vol-3a_67_1.png)
 
 | 비트 | 필드 이름 | 접근 권한 | 설명 |
 | --- | --- | --- | --- |

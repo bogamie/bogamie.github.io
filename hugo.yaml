@@ -3,40 +3,40 @@ title: "Home"
 paginate: 5
 theme: "PaperMod"
 
-# 빌드 시 불필요한 파일 생성 방지
 buildDrafts: false
 buildFuture: false
 buildExpired: false
 
 params:
   env: production
-  author: "Kim Bogyeom" # RSS 템플릿 빌드 에러 방지용 필수 값
+  author: "Kim Bogyeom"
   defaultTheme: auto
   disableThemeToggle: false
 
-  # 포트폴리오 가독성 최적화를 위한 부가 기능 제어
   ShowReadingTime: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
-  ShowCodeCopyButtons: true # 코드 블록 복사 버튼 활성화 (파이썬/C 코드 공유용)
+  ShowCodeCopyButtons: true
   ShowWordCount: false
   comments: false
-  
+
+  # TOC 활성화
+  ShowToc: true
+  TocOpen: true
+
   profileMode:
     enabled: true
-    title: "Kim Bogyeom" # optional default will be site title
-    imageUrl: "./img/profile.jpg" # optional
-    imageWidth: 180 # custom size
-    imageHeight: 180 # custom size
+    title: "Kim Bogyeom"
+    imageUrl: "./img/profile.jpg"
+    imageWidth: 180
+    imageHeight: 180
 
-  # 연락처 및 링크 연동
   socialIcons:
     - name: github
       url: "https://github.com/Bogamie"
     - name: email
       url: "mailto:bogamie02@gmail.com"
 
-# 상단 네비게이션 메뉴 (GNB)
 menu:
   main:
     - identifier: about
@@ -56,8 +56,13 @@ menu:
       url: /posts/
       weight: 40
 
-# 마크다운 코드 블록 하이라이팅 설정
 pygmentsUseClasses: true
+
 markup:
   highlight:
     noClasses: false
+
+  tableOfContents:
+    startLevel: 1
+    endLevel: 6
+    ordered: false

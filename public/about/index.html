@@ -237,7 +237,7 @@ Unity 기반 AR·VR 콘텐츠 분야 작품 출품
 ">
 <meta name="author" content="Kim Bogyeom">
 <link rel="canonical" href="http://localhost:1313/about/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.e856f81b6e89adfe4c0fb58def975857d43fbe7770c5fa8db242a8f4200ccaeb.css" integrity="sha256-6Fb4G26Jrf5MD7WN75dYV9Q/vndwxfqNskKo9CAMyus=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fa8b93373cb2758080305dc612d72d607ad3dfaaa4c90b9beceec21d78e9a23d.css" integrity="sha256-&#43;ouTNzyydYCAMF3GEtctYHrT36qkyQub7O7CHXjpoj0=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -652,7 +652,63 @@ Unity 기반 AR·VR 콘텐츠 분야 작품 출품
     <div class="post-meta"><span title='2026-02-27 23:46:31 +0900 KST'>February 27, 2026</span>&nbsp;·&nbsp;<span>2 min</span>&nbsp;·&nbsp;<span>Kim Bogyeom</span>
 
 </div>
-  </header> 
+  </header> <div class="toc-wrapper">
+
+  <div class="toc-mini">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#-research-experience">🔬 Research Experience</a>
+          <ul>
+            <li><a href="#csos-lab-cyber-security--operating-systems-laboratory"><strong>CSOS Lab (Cyber Security &amp; Operating Systems Laboratory)</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#-skills">🧠 Skills</a></li>
+        <li><a href="#-projects">💼 Projects</a>
+          <ul>
+            <li><a href="#-차량-로그-기반-포렌식-웹-서비스-202507-">🔹 <strong>차량 로그 기반 포렌식 웹 서비스 (2025.07. ~ 진행 중)</strong></a></li>
+            <li><a href="#-리눅스-패키지-매니저-202412--202501">🔹 <strong>리눅스 패키지 매니저</strong> (2024.12. ~ 2025.01.)</a></li>
+            <li><a href="#-에빙하우스-플래너-202401--202402">🔹 <strong>에빙하우스 플래너</strong> (2024.01. ~ 2024.02.)</a></li>
+            <li><a href="#-홀로그램-도슨트-202407--202410">🔹 <strong>홀로그램 도슨트</strong> (2024.07. ~ 2024.10.)</a></li>
+          </ul>
+        </li>
+        <li><a href="#-activities">📌 Activities</a></li>
+        <li><a href="#-awards">🏆 Awards</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+
+  <div class="toc-panel">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#-research-experience">🔬 Research Experience</a>
+          <ul>
+            <li><a href="#csos-lab-cyber-security--operating-systems-laboratory"><strong>CSOS Lab (Cyber Security &amp; Operating Systems Laboratory)</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#-skills">🧠 Skills</a></li>
+        <li><a href="#-projects">💼 Projects</a>
+          <ul>
+            <li><a href="#-차량-로그-기반-포렌식-웹-서비스-202507-">🔹 <strong>차량 로그 기반 포렌식 웹 서비스 (2025.07. ~ 진행 중)</strong></a></li>
+            <li><a href="#-리눅스-패키지-매니저-202412--202501">🔹 <strong>리눅스 패키지 매니저</strong> (2024.12. ~ 2025.01.)</a></li>
+            <li><a href="#-에빙하우스-플래너-202401--202402">🔹 <strong>에빙하우스 플래너</strong> (2024.01. ~ 2024.02.)</a></li>
+            <li><a href="#-홀로그램-도슨트-202407--202410">🔹 <strong>홀로그램 도슨트</strong> (2024.07. ~ 2024.10.)</a></li>
+          </ul>
+        </li>
+        <li><a href="#-activities">📌 Activities</a></li>
+        <li><a href="#-awards">🏆 Awards</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+
+</div>
   <div class="post-content"><table>
   <thead>
       <tr>
@@ -906,7 +962,79 @@ Unity 기반 AR·VR 콘텐츠 분야 작품 출품
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script>
+document.addEventListener("DOMContentLoaded", function () {
+  const tocWrapper = document.querySelector(".toc-wrapper");
+  if (!tocWrapper) return;
+
+  const tocLinks = Array.from(tocWrapper.querySelectorAll('a[href^="#"]'));
+  if (!tocLinks.length) return;
+
+   
+  const headings = tocLinks
+    .map(function (link) {
+      var id = decodeURIComponent(link.getAttribute("href").slice(1));
+      return document.getElementById(id);
+    })
+    .filter(Boolean);
+
+  if (!headings.length) return;
+
+  var activeId = null;
+  var OFFSET = 100;  
+
+  function setActive(id) {
+    if (activeId === id) return;
+    activeId = id;
+    tocLinks.forEach(function (link) {
+      var linkId = decodeURIComponent(link.getAttribute("href").slice(1));
+      link.classList.toggle("active", linkId === id);
+    });
+  }
+
+  function updateActive() {
+     
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 2) {
+      setActive(headings[headings.length - 1].id);
+      return;
+    }
+
+     
+    var current = null;
+    for (var heading of headings) {
+      if (heading.getBoundingClientRect().top <= OFFSET) {
+        current = heading;
+      } else {
+        break;
+      }
+    }
+
+    if (current) {
+      setActive(current.id);
+    } else {
+       
+      setActive(headings[0].id);
+    }
+  }
+
+   
+  var ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(function () {
+        updateActive();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+
+  updateActive();
+});
+</script>
 
 <script>
     let menu = document.getElementById('menu');

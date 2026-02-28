@@ -6,8 +6,64 @@
     <description>Recent content on Home</description>
     <generator>Hugo -- 0.157.0</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 28 Feb 2026 16:35:48 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 28 Feb 2026 23:44:29 +0900</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control Registers</title>
+      <link>http://localhost:1313/posts/intel/control-registers/</link>
+      <pubDate>Sat, 28 Feb 2026 23:44:29 +0900</pubDate>
+      <guid>http://localhost:1313/posts/intel/control-registers/</guid>
+      <description>&lt;p&gt;&lt;img alt=&#34;sdm-vol-3a_73.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/control-registers/img/sdm-vol-3a_73.png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;control register는 프로세서의 operating 모드와 현재 실행 중인 태스크의 특성을 결정함
+&lt;ul&gt;
+&lt;li&gt;32bit 모드와 compatibility 모드에서 32bits 크기를 가짐&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;64-bit-모드&#34;&gt;64-bit 모드&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;64-bit 모드에서는 64bits 크기로 확장됨&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;MOV CRn&lt;/code&gt; 명령어를 사용해서 해당 레지스터의 비트를 조작함
+&lt;ul&gt;
+&lt;li&gt;이 명령어에 대한 오퍼랜드 크기의 prefix는 무시됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;MOV 명령어의 control register 간 이동 형식을 사용하여 읽고 쓸 수 있음&lt;/li&gt;
+&lt;li&gt;protected 모드에서 MOV 명령어는 privilege level 0에서만 제어 레지스터를 읽거나 로드할 수 있도록 허용함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;cr0&#34;&gt;CR0&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;sdm-vol-1-2abcd-3abcd-4_3208.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/control-registers/img/bffcb2f2-4137-4e4b-8c72-b0d0ac32cea3.png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;프로세서의 operating 모드와 상태를 제어하는 시스템 제어 플래그를 포함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;cr0pg&#34;&gt;CR0.PG&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Paging&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;1이면 페이징 활성화, 0이면 비활성화&lt;/li&gt;
+&lt;li&gt;페이징이 꺼져 있으면 선형 주소는 물리 주소로 간주함&lt;/li&gt;
+&lt;li&gt;PE 플래스가 1이어야 PG 플래그가 유효함
+&lt;ul&gt;
+&lt;li&gt;PE=0인데 PG=1로 설정하면 → general-protection exception (#GP) 발생&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Intel 64 프로세서에서 IA-32e 모드 활성화/비활성화 시에도 PG 비트 수정 필요&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;cr0pe&#34;&gt;CR0.PE&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Protection Enable&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;PE = 1 → protected mode 활성화&lt;/li&gt;
+&lt;li&gt;PE = 0 → real-address mode 활성화&lt;/li&gt;
+&lt;li&gt;이 플래그는 paging을 직접 활성화하지 않음&lt;/li&gt;
+&lt;li&gt;세그먼트 수준의 보호 기능만 활성화함&lt;/li&gt;
+&lt;li&gt;paging을 활성화하려면 PE와 PG 플래그를 모두 설정해야 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;cr0wp&#34;&gt;CR0.WP&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Write Protect&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Modes of Operation</title>
       <link>http://localhost:1313/posts/intel/modes-of-operation/</link>
@@ -15,7 +71,7 @@
       <guid>http://localhost:1313/posts/intel/modes-of-operation/</guid>
       <description>&lt;h2 id=&#34;ia-32-아키텍처&#34;&gt;IA-32 아키텍처&lt;/h2&gt;
 &lt;p&gt;IA-32 아키텍처는 3개의 operating 모드와 1개의 quasi-operating 모드를 지원&lt;/p&gt;
-&lt;h3 id=&#34;protected-mode&#34;&gt;&lt;strong&gt;Protected mode&lt;/strong&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;protected-mode&#34;&gt;Protected mode&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;프로세서의 기본 운영 모드&lt;/li&gt;
 &lt;li&gt;풍부한 아키텍처 기능, 높은 유연성, 고성능, 기존 서프트웨어 베이스와의 하위 호환성 제공&lt;/li&gt;
@@ -26,13 +82,13 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;real-address-mode&#34;&gt;&lt;strong&gt;Real-address mode&lt;/strong&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;real-address-mode&#34;&gt;Real-address mode&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Intel 8086 프로세서의 프로그래밍 환경을 제공&lt;/li&gt;
 &lt;li&gt;전원 인가 또는 리셋 직후 프로세서는 이 모드에서 시작&lt;/li&gt;
 &lt;li&gt;protected 모드나 system management 모드로 전환할 수 있는 기능과 같은 몇 가지 확장 제공&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;system-management-modesmm&#34;&gt;&lt;strong&gt;System management mode(SMM)&lt;/strong&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;system-management-modesmm&#34;&gt;System management mode(SMM)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;모든 IA-32 프로세서에 포함된 표준 아키텍처 기능&lt;/li&gt;
 &lt;li&gt;운영체제 또는 실행 환경에 전원 관리나 OEM 차별화 기능을 구현할 수 있는 투명한 메커니즘 제공&lt;/li&gt;
@@ -46,7 +102,7 @@
 &lt;/li&gt;
 &lt;li&gt;SMM에서 복귀하면, 시스템 관리 인터럽트 이전의 상태로 복원됨&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;virtual-8086-mode&#34;&gt;&lt;strong&gt;Virtual-8086 mode&lt;/strong&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;virtual-8086-mode&#34;&gt;Virtual-8086 mode&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;protected 모드에서 프로세서는 virtual-8086 모드라 불리는 quasi-operating 모드를 지원&lt;/li&gt;
 &lt;li&gt;이 모드는 프로세서가 보호된 멀티태스킹 환경에서 8086 소프트웨어를 실행할 수 있음&lt;/li&gt;
@@ -60,7 +116,7 @@
       <pubDate>Sat, 28 Feb 2026 16:30:15 +0900</pubDate>
       <guid>http://localhost:1313/posts/intel/general-purpose-registers/</guid>
       <description>&lt;h2 id=&#34;32-bit-general-purpose-registers&#34;&gt;32-bit general-purpose registers&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;sdm-vol-1-1_73.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/general-purpose-registers/sdm-vol-1-1_73.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sdm-vol-1-1_73.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/general-purpose-registers/img/sdm-vol-1-1_73.png&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;논리 연산 및 산술 연산을 위한 피연산자&lt;/li&gt;
 &lt;li&gt;주소 계산용 피연산자&lt;/li&gt;
@@ -119,7 +175,7 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2 id=&#34;64-bit-general-purpose-registers&#34;&gt;64-bit general-purpose registers&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;13-csapp-fig3.2.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/general-purpose-registers/13-csapp-fig3.2.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;13-csapp-fig3.2.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/general-purpose-registers/img/13-csapp-fig3.2.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>About Me</title>
