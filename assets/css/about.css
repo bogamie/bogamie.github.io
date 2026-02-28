@@ -10,3 +10,7 @@
     text-decoration: none;
     box-shadow: none !important;
 }
+
+body {
+    background: var(--theme);
+}

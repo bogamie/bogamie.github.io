@@ -22,11 +22,12 @@ params:
   ShowWordCount: false
   comments: false
   
-  # Home-Info 모드 설정
-  homeInfoParams:
-    Title: "추후 업데이트 예정"
-    Content: |
-      추후 업데이트 예정입니다.
+  profileMode:
+    enabled: true
+    title: "Kim Bogyeom" # optional default will be site title
+    imageUrl: "./img/profile.jpg" # optional
+    imageWidth: 180 # custom size
+    imageHeight: 180 # custom size
 
   # 연락처 및 링크 연동
   socialIcons:
@@ -50,9 +51,9 @@ menu:
       name: Projects
       url: /projects/
       weight: 30
-    - identifier: tags
-      name: Tags
-      url: /tags/
+    - identifier: posts
+      name: Posts
+      url: /posts/
       weight: 40
 
 # 마크다운 코드 블록 하이라이팅 설정

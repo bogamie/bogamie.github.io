@@ -6,8 +6,121 @@
     <description>Recent content on Home</description>
     <generator>Hugo -- 0.157.0</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 27 Feb 2026 23:46:31 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 28 Feb 2026 16:35:48 +0900</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Modes of Operation</title>
+      <link>http://localhost:1313/posts/intel/modes-of-operation/</link>
+      <pubDate>Sat, 28 Feb 2026 16:35:48 +0900</pubDate>
+      <guid>http://localhost:1313/posts/intel/modes-of-operation/</guid>
+      <description>&lt;h2 id=&#34;ia-32-아키텍처&#34;&gt;IA-32 아키텍처&lt;/h2&gt;
+&lt;p&gt;IA-32 아키텍처는 3개의 operating 모드와 1개의 quasi-operating 모드를 지원&lt;/p&gt;
+&lt;h3 id=&#34;protected-mode&#34;&gt;&lt;strong&gt;Protected mode&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;프로세서의 기본 운영 모드&lt;/li&gt;
+&lt;li&gt;풍부한 아키텍처 기능, 높은 유연성, 고성능, 기존 서프트웨어 베이스와의 하위 호환성 제공&lt;/li&gt;
+&lt;li&gt;보호된 멀티태스킹 환경 제공&lt;/li&gt;
+&lt;li&gt;이 모드에서 virtual-8086 모드를 활성화할 수 있음
+&lt;ul&gt;
+&lt;li&gt;단, virtual-8086 모드는 독립된 프로세서 모드가 아니라 protected 모드의 한 속성으로 동작&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;real-address-mode&#34;&gt;&lt;strong&gt;Real-address mode&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Intel 8086 프로세서의 프로그래밍 환경을 제공&lt;/li&gt;
+&lt;li&gt;전원 인가 또는 리셋 직후 프로세서는 이 모드에서 시작&lt;/li&gt;
+&lt;li&gt;protected 모드나 system management 모드로 전환할 수 있는 기능과 같은 몇 가지 확장 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;system-management-modesmm&#34;&gt;&lt;strong&gt;System management mode(SMM)&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;모든 IA-32 프로세서에 포함된 표준 아키텍처 기능&lt;/li&gt;
+&lt;li&gt;운영체제 또는 실행 환경에 전원 관리나 OEM 차별화 기능을 구현할 수 있는 투명한 메커니즘 제공&lt;/li&gt;
+&lt;li&gt;외부 SMI 핀(SMI#)이 활성화되거나 APIC로부터 SMI를 수신하면 진입&lt;/li&gt;
+&lt;li&gt;SMM 진입 시:
+&lt;ul&gt;
+&lt;li&gt;현재 실행 중인 프로그램 또는 태스크의 기본 컨텍스트를 저장&lt;/li&gt;
+&lt;li&gt;분리된 주소 공간으로 전환&lt;/li&gt;
+&lt;li&gt;SMM 전용 코드를 투명하게 실행&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;SMM에서 복귀하면, 시스템 관리 인터럽트 이전의 상태로 복원됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;virtual-8086-mode&#34;&gt;&lt;strong&gt;Virtual-8086 mode&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;protected 모드에서 프로세서는 virtual-8086 모드라 불리는 quasi-operating 모드를 지원&lt;/li&gt;
+&lt;li&gt;이 모드는 프로세서가 보호된 멀티태스킹 환경에서 8086 소프트웨어를 실행할 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;intel-64-아키텍처&#34;&gt;Intel 64 아키텍처&lt;/h2&gt;
+&lt;p&gt;Intel 64 아키텍처는 IA-32 아키텍처의 모든 operating 모드를 지원하고 추가로 IA-32e 모드를 지원&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>General Purpose Registers</title>
+      <link>http://localhost:1313/posts/intel/general-purpose-registers/</link>
+      <pubDate>Sat, 28 Feb 2026 16:30:15 +0900</pubDate>
+      <guid>http://localhost:1313/posts/intel/general-purpose-registers/</guid>
+      <description>&lt;h2 id=&#34;32-bit-general-purpose-registers&#34;&gt;32-bit general-purpose registers&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;sdm-vol-1-1_73.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/general-purpose-registers/sdm-vol-1-1_73.png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;논리 연산 및 산술 연산을 위한 피연산자&lt;/li&gt;
+&lt;li&gt;주소 계산용 피연산자&lt;/li&gt;
+&lt;li&gt;메모리 포인터&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ESP는 스택 포인터를 가지고 있으므로 다른 목적으로 사용해서는 안 됨&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;레지스터&lt;/th&gt;
+          &lt;th&gt;명칭&lt;/th&gt;
+          &lt;th&gt;주요 용도 및 특수 기능&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;EAX&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Accumulator&lt;/td&gt;
+          &lt;td&gt;산술 연산 결과 저장, 함수 리턴값, I/O 데이터 전송&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;EBX&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Base&lt;/td&gt;
+          &lt;td&gt;메모리 주소 지정(DS 세그먼트), 변환 테이블 베이스(&lt;code&gt;XLAT&lt;/code&gt;)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ECX&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Counter&lt;/td&gt;
+          &lt;td&gt;반복문(&lt;code&gt;LOOP&lt;/code&gt;) 및 문자열 명령어(&lt;code&gt;REP&lt;/code&gt;)의 카운터&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;EDX&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Data&lt;/td&gt;
+          &lt;td&gt;큰 수의 곱셈/나눗셈 시 상위 비트 저장, I/O 포트 주소 지정&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ESI&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Source Index&lt;/td&gt;
+          &lt;td&gt;문자열 연산의 소스(출발지) 주소 포인터&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;EDI&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Dest. Index&lt;/td&gt;
+          &lt;td&gt;문자열 연산의 목적지 주소 포인터&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;EBP&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Base Pointer&lt;/td&gt;
+          &lt;td&gt;스택 프레임의 기준 주소 (함수 파라미터/지역변수 접근)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ESP&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Stack Pointer&lt;/td&gt;
+          &lt;td&gt;현재 스택의 최상단 주소 (PUSH/POP에 의해 자동 변경)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;64-bit-general-purpose-registers&#34;&gt;64-bit general-purpose registers&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;13-csapp-fig3.2.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/general-purpose-registers/13-csapp-fig3.2.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>About Me</title>
       <link>http://localhost:1313/about/</link>
@@ -51,7 +164,7 @@
 &lt;h2 id=&#34;-research-experience&#34;&gt;🔬 Research Experience&lt;/h2&gt;
 &lt;h3 id=&#34;csos-lab-cyber-security--operating-systems-laboratory&#34;&gt;&lt;strong&gt;CSOS Lab (Cyber Security &amp;amp; Operating Systems Laboratory)&lt;/strong&gt;&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;학부연구생 (Undergraduate Researcher)&lt;/strong&gt; — 2025.06 ~ 현재&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;학부연구생 (Undergraduate Researcher)&lt;/strong&gt; — 2025.06. ~ 현재&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;지도 교수:&lt;/strong&gt; 조성제 교수님&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;위치:&lt;/strong&gt; 단국대학교 죽전캠퍼스&lt;/li&gt;
 &lt;li&gt;차량 포렌식 및 Android 보안 연구&lt;/li&gt;
@@ -99,7 +212,7 @@
 &lt;/table&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-projects&#34;&gt;💼 Projects&lt;/h2&gt;
-&lt;h3 id=&#34;-차량-로그-기반-포렌식-웹-서비스-202507-&#34;&gt;🔹 &lt;strong&gt;차량 로그 기반 포렌식 웹 서비스 (2025.07 ~ 진행 중)&lt;/strong&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;-차량-로그-기반-포렌식-웹-서비스-202507-&#34;&gt;🔹 &lt;strong&gt;차량 로그 기반 포렌식 웹 서비스 (2025.07. ~ 진행 중)&lt;/strong&gt;&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;설명&lt;/strong&gt;
 &lt;ul&gt;
@@ -134,7 +247,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;-리눅스-패키지-매니저-202412--202501&#34;&gt;🔹 &lt;strong&gt;리눅스 패키지 매니저&lt;/strong&gt; (2024.12 ~ 2025.01)&lt;/h3&gt;
+&lt;h3 id=&#34;-리눅스-패키지-매니저-202412--202501&#34;&gt;🔹 &lt;strong&gt;리눅스 패키지 매니저&lt;/strong&gt; (2024.12. ~ 2025.01.)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;설명&lt;/strong&gt;
 &lt;ul&gt;
@@ -165,7 +278,7 @@
 &lt;li&gt;&lt;strong&gt;GitHub:&lt;/strong&gt; &lt;a href=&#34;https://github.com/bogamie/Linux-package-manager&#34;&gt;🔗 Linux Package Mannager&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;-에빙하우스-플래너-202401--202402&#34;&gt;🔹 &lt;strong&gt;에빙하우스 플래너&lt;/strong&gt; (2024.01 ~ 2024.02)&lt;/h3&gt;
+&lt;h3 id=&#34;-에빙하우스-플래너-202401--202402&#34;&gt;🔹 &lt;strong&gt;에빙하우스 플래너&lt;/strong&gt; (2024.01. ~ 2024.02.)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;설명&lt;/strong&gt;
 &lt;ul&gt;
@@ -197,7 +310,7 @@
 &lt;li&gt;&lt;strong&gt;GitHub:&lt;/strong&gt; &lt;a href=&#34;https://github.com/bogamie/ebbinghaus_planner&#34;&gt;🔗 Ebbinghaus Planner&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;-홀로그램-도슨트-202407--202410&#34;&gt;🔹 &lt;strong&gt;홀로그램 도슨트&lt;/strong&gt; (2024.07 ~ 2024.10)&lt;/h3&gt;
+&lt;h3 id=&#34;-홀로그램-도슨트-202407--202410&#34;&gt;🔹 &lt;strong&gt;홀로그램 도슨트&lt;/strong&gt; (2024.07. ~ 2024.10.)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;설명&lt;/strong&gt;
 &lt;ul&gt;
@@ -227,10 +340,10 @@
 &lt;hr&gt;
 &lt;h2 id=&#34;-activities&#34;&gt;📌 Activities&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;2025.07 ~ 진행 중&lt;/strong&gt; - 차량 로그 기반 포렌식 웹 서비스 개발 프로젝트 참여&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;2024.07 ~ 2024.10&lt;/strong&gt; - 메타버스 기반 AR·VR 콘텐츠 개발 프로젝트 참여&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;2023.08&lt;/strong&gt; - 육군 병장 만기 전역&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;2021.03&lt;/strong&gt; - 단국대학교 소프트웨어학과 입학&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2025.07. ~ 진행 중&lt;/strong&gt; - 차량 로그 기반 포렌식 웹 서비스 개발 프로젝트 참여&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2024.07. ~ 2024.10.&lt;/strong&gt; - 메타버스 기반 AR·VR 콘텐츠 개발 프로젝트 참여&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2023.08.&lt;/strong&gt; - 육군 병장 만기 전역&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2021.03.&lt;/strong&gt; - 단국대학교 소프트웨어학과 입학&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-awards&#34;&gt;🏆 Awards&lt;/h2&gt;

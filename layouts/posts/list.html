@@ -1,0 +1,118 @@
+{{- define "main" }}
+
+{{- $pages := .RegularPages }}
+
+{{/* Collect all unique categories */}}
+{{- $allCats := slice }}
+{{- range $pages }}
+  {{- range .Params.categories }}
+    {{- if not (in $allCats .) }}
+      {{- $allCats = $allCats | append . }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- $allCats = sort $allCats }}
+
+{{/* Group pages by year */}}
+{{- $byYear := dict }}
+{{- range $pages }}
+  {{- $year := .Date.Format "2006" }}
+  {{- $entries := index $byYear $year | default slice }}
+  {{- $byYear = merge $byYear (dict $year (append . $entries)) }}
+{{- end }}
+
+{{- $years := slice }}
+{{- range $year, $_ := $byYear }}
+  {{- $years = $years | append $year }}
+{{- end }}
+{{- $years = sort $years "value" "desc" }}
+
+<header class="page-header">
+  <h1 class="posts-page-title">Posts</h1>
+</header>
+
+{{- if gt (len $allCats) 0 }}
+<div class="posts-filter">
+  <button class="posts-filter-btn active" data-filter="all">All</button>
+  {{- range $allCats }}
+  <button class="posts-filter-btn" data-filter="{{ . | urlize }}">{{ . }}</button>
+  {{- end }}
+</div>
+{{- end }}
+
+<div class="posts-list-wrapper">
+  {{- range $years }}
+  {{- $year := . }}
+  {{- $entries := index $byYear $year }}
+  <section class="posts-year-group" data-year="{{ $year }}">
+    <div class="posts-year-label">{{ $year }}</div>
+    <ul class="posts-year-list">
+      {{- range $entries }}
+      {{- $cats := slice }}
+      {{- range .Params.categories }}
+        {{- $cats = $cats | append (. | urlize) }}
+      {{- end }}
+      <li class="posts-item" data-categories="{{ delimit $cats "," }}">
+        <a class="posts-item-title" href="{{ .Permalink }}">{{ .Title }}</a>
+        <span class="posts-item-date">{{ .Date.Format "Jan 02" }}</span>
+      </li>
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+</div>
+
+<script>
+(function () {
+  const btns = document.querySelectorAll('.posts-filter-btn');
+  const items = document.querySelectorAll('.posts-item');
+  const groups = document.querySelectorAll('.posts-year-group');
+
+  function applyFilter(filter) {
+    items.forEach(item => {
+      const link = item.querySelector('.posts-item-title');
+      if (!link) return;
+
+      // Update href: add or remove ?cat= query param
+      const url = new URL(link.href);
+      if (filter === 'all') {
+        url.searchParams.delete('cat');
+      } else {
+        url.searchParams.set('cat', filter);
+      }
+      link.href = url.toString();
+
+      // Show/hide item
+      if (filter === 'all') {
+        item.classList.remove('posts-item--hidden');
+      } else {
+        const cats = (item.dataset.categories || '').split(',').map(c => c.trim());
+        if (cats.includes(filter)) {
+          item.classList.remove('posts-item--hidden');
+        } else {
+          item.classList.add('posts-item--hidden');
+        }
+      }
+    });
+
+    groups.forEach(group => {
+      const visible = group.querySelectorAll('.posts-item:not(.posts-item--hidden)');
+      if (visible.length === 0) {
+        group.classList.add('posts-year-group--hidden');
+      } else {
+        group.classList.remove('posts-year-group--hidden');
+      }
+    });
+  }
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilter(btn.dataset.filter);
+    });
+  });
+})();
+</script>
+
+{{- end }}
