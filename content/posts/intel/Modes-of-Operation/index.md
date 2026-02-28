@@ -68,7 +68,7 @@ Intel 64 아키텍처는 IA-32 아키텍처의 모든 operating 모드를 지원
 
 ## Operating modes의 전환
 
-![sdm-vol-3a_66.png](img/sdm-vol-3a_66.png)
+![sdm-vol-3a_66.png](img/sdm-vol-3a_66.png#dark-invert)
 
 - 전원이 켜지거나 리셋이 발생하면 프로세서는 real-address 모드로 전환
 - control 레지스터 CR0의 PE flag는 프로세서가 real-address 모드와 protected 모드 중에 어떤 모드로 동작할지 제어함
@@ -84,7 +84,7 @@ Intel 64 아키텍처는 IA-32 아키텍처의 모든 operating 모드를 지원
 
 IA32_EFER MSR은 IA-32e 모드의 활성화 및 동작과 관련된 여러 필드를 제공함
 
-![sdm-vol-3a_67_1.png](img/sdm-vol-3a_67_1.png)
+![sdm-vol-3a_67_1.png](img/sdm-vol-3a_67_1.png#dark-invert)
 
 | 비트 | 필드 이름 | 접근 권한 | 설명 |
 | --- | --- | --- | --- |

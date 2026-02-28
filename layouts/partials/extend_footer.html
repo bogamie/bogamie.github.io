@@ -1,0 +1,120 @@
+{{- /* Footer custom content area start */ -}}
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const tocWrapper = document.querySelector(".toc-wrapper");
+  if (!tocWrapper) return;
+
+  /* ---------- 타이틀을 TOC 리스트 맨 앞에 h1 항목으로 삽입 ---------- */
+  const tocTitle = tocWrapper.dataset.tocTitle;
+  if (tocTitle) {
+    for (const ul of tocWrapper.querySelectorAll("nav#TableOfContents > ul")) {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = "#";
+      a.textContent = tocTitle;
+      li.appendChild(a);
+      ul.prepend(li);
+    }
+  }
+
+  /* ---------- 링크 수집 ---------- */
+  const allLinks = Array.from(tocWrapper.querySelectorAll('a[href^="#"]'));
+  const titleLinks = allLinks.filter((a) => a.hash === "" || a.hash === "#");
+  const tocLinks = allLinks.filter((a) => a.hash !== "" && a.hash !== "#");
+  if (!tocLinks.length) return;
+
+  /* TOC 링크 → heading 요소 매핑 */
+  const headings = tocLinks
+    .map((link) => document.getElementById(decodeURIComponent(link.hash.slice(1))))
+    .filter(Boolean);
+  if (!headings.length) return;
+
+  const OFFSET = 100;
+  let activeId = null;
+
+  function setActive(id) {
+    if (activeId === id) return;
+    activeId = id;
+
+    for (const link of titleLinks) {
+      link.classList.toggle("active", id === "__top__");
+    }
+    for (const link of tocLinks) {
+      link.classList.toggle(
+        "active",
+        decodeURIComponent(link.hash.slice(1)) === id
+      );
+    }
+  }
+
+  function updateActive() {
+    /* 페이지 맨 아래 → 마지막 heading 활성화 */
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 2) {
+      setActive(headings.at(-1).id);
+      return;
+    }
+
+    /* 뷰포트 상단을 지나간 마지막 heading */
+    let current = null;
+    for (const h of headings) {
+      if (h.getBoundingClientRect().top <= OFFSET) current = h;
+      else break;
+    }
+
+    setActive(current ? current.id : "__top__");
+  }
+
+  /* scroll 쓰로틀링 */
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      updateActive();
+      ticking = false;
+    });
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  updateActive();
+});
+</script>
+
+<!-- Lightbox -->
+<script>
+(() => {
+  const overlay = document.createElement("div");
+  overlay.className = "lightbox-overlay";
+  const zoomImg = document.createElement("img");
+  overlay.appendChild(zoomImg);
+  document.body.appendChild(overlay);
+
+  function close() {
+    overlay.classList.remove("active");
+  }
+
+  overlay.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+
+  document.querySelectorAll(".post-content img").forEach((img) => {
+    img.addEventListener("click", (e) => {
+      e.stopPropagation();
+      zoomImg.src = img.src;
+      zoomImg.alt = img.alt;
+
+      /* dark-invert 플래그 유지 */
+      if (img.src.includes("#dark-invert")) {
+        zoomImg.classList.add("dark-invert");
+      } else {
+        zoomImg.classList.remove("dark-invert");
+      }
+
+      overlay.classList.add("active");
+    });
+  });
+})();
+</script>

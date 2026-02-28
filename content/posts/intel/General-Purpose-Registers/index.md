@@ -6,7 +6,7 @@ categories = ['Intel']
 +++
 ## 32-bit general-purpose registers
 
-![sdm-vol-1-1_73.png](img/sdm-vol-1-1_73.png)
+![sdm-vol-1-1_73.png](img/sdm-vol-1-1_73.png#dark-invert)
 
 - 논리 연산 및 산술 연산을 위한 피연산자
 - 주소 계산용 피연산자
@@ -26,7 +26,7 @@ categories = ['Intel']
 
 ## 64-bit general-purpose registers
 
-![13-csapp-fig3.2.png](img/13-csapp-fig3.2.png)
+![13-csapp-fig3.2.png](img/13-csapp-fig3.2.png#dark-invert)
 
 - **R8 ~ R15 (New GPRs)**
     - 추가된 범용 레지스터

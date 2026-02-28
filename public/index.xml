@@ -6,14 +6,14 @@
     <description>Recent content on Home</description>
     <generator>Hugo -- 0.157.0</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 28 Feb 2026 23:44:29 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 01 Mar 2026 01:14:44 +0900</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Control Registers</title>
       <link>http://localhost:1313/posts/intel/control-registers/</link>
-      <pubDate>Sat, 28 Feb 2026 23:44:29 +0900</pubDate>
+      <pubDate>Sun, 01 Mar 2026 01:14:44 +0900</pubDate>
       <guid>http://localhost:1313/posts/intel/control-registers/</guid>
-      <description>&lt;p&gt;&lt;img alt=&#34;sdm-vol-3a_73.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/control-registers/img/sdm-vol-3a_73.png&#34;&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img alt=&#34;sdm-vol-3a_73.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/control-registers/img/sdm-vol-3a_73.png#dark-invert&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;control register는 프로세서의 operating 모드와 현재 실행 중인 태스크의 특성을 결정함
 &lt;ul&gt;
@@ -34,7 +34,7 @@
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h1 id=&#34;cr0&#34;&gt;CR0&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;sdm-vol-1-2abcd-3abcd-4_3208.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/control-registers/img/bffcb2f2-4137-4e4b-8c72-b0d0ac32cea3.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sdm-vol-1-2abcd-3abcd-4_3208.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/control-registers/img/bffcb2f2-4137-4e4b-8c72-b0d0ac32cea3.png#dark-invert&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;프로세서의 operating 모드와 상태를 제어하는 시스템 제어 플래그를 포함&lt;/li&gt;
 &lt;/ul&gt;
@@ -116,7 +116,7 @@
       <pubDate>Sat, 28 Feb 2026 16:30:15 +0900</pubDate>
       <guid>http://localhost:1313/posts/intel/general-purpose-registers/</guid>
       <description>&lt;h2 id=&#34;32-bit-general-purpose-registers&#34;&gt;32-bit general-purpose registers&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;sdm-vol-1-1_73.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/general-purpose-registers/img/sdm-vol-1-1_73.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sdm-vol-1-1_73.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/general-purpose-registers/img/sdm-vol-1-1_73.png#dark-invert&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;논리 연산 및 산술 연산을 위한 피연산자&lt;/li&gt;
 &lt;li&gt;주소 계산용 피연산자&lt;/li&gt;
@@ -175,7 +175,7 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2 id=&#34;64-bit-general-purpose-registers&#34;&gt;64-bit general-purpose registers&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;13-csapp-fig3.2.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/general-purpose-registers/img/13-csapp-fig3.2.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;13-csapp-fig3.2.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/intel/general-purpose-registers/img/13-csapp-fig3.2.png#dark-invert&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>About Me</title>

@@ -1,0 +1,13 @@
+{{- if .TableOfContents -}}
+<div class="toc-wrapper" data-toc-title="{{ .Title }}">
+
+  <div class="toc-mini">
+    {{ .TableOfContents }}
+  </div>
+
+  <div class="toc-panel">
+    {{ .TableOfContents }}
+  </div>
+
+</div>
+{{- end -}}

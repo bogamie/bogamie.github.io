@@ -1,10 +1,10 @@
 +++
-date = '2026-02-28T23:44:29+09:00'
+date = '2026-03-01T01:14:44+09:00'
 draft = false
 title = 'Control Registers'
 categories = ['Intel']
 +++
-![sdm-vol-3a_73.png](img/sdm-vol-3a_73.png)
+![sdm-vol-3a_73.png](img/sdm-vol-3a_73.png#dark-invert)
 
 - control register는 프로세서의 operating 모드와 현재 실행 중인 태스크의 특성을 결정함
     - 32bit 모드와 compatibility 모드에서 32bits 크기를 가짐
@@ -21,7 +21,7 @@ categories = ['Intel']
 
 # CR0
 
-![sdm-vol-1-2abcd-3abcd-4_3208.png](img/bffcb2f2-4137-4e4b-8c72-b0d0ac32cea3.png)
+![sdm-vol-1-2abcd-3abcd-4_3208.png](img/bffcb2f2-4137-4e4b-8c72-b0d0ac32cea3.png#dark-invert)
 
 - 프로세서의 operating 모드와 상태를 제어하는 시스템 제어 플래그를 포함
 
@@ -71,7 +71,7 @@ categories = ['Intel']
         - Intel486: **write-through 방식**
     - CD와 NW 조합에 따라 캐시 동작 방식이 달라짐
     
-    ![sdm-vol-1-2abcd-3abcd-4_3615.png](img/sdm-vol-1-2abcd-3abcd-4_3615.png)
+    ![sdm-vol-1-2abcd-3abcd-4_3615.png](img/sdm-vol-1-2abcd-3abcd-4_3615.png#dark-invert)
     
     ## CR0.AM
     
@@ -94,7 +94,7 @@ categories = ['Intel']
 
 # CR2
 
-![sdm-vol-1-2abcd-3abcd-4_3208.png](img/99c672c2-ec0a-4850-8ddb-2d56e6f8c52b.png)
+![sdm-vol-1-2abcd-3abcd-4_3208.png](img/99c672c2-ec0a-4850-8ddb-2d56e6f8c52b.png#dark-invert)
 
 - page-fault linear 주소(page fault를 발생시킨 linear 주소)를 포함함
 
@@ -102,7 +102,7 @@ categories = ['Intel']
 
 # CR3
 
-![sdm-vol-1-2abcd-3abcd-4_3208.png](img/7780acee-f7d6-428a-9fb2-a7514acd66d1.png)
+![sdm-vol-1-2abcd-3abcd-4_3208.png](img/7780acee-f7d6-428a-9fb2-a7514acd66d1.png#dark-invert)
 
 - 현재 활성화된 페이징 구조체의 최상위 테이블의 물리 주소(Physical Address)를 저장
 - 베이스 주소는 상위 비트들만 지정됨(하위 12비트 제외)
@@ -147,7 +147,7 @@ categories = ['Intel']
 
 # CR4
 
-![sdm-vol-1-2abcd-3abcd-4_3208.png](img/2612fdf2-0834-44ea-8bb3-70388c6a0cce.png)
+![sdm-vol-1-2abcd-3abcd-4_3208.png](img/2612fdf2-0834-44ea-8bb3-70388c6a0cce.png#dark-invert)
 
 - 여러 아키텍처 확장을 활성화하고 특정 프로세서 기능에 대한 운영체제 또는 실행 환경의 지원 여부를 나타내는 플래그 집합을 포함함
 - CR4[63:32] 비트는 IA-32e 모드에서만 사용할 수 있는 기능들을 위한 것
@@ -198,7 +198,7 @@ IA-32e 모드가 아닐 때는 아무런 영향을 주지 않음
 
 # CR8
 
-![sdm-vol-1-2abcd-3abcd-4_3208.png](img/bc1b5358-f3be-4ad6-9fd1-d71d9000b524.png)
+![sdm-vol-1-2abcd-3abcd-4_3208.png](img/bc1b5358-f3be-4ad6-9fd1-d71d9000b524.png#dark-invert)
 
 - CR8[3:0]을 통해 로컬 APIC의 Task-Priority Register(TRR) 7:4번 비트에 읽고 쓰기 접근을 제공함
 - CR8[3:0] 비트는 task-priority class를 의미하며 해당 task-priority class보다 낮은 모든 인터럽트는 차단됨
