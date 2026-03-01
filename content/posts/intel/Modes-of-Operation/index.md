@@ -1,5 +1,5 @@
 +++
-date = '2026-02-28T16:35:48+09:00'
+date = '2026-02-13T12:09:37+09:00'
 draft = false
 title = 'Modes of Operation'
 categories = ['Intel']

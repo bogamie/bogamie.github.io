@@ -1,5 +1,5 @@
 +++
-date = '2026-03-01T01:14:44+09:00'
+date = '2026-02-15T13:05:24+09:00'
 draft = false
 title = 'Control Registers'
 categories = ['Intel']
