@@ -7,11 +7,11 @@ categories = ['Intel']
 ![sdm-vol-3a_73.png](img/sdm-vol-3a_73.png#dark-invert)
 
 - control register는 프로세서의 operating 모드와 현재 실행 중인 태스크의 특성을 결정함
-    - 32bit 모드와 compatibility 모드에서 32bits 크기를 가짐
+    - 32-bit 모드와 compatibility 모드에서 32-bit 크기를 가짐
 
 # 64-bit 모드
 
-- 64-bit 모드에서는 64bits 크기로 확장됨
+- 64-bit 모드에서는 64-bit 크기로 확장됨
 - `MOV CRn` 명령어를 사용해서 해당 레지스터의 비트를 조작함
     - 이 명령어에 대한 오퍼랜드 크기의 prefix는 무시됨
 - MOV 명령어의 control register 간 이동 형식을 사용하여 읽고 쓸 수 있음
@@ -30,7 +30,7 @@ categories = ['Intel']
 - **Paging**
 - 1이면 페이징 활성화, 0이면 비활성화
 - 페이징이 꺼져 있으면 선형 주소는 물리 주소로 간주함
-- PE 플래스가 1이어야 PG 플래그가 유효함
+- PE 플래그가 1이어야 PG 플래그가 유효함
     - PE=0인데 PG=1로 설정하면 → general-protection exception (#GP) 발생
 - Intel 64 프로세서에서 IA-32e 모드 활성화/비활성화 시에도 PG 비트 수정 필요
 
@@ -179,8 +179,8 @@ IA-32e 모드가 아닐 때는 아무런 영향을 주지 않음
     - Page-directory-pointer-table entry
     - Page-directory entry
     - Page-table entry
-- Global page는 다음 경우에도 translation-lookaside buffer(TLB)에러 flush되지 않음
-    - 태스트 전환 시
+- Global page는 다음 경우에도 translation-lookaside buffer(TLB)에서 flush되지 않음
+    - 태스크 전환 시
     - CR3 레지스터에 쓰기 수행 시
 - Global page 기능을 활성화할 때는
     - CR0.PG를 설정하여 페이징을 활성화해야 함
@@ -200,7 +200,7 @@ IA-32e 모드가 아닐 때는 아무런 영향을 주지 않음
 
 ![sdm-vol-1-2abcd-3abcd-4_3208.png](img/bc1b5358-f3be-4ad6-9fd1-d71d9000b524.png#dark-invert)
 
-- CR8[3:0]을 통해 로컬 APIC의 Task-Priority Register(TRR) 7:4번 비트에 읽고 쓰기 접근을 제공함
+- CR8[3:0]을 통해 로컬 APIC의 Task Priority Register (TPR) 7:4 비트에 읽고 쓰기 접근을 제공함
 - CR8[3:0] 비트는 task-priority class를 의미하며 해당 task-priority class보다 낮은 모든 인터럽트는 차단됨
 - 값이 15이면 모든 우선순위 클래스의 인터럽트를 차단함
 - 값이 0이면 어떤 인터럽트도 차단하지 않음

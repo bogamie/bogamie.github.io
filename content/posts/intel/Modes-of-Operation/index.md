@@ -12,6 +12,7 @@ IA-32 아키텍처는 3개의 operating 모드와 1개의 quasi-operating 모드
 
 - 프로세서의 기본 운영 모드
 - 풍부한 아키텍처 기능, 높은 유연성, 고성능, 기존 서프트웨어 베이스와의 하위 호환성 제공
+ - 풍부한 아키텍처 기능, 높은 유연성, 고성능, 기존 소프트웨어 베이스와의 하위 호환성 제공
 - 보호된 멀티태스킹 환경 제공
 - 이 모드에서 virtual-8086 모드를 활성화할 수 있음
     - 단, virtual-8086 모드는 독립된 프로세서 모드가 아니라 protected 모드의 한 속성으로 동작
@@ -52,15 +53,15 @@ Intel 64 아키텍처는 IA-32 아키텍처의 모든 operating 모드를 지원
     - 운영체제가 코드 세그먼트 단위로 활성화
     - 하나의 64비트 OS가 64-bit 모드의 64비트 애플리케이션과 compatibility 모드의 기존 32비트 애플리케이션을 동시에 지원 가능
     - 실행 환경은 32-bit protected 모드와 유사
-    - 애플리케이션은 linear adress space의 첫 4GByte만 접근 가능
+    - 애플리케이션은 linear address space의 첫 4GiB만 접근 가능
     - 16비트 및 32비트 주소/오퍼랜드 크기 사용
-    - PAE(Physical Address Extensions)를 통해 4GByte 이상의 물리 메모리 접근 가능
+    - PAE(Physical Address Extensions)를 통해 4GiB 이상의 물리 메모리 접근 가능
 - **64-bit mode**
     - 64-bit linear addressing 제공
     - 일반 목적 레지스터와 SIMD 확장 레지스터 수가 8개에서 16개로 확장
         - 일반 목적 레지스터는 64비트로 확장
         - 확장 레지스터 접근을 위해 새로운 opcode prefix(REX) 도입
-    - 64GBytes보다 큰 물리 주소 공간 지원
+    - 64GiB보다 큰 물리 주소 공간 지원
     - 운영체제가 코드 세그먼트 단위로 활성화
     - 기본 주소 크기: 64비트
     - 기본 오퍼랜드 크기: 32비트

@@ -415,11 +415,6 @@
     padding: 0;
 }
 
-/* Hide TOC panel scrollbar but keep scrolling functional */
-.toc-panel {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE 10+ */
-}
 .toc-panel::-webkit-scrollbar {
     width: 0;
     height: 0;
