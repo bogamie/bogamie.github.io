@@ -443,7 +443,7 @@
     color: var(--toc-text);
     opacity: 0;
     transform: translateX(8px);
-    transition: color 0.15s ease, background 0.15s ease,
+    transition: color 0.08s ease, background 0.08s ease,
                 opacity 0.25s ease, transform 0.25s ease;
 }
 

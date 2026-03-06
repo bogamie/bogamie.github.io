@@ -5,6 +5,12 @@
     <loc>http://localhost:1313/</loc>
     <lastmod>2026-03-04T12:13:30+09:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/categories/</loc>
+    <lastmod>2026-03-04T12:13:30+09:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/intel/</loc>
+    <lastmod>2026-03-04T12:13:30+09:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/posts/intel/interrupt-and-exception-handling/</loc>
     <lastmod>2026-03-04T12:13:30+09:00</lastmod>
   </url><url>
@@ -14,13 +20,7 @@
     <loc>http://localhost:1313/about/</loc>
     <lastmod>2026-02-27T23:46:31+09:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2026-02-15T13:05:24+09:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/posts/intel/control-registers/</loc>
-    <lastmod>2026-02-15T13:05:24+09:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/intel/</loc>
     <lastmod>2026-02-15T13:05:24+09:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/intel/modes-of-operation/</loc>

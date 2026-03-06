@@ -2,6 +2,7 @@
 date = '2026-03-04T12:13:30+09:00'
 draft = true
 title = 'Interrupt and Exception Handling'
+categories = ['Intel']
 +++
 - Interrupt와 Exception은 시스템, 프로세서 또는 현재 실행 중인 프로그램/task에서 어떤 조건이 발생했음을 나타내는 이벤트임
 - 이러한 이벤트는 보통 현재 실행 중인 프로그램 또는 태스크의 실행을 중단시키고 interrupt handler 또는 exception handler라는 특별한 소프트웨어 루틴(또는 태스트)으로 강제적으로 실행 흐름을 이동시킴
