@@ -6,8 +6,101 @@
     <description>Recent content on Bogamie</description>
     <generator>Hugo -- 0.157.0</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 04 Mar 2026 12:13:30 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 18 Mar 2026 19:39:22 +0900</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Multiboot2 Memory Map Parsing Implementation</title>
+      <link>http://localhost:1313/posts/project-os/multiboot2-memory-map-parsing-implementation/</link>
+      <pubDate>Wed, 18 Mar 2026 19:39:22 +0900</pubDate>
+      <guid>http://localhost:1313/posts/project-os/multiboot2-memory-map-parsing-implementation/</guid>
+      <description>&lt;h2 id=&#34;현재-상태&#34;&gt;현재 상태&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;- GRUB + Multiboot2로 IA32e mode로 진입 완료
+- GDT, IDT, 인터럽트 기본 동작
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;목표&#34;&gt;목표&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[Bootloader (GRUB)]
+        ↓
+[Multiboot2 raw data]
+        ↓
+[Boot parsing layer]
+        ↓
+[usable memory list]
+        ↓
+[PMM]
+        ↓
+[page allocator]
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;multiboot2-memory-map-파싱&#34;&gt;Multiboot2 memory map 파싱&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;부트로더(GRUB)가 전달한 물리 메모리 배치 정보를 읽어 커널이 사용할 수 있는 RAM 영역을 구분하기 위해 수행함&lt;/li&gt;
+&lt;li&gt;커널은 부팅 직후 전체 RAM 크기, 사용 가능한 RAM 구간, 예약된 메모리 영역을 스스로 알 수 없으므로 GRUB에게 받은 Multiboot2 information structure로 파악함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;multiboot2-information-구조&#34;&gt;Multiboot2 information 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;우리가 봐야하는 구조체는 세 가지임&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;basic-tags-structure&#34;&gt;&lt;strong&gt;Basic tags structure&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;        ┌───────────────────┐
+u32     │ total_size        │
+u32     │ reserved          │
+	│ tag list 시작      │
+        └───────────────────┘
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;부트 정보는 고정된 8byte 헤더로 시작하고 그 뒤에 여러 태그들이 8byte 정렬 상태로 연속해서 붙음&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;total_size&lt;/code&gt; : 해당 필드 자체와 맨 마지막에 위치할 terminating 태그를 모두 포함한 부트 정보 구조체 전체의 크기(byte 크기)를 나타냄&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;reserved&lt;/code&gt; : 항상 0으로 설정되어 OS 이미지는 이 값을 무시해야 함&lt;/li&gt;
+&lt;li&gt;태그 목록 시작: 이후 모든 태그는 type과 size 필드로 시작하며 마지막은 type = 0, size = 8을 가지는 terminating 태그로 마무리됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;memory-map&#34;&gt;&lt;strong&gt;Memory map&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;부트로더가 파악한 시스템의 물리 메모리 배치 상태를 OS에 전달하는 태그&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;        ┌───────────────────┐
+u32     │ type = 6          │
+u32     │ size              │
+u32     │ entry_size        │
+u32     │ entry_version     │
+varies  │ entries           │
+        └───────────────────┘
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;type&lt;/code&gt; : 메모리 맵 태그를 식별하는 번호로 항상 6임&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;size&lt;/code&gt; : 태그 헤더와 뒤따르는 엔트리 배열을 모두 포함한 Memory 태그 전체의 크기&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;entry_size&lt;/code&gt; : &lt;code&gt;entries&lt;/code&gt;  배열에 들어있는 개별 메모리 엔트리의 1개의 크기&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;entry_version&lt;/code&gt; : 현재 엔트리 버전은 0으로 설정되어 있음&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;entries&lt;/code&gt; : 실제 메모리 영역들의 정보가 담긴 엔트리 구조체의 배열&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;memory-entry&#34;&gt;memory entry&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;시스템에 존재하는 각 메모리 구간의 시작 주소, 크기, 용도를 정의함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;        ┌───────────────────┐
+u64     │ base_addr         │
+u64     │ length            │
+u32     │ type              │
+u32     │ reserved          │
+        └───────────────────┘
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;base_addr&lt;/code&gt; : 해당 메모리 영역이 시작되는 64bits 물리 주소&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;length&lt;/code&gt; : 해당 메모리 영역의 크기(byte)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;type&lt;/code&gt; : 해당 메모리 영역의 종류를 나타냄
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;1&lt;/code&gt; : 일반적인 용도로 사용 가능한 RAM
+&lt;ul&gt;
+&lt;li&gt;이 영역 내에는 현재 실행 중인 커널 이미지, Multiboot2 info 구조체 등이 적재되어 있을 수 있음&lt;/li&gt;
+&lt;li&gt;커널 메모리 관리자를 초기화할 때는 유의해야 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;3&lt;/code&gt; : ACPI(Advanced Configuration and Power Interface) 정보를 담고 있는 사용 가능한 메모리&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;4&lt;/code&gt; : 최대 절전 모드 상태를 위해 보존되어야 하는 예약된 메모리&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;5&lt;/code&gt; : 결함이 있는 RAM 모듈이 차지하고 있는 사용할 수 없는 메모리&lt;/li&gt;
+&lt;li&gt;이 외의 값은 예약된 영역을 의미하므로 OS가 함부로 사용하면 안 됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;multiboot2-tag-순회&#34;&gt;Multiboot2 tag 순회&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Multiboot2 info는 단일 구조체가 아니라 tag들의 리스트이므로 원하는 정보를 얻으려면 tag를 순회하면서 찾아야 함&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Interrupt and Exception Handling</title>
       <link>http://localhost:1313/posts/intel/interrupt-and-exception-handling/</link>
