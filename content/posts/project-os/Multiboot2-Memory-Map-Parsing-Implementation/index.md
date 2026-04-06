@@ -2,7 +2,7 @@
 date = '2026-03-18T19:39:22+09:00'
 draft = false
 title = 'Multiboot2 Memory Map Parsing Implementation'
-categories = ['OS Project']
+categories = ['Project OS']
 +++
 
 ## 현재 상태

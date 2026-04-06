@@ -2,7 +2,7 @@
 date = '2026-03-24T13:31:44+09:00'
 draft = false
 title = 'GCC Inline Assembly'
-categories = ['OS Project']
+categories = ['Project OS']
 +++
 
 ## 인라인 어셈블리 사용 이유

@@ -2,7 +2,7 @@
 date = '2026-03-25T13:47:46+09:00'
 draft = false
 title = 'Higher Half Kernel'
-categories = ['OS Project']
+categories = ['Project OS']
 +++
 ## Identity Mapping의 한계
 
