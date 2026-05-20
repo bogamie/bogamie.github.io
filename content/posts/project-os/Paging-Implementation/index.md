@@ -2,7 +2,7 @@
 date = '2026-03-22T02:19:30+09:00'
 draft = false
 title = 'Paging Implementation'
-categories = ['OS Project']
+categories = ['Project OS']
 +++
 
 # 개요

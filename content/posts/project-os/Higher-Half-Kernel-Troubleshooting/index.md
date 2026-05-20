@@ -2,7 +2,7 @@
 date = '2026-03-29T18:50:18+09:00'
 draft = false
 title = 'Higher Half Kernel Troubleshooting'
-categories = ['OS Project']
+categories = ['Project OS']
 +++
 # relocation truncated to fit: R_X86_64_32
 
@@ -313,7 +313,7 @@ start64:
 
 ## 결과
 
-![image.png](Higher-Half%20Kernel%20Troubleshooting/image.png)
+![image.png](img/image.png)
 
 - 기존에 `kmain.c`에 구현한 초기화 코드는 실행되진 않았지만 부팅까진 성공함
 
@@ -396,7 +396,7 @@ Triple fault
 
 - `ffffffff8000247c` 위치의 코드를 실행할 때 트리플 폴트 발생
 
-![sdm-vol-1-2abcd-3abcd-4_3337.png](Higher-Half%20Kernel%20Troubleshooting/sdm-vol-1-2abcd-3abcd-4_3337.png)
+![sdm-vol-1-2abcd-3abcd-4_3337.png](img/sdm-vol-1-2abcd-3abcd-4_3337.png)
 
 - 예외 발생 순서
     - `v=06` (Invalid Opcode): RIP=ffffffff8000247c CR3=0000000000104000
@@ -516,7 +516,7 @@ SECTIONS
 
 ## 결과
 
-![image.png](Higher-Half%20Kernel%20Troubleshooting/image%201.png)
+![image.png](img/image%201.png)
 
 - 전에 실행되지 않던 kmain.c의 시리얼이 출력됨!!!
 
@@ -530,11 +530,11 @@ SECTIONS
 
 - GDB를 통해 해당 문제를 분석해보자
 
-![image.png](Higher-Half%20Kernel%20Troubleshooting/image%202.png)
+![image.png](img/image%202.png)
 
 ### `mb_info`
 
-![image.png](Higher-Half%20Kernel%20Troubleshooting/image%203.png)
+![image.png](img/image%203.png)
 
 - multiboot_parse()를 호출할 때 인자로 넘겨주는 mb_info를 확인해봄
 
@@ -598,7 +598,7 @@ static void remove_reserved_regions(void *mb_info) {
 
 ### remove_reserved_regions
 
-![image.png](Higher-Half%20Kernel%20Troubleshooting/image%204.png)
+![image.png](img/image%204.png)
 
 - for문 첫번째 순회에서의 `start`, `end` 값과 `kernel_end` 값을 출력함
 - 이를 통해 가상 주소와 물리 주소를 직접 비교하여 문제가 발생한다는 가정을 증명함
@@ -615,7 +615,7 @@ uint64_t kernel_end = (uint64_t)_kernel_end - KERNEL_BASE;
 
 ## 결과
 
-![Screenshot from 2026-04-03 11-37-03.png](Higher-Half%20Kernel%20Troubleshooting/Screenshot_from_2026-04-03_11-37-03.png)
+![Screenshot from 2026-04-03 11-37-03.png](img/Screenshot_from_2026-04-03_11-37-03.png)
 
 - 파싱 완료되어 정상적으로 사용 가능 영역을 출력하고 pmm_init_step2까지 실행하다가 멈춤
 
@@ -623,7 +623,7 @@ uint64_t kernel_end = (uint64_t)_kernel_end - KERNEL_BASE;
 
 ## 증상
 
-![image.png](Higher-Half%20Kernel%20Troubleshooting/617ce1c0-2255-4e24-a467-d3a79a97f7ce.png)
+![image.png](img/617ce1c0-2255-4e24-a467-d3a79a97f7ce.png)
 
 - pmm_init_step2의 `list_push`에서 잘못된 포인터(`%rax`)에 쓰기를 시도하면서 메모리 오류 발생
 
@@ -642,7 +642,7 @@ static void list_push(uint32_t order, block_t* blk) {
 - 따라서 `phys_to_virt`로 가상 주소(`vblk`)를 구해서 `next` 포인터를 설정함
 - 단, `free_list[order]`에는 물리 주소(`blk`)를 그대로 저장함 — 리스트 자체는 물리 주소 기반으로 관리되고, 접근할 때만 가상 주소로 변환하는 구조
 
-![image.png](Higher-Half%20Kernel%20Troubleshooting/7a9c2964-7bf0-4342-b798-111600d21ede.png)
+![image.png](img/7a9c2964-7bf0-4342-b798-111600d21ede.png)
 
 - gdb에서 `vblk`의 값을 출력하고 그 값에 접근해봄
 - 접근 불가로 뜨기 때문에 해당 VA는 현재 page table에서 valid mapping이 없다는 것을 파악함
@@ -656,7 +656,7 @@ uint64_t end   = (uint64_t)kernel_vma_end() + EARLY_ALLOC_SIZE; // 커널과 ear
 
 - `paging_init`은 커널 이미지 영역만 매핑함
 
-![Screenshot from 2026-04-03 13-17-27.png](Higher-Half%20Kernel%20Troubleshooting/Screenshot_from_2026-04-03_13-17-27.png)
+![Screenshot from 2026-04-03 13-17-27.png](img/Screenshot_from_2026-04-03_13-17-27.png)
 
 - gdb로 매핑하는 영역의 시작, 끝 주소를 확인하면 위와 같음
 - 하지만 `vblk`는 0xffffffffc0001000이므로 매핑 영역의 바깥임
